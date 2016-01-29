@@ -18,9 +18,6 @@ int main(void)
 	myConsumer.Join();
 	while(1)
 	{
-		sleep(1);
-	}
-	/*HandleLog myhandlelog;
-	string filepath = "/home/suli/ms_srv_cpc.log.20160121";
-	myhandlelog.Test(filepath);*/
+		sleep(1); 
+	} 
 }

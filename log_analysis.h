@@ -17,7 +17,6 @@ public:
 	}
 	~LogAnalysis(){}
 	virtual void Process(rd_kafka_message_t * pMessage);
-	//virtual void ProcessMessage(rd_kafka_message_t* pMessage);
 	string strRecvMes(char* pstr,int len)
 	{
 		char buf[1024*5] = {0};

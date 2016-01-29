@@ -15,8 +15,6 @@ struct LogValue
 	int m_SearchDiscard;
 };
 
-
-
 class Test: public LogAnalysis
 {
 public:
