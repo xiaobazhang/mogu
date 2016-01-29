@@ -8,7 +8,6 @@ int main(void)
 {
 	//ckit::log::SetPrintLogger();
 	Test myConsumer;
-	HandleLog myhandlelog;
 	myConsumer.SetTopicConf("topic.offset.store.method", "file");
 	myConsumer.SetTopicConf("topic.offset.store.sync.interval.ms", "1");
 	myConsumer.SetTopicConf("auto.commit.interval.ms", "10");

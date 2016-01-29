@@ -15,13 +15,17 @@ namespace ckit
 		}
 	}
 }
-LogAnalysis::LogAnalysis()
+/*LogAnalysis::LogAnalysis()
 {
 	this->SetCb(this);
+}*/
+void LogAnalysis::Process(rd_kafka_message_t * pMessage)
+{
+	//ProcessMessage(pMessage);
 }
 string LogAnalysis::strRecvIp(char* pstr,int len)
 {
-	char buf[len+1] = {0};
+	char buf[128] = {0};
 	memcpy(buf,pstr,len);
 	string str(buf);
 	string strip;

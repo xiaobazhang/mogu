@@ -5,7 +5,7 @@ void Test::Process(rd_kafka_message_t * pMessage)
 	if(pMessage == NULL)
 		return ;
 	string strlog = strRecvMes((char*)pMessage->payload,pMessage->len);
-	string strip = strRecvIp(pMessage->key,pMessage->key_len);
+	string strip = strRecvIp((char*)pMessage->key,pMessage->key_len);
 	if(!m_mapLogValue.count(strip))
 	{
 		LogValue stlogvalue;
@@ -20,8 +20,8 @@ void Test::Process(rd_kafka_message_t * pMessage)
 		m_mapCurrentTime[strip] = iCurrentTime;//记录当前的时间
 	}
 	if(m_mapLogValue[strip].m_Time == 0)
-		m_mapLogValue[strip].m_Time = iCurrentTime;
-	if(m_mapLogValue[strip].m_Time != iCurrentTime)
+		m_mapLogValue[strip].m_Time = m_mapCurrentTime[strip];
+	if(m_mapLogValue[strip].m_Time != m_mapCurrentTime[strip])
 	{
 		int iCostTime = m_mapLogValue[strip].m_CostTime/m_mapLogValue[strip].m_Queryps;
 		m_Metric.HandleMetric("search_qps_test",strip,m_mapLogValue[strip].m_Time,m_mapLogValue[strip].m_Queryps);
@@ -83,27 +83,27 @@ bool Test::IsSearchZero(const string strlog)
 bool Test::IsSearchFailed(const string strlog)
 {
 	ckit::Regex regex;
-	if(!m_regex.Compile("ret:false"))
+	if(!regex.Compile("ret:false"))
 	{
 		SET_ERROR_MSG("Compile ret:false error");
 		return false;
 	}
-	if(!m_regex.Match(strlog))
+	if(!regex.Match(strlog))
 	{
 		SET_ERROR_MSG("Match ret:false error");
 		return false;
 	}
 	return true;
 }
-boo Test::IsSearchDiscard(const string strlog)
+bool Test::IsSearchDiscard(const string strlog)
 {
 	ckit::Regex regex;
-	if(!m_regex.Compile("discard"))
+	if(!regex.Compile("discard"))
 	{
 		SET_ERROR_MSG("Compile discard error");
 		return false;
 	}
-	if(!m_regex.Match(strlog))
+	if(!regex.Match(strlog))
 	{
 		SET_ERROR_MSG("Match discard error");
 		return false;
