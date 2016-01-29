@@ -21,9 +21,7 @@ void LogAnalysis::Process(rd_kafka_message_t * pMessage)
 }
 string LogAnalysis::strRecvIp(char* pstr,int len)
 {
-	char buf[128] = {0};
-	memcpy(buf,pstr,len);
-	string str(buf);
+	string str(pstr,len);
 	string strip;
 	Regex regex;
 	if(!regex.Compile("(([0-9]{1,3}[.]){3}[0-9]{1,3})"))
@@ -40,7 +38,7 @@ string LogAnalysis::strRecvIp(char* pstr,int len)
 	regex.GetGroupByIdx(0,strip);
 	return strip;
 }
-int LogAnalysis::GetLogTime(const string strlog)
+int LogAnalysis::GetLogTime(const string& strlog)
 {
 	std::string strlogtime;
 	ckit::Regex regex;
@@ -65,7 +63,7 @@ int LogAnalysis::GetLogTime(const string strlog)
 
 	return logtime;
 }
-bool LogAnalysis::IsQueryFinish(const string strlog)
+bool LogAnalysis::IsQueryFinish(const string& strlog)
 {
 	ckit::Regex regex;
 	if(!regex.Compile("(query process finish.)"))

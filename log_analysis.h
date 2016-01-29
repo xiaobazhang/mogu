@@ -19,14 +19,12 @@ public:
 	virtual void Process(rd_kafka_message_t * pMessage);
 	string strRecvMes(char* pstr,int len)
 	{
-		char buf[1024*5] = {0};
-		memcpy(buf,pstr,len);
-		string str(buf);
+		string str(pstr,len);
 		return str;
 	}
 	string strRecvIp(char* pstr,int len);
-	int GetLogTime(const string strlog);
-	bool IsQueryFinish(const string strlog);
+	int GetLogTime(const string& strlog);
+	bool IsQueryFinish(const string& strlog);
 private:
 
 };
