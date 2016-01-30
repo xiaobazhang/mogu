@@ -65,6 +65,7 @@ int Test::GetCostTime(const string strlog)
 		return -1;
 	}
 	regex.GetGroupByIdx(0,strcosttime);
+	std::cout<<"log="<<strlog<<std::endl;
 	std::cout<<"costtime="<<strcosttime<<std::endl;
 	return atoi(strcosttime.c_str());
 }
