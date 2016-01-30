@@ -6,22 +6,14 @@ void Test::Process(rd_kafka_message_t * pMessage)
 		return ;
 	string strlog = strRecvMes((char*)pMessage->payload,pMessage->len);
 	string strip = strRecvIp((char*)pMessage->key,pMessage->key_len);
+	int iCurrentTime = GetLogTime(strlog);
 	if(!m_mapLogValue.count(strip))
 	{
 		LogValue stlogvalue;
 		m_mapLogValue[strip] = stlogvalue;
 	}
-	if(!m_mapCurrentTime.count(strip))
-	{
-		int iCurrentTime = GetLogTime(strlog);
-		if(iCurrentTime == 0)
-			return ;
-		m_mapCurrentTime[strip] = iCurrentTime;//记录当前的时间
-	}
-	else
-	{
-		m_mapCurrentTime[strip] = GetLogTime(strlog);
-	}
+	m_mapCurrentTime[strip] = iCurrentTime;//记录当前的时间
+	std::cout<<"time = "<<m_mapLogValue[strip].m_Time<<std::endl;
 	if(m_mapLogValue[strip].m_Time == 0)
 		m_mapLogValue[strip].m_Time = m_mapCurrentTime[strip];
 	
