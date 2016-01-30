@@ -2,18 +2,20 @@
 
 void Test::Process(rd_kafka_message_t * pMessage)
 {
+
 	if(pMessage == NULL)
 		return ;
 	string strlog = strRecvMes((char*)pMessage->payload,pMessage->len);
 	string strip = strRecvIp((char*)pMessage->key,pMessage->key_len);
 	int iCurrentTime = GetLogTime(strlog);
+	std::cout<<strlog<<std::endl;
 	if(!m_mapLogValue.count(strip))
 	{
 		LogValue stlogvalue;
 		m_mapLogValue[strip] = stlogvalue;
 	}
 	m_mapCurrentTime[strip] = iCurrentTime;//记录当前的时间
-
+	
 	if(m_mapLogValue[strip].m_Time == 0)
 	{
 		m_mapLogValue[strip].m_Time = m_mapCurrentTime[strip];
@@ -27,7 +29,7 @@ void Test::Process(rd_kafka_message_t * pMessage)
 			iCostTime = m_mapLogValue[strip].m_CostTime/m_mapLogValue[strip].m_Queryps;
 		else
 			iCostTime = 0;
-		
+
 		m_Metric.HandleMetric("search_qps_test",strip,m_mapLogValue[strip].m_Time,m_mapLogValue[strip].m_Queryps);
 		m_Metric.HandleMetric("search_rt_test",strip,m_mapLogValue[strip].m_Time,iCostTime);
 		m_Metric.HandleMetric("search_zero_test",strip,m_mapLogValue[strip].m_Time,m_mapLogValue[strip].m_SearchZero);
