@@ -20,7 +20,9 @@ void Test::Process(rd_kafka_message_t * pMessage)
 	}
 	if(m_mapLogValue[strip].m_Time != m_mapCurrentTime[strip])
 	{  
-		int iCostTime = 0;
+		LogValue tmp = m_mapLogValue[strip];
+		std::cout<<strip<<":"<<tmp.m_Time<<":"<<tmp.m_Queryps<<":"<<tmp.m_CostTime<<std::endl;
+		/*int iCostTime = 0;
 		if(m_mapLogValue[strip].m_Queryps != 0)
 			iCostTime = m_mapLogValue[strip].m_CostTime/m_mapLogValue[strip].m_Queryps;
 
@@ -29,7 +31,7 @@ void Test::Process(rd_kafka_message_t * pMessage)
 		m_Metric.HandleMetric("search_zero_test",strip,m_mapLogValue[strip].m_Time,m_mapLogValue[strip].m_SearchZero);
 		m_Metric.HandleMetric("search_fail_test",strip,m_mapLogValue[strip].m_Time,m_mapLogValue[strip].m_SearchFaild);
 		m_Metric.HandleMetric("search_discard_test",strip,m_mapLogValue[strip].m_Time,m_mapLogValue[strip].m_SearchDiscard);
-		//发送curl
+		*///发送curl
 	}
 	if(IsQueryFinish(strlog))
 	{
