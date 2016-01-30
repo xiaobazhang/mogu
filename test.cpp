@@ -15,11 +15,13 @@ void Test::Process(rd_kafka_message_t * pMessage)
 	m_mapCurrentTime[strip] = iCurrentTime;//记录当前的时间
 
 	if(m_mapLogValue[strip].m_Time == 0)
+	{
 		m_mapLogValue[strip].m_Time = m_mapCurrentTime[strip];
-	
+		std::cout<<"m_mapLogValue[strip].m_Time = "<<m_mapLogValue[strip].m_Time<<std::endl;
+		system("pause");
+	}
 	if(m_mapLogValue[strip].m_Time != m_mapCurrentTime[strip])
 	{  
-		LogValue tmp = m_mapLogValue[strip];
 		int iCostTime = m_mapLogValue[strip].m_CostTime/m_mapLogValue[strip].m_Queryps;
 		std::cout<<"ip: "<<strip<<" time: "<<m_mapLogValue[strip].m_Time<<std::endl;
 		m_Metric.HandleMetric("search_qps_test",strip,m_mapLogValue[strip].m_Time,m_mapLogValue[strip].m_Queryps);
