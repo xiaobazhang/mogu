@@ -65,6 +65,7 @@ int Test::GetCostTime(const string strlog)
 		return -1;
 	}
 	regex.GetGroupByIdx(0,strcosttime);
+	std::cout<<"costtime="<<strcosttime<<std::endl;
 	return atoi(strcosttime.c_str());
 }
 bool Test::IsSearchZero(const string strlog)
