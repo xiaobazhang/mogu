@@ -20,13 +20,14 @@ void Test::Process(rd_kafka_message_t * pMessage)
 	}
 	if(m_mapLogValue[strip].m_Time != m_mapCurrentTime[strip])
 	{  
-		//LogValue tmp = m_mapLogValue[strip];
+		LogValue tmp = m_mapLogValue[strip];
 		//std::cout<<strip<<":"<<tmp.m_Time<<":"<<tmp.m_Queryps<<":"<<tmp.m_CostTime<<std::endl;
 		int iCostTime = 0;
 		if(m_mapLogValue[strip].m_Queryps != 0)
 			iCostTime = m_mapLogValue[strip].m_CostTime/m_mapLogValue[strip].m_Queryps;
 		else
 		{
+			std::cout<<strip<<":"<<tmp.m_Time<<":"<<tmp.m_Queryps<<":"<<tmp.m_CostTime<<std::endl;
 			std::cout<<"qps = 0"<<std::endl;
 			exit(0);
 		}
