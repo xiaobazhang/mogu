@@ -2,14 +2,11 @@
 
 void Test::Process(rd_kafka_message_t * pMessage)
 {
-	if(num > 1000)
-		exit(0);
-
 	if(pMessage == NULL)
 		return ;
 	string strlog = strRecvMes((char*)pMessage->payload,pMessage->len);
 	string strip = strRecvIp((char*)pMessage->key,pMessage->key_len);
-	/*int iCurrentTime = GetLogTime(strlog);
+	int iCurrentTime = GetLogTime(strlog);
 	if(!m_mapLogValue.count(strip))
 	{
 		LogValue stlogvalue;
@@ -23,22 +20,21 @@ void Test::Process(rd_kafka_message_t * pMessage)
 	}
 	if(m_mapLogValue[strip].m_Time != m_mapCurrentTime[strip])
 	{  
-		int iCostTime = m_mapLogValue[strip].m_CostTime/m_mapLogValue[strip].m_Queryps;
+		if(m_mapLogValue[strip].m_Queryps != 0)
+			int iCostTime = m_mapLogValue[strip].m_CostTime/m_mapLogValue[strip].m_Queryps;
 		m_Metric.HandleMetric("search_qps_test",strip,m_mapLogValue[strip].m_Time,m_mapLogValue[strip].m_Queryps);
 		m_Metric.HandleMetric("search_rt_test",strip,m_mapLogValue[strip].m_Time,iCostTime);
 		m_Metric.HandleMetric("search_zero_test",strip,m_mapLogValue[strip].m_Time,m_mapLogValue[strip].m_SearchZero);
 		m_Metric.HandleMetric("search_fail_test",strip,m_mapLogValue[strip].m_Time,m_mapLogValue[strip].m_SearchFaild);
 		m_Metric.HandleMetric("search_discard_test",strip,m_mapLogValue[strip].m_Time,m_mapLogValue[strip].m_SearchDiscard);
 		//发送curl
-	}*/
+	}
 	if(IsQueryFinish(strlog))
 	{
-		//m_mapLogValue[strip].m_Queryps = m_mapLogValue[strip].m_Queryps + 1;
-		std::cout<<strip<<"  "<<strlog<<std::endl;
-		num++;
+		m_mapLogValue[strip].m_Queryps = m_mapLogValue[strip].m_Queryps + 1;
 	}
 
-	/*int iCostTime = GetCostTime(strlog);
+	int iCostTime = GetCostTime(strlog);
 	if(iCostTime!= -1)
 	{
 		m_mapLogValue[strip].m_CostTime = m_mapLogValue[strip].m_CostTime + iCostTime;
@@ -51,7 +47,7 @@ void Test::Process(rd_kafka_message_t * pMessage)
 		m_mapLogValue[strip].m_SearchFaild = m_mapLogValue[strip].m_SearchFaild + 1;
 
 	if(IsSearchDiscard(strlog))
-		m_mapLogValue[strip].m_SearchDiscard = m_mapLogValue[strip].m_SearchDiscard + 1;*/
+		m_mapLogValue[strip].m_SearchDiscard = m_mapLogValue[strip].m_SearchDiscard + 1;
 
 }
 int Test::GetCostTime(const string strlog)

@@ -19,7 +19,7 @@ struct LogValue
 class Test: public LogAnalysis
 {
 public:
-	Test():num(0)
+	Test()
 	{
 	}
 	~Test()
@@ -35,7 +35,6 @@ private:
 	map<string,LogValue> m_mapLogValue;
 	map<string,int> m_mapCurrentTime;
 	Metric m_Metric;
-	int num;
 };
 
 #endif
