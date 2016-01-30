@@ -37,7 +37,7 @@ void Test::Process(rd_kafka_message_t * pMessage)
 		{
 			m_mapLogValue[strip].m_CostTime = m_mapLogValue[strip].m_CostTime + iCostTime;
 			std::cout<<"costtime = "<<iCostTime<<std::endl;
-			exit(0);
+			//exit(0);
 		}
 
 	if(IsSearchZero(strlog))
