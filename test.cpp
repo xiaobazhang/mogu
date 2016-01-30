@@ -18,7 +18,6 @@ void Test::Process(rd_kafka_message_t * pMessage)
 	{
 		m_mapLogValue[strip].m_Time = m_mapCurrentTime[strip];
 		std::cout<<"m_mapLogValue[strip].m_Time = "<<m_mapLogValue[strip].m_Time<<std::endl;
-		system("pause");
 	}
 	if(m_mapLogValue[strip].m_Time != m_mapCurrentTime[strip])
 	{  
@@ -32,13 +31,16 @@ void Test::Process(rd_kafka_message_t * pMessage)
 		//发送curl
 	}
 	if(IsQueryFinish(strlog))
+	{
 		m_mapLogValue[strip].m_Queryps = m_mapLogValue[strip].m_Queryps + 1;
+		std::cout<<"IsQueryFinish = "<<m_mapLogValue[strip].m_Queryps<<std::endl;
+	}
 
 	int iCostTime = GetCostTime(strlog);
 	if(iCostTime!= -1)
 		{
 			m_mapLogValue[strip].m_CostTime = m_mapLogValue[strip].m_CostTime + iCostTime;
-			std::cout<<"costtime = "<<m_mapLogValue[strip].m_CostTime<<std::endl;
+			std::cout<<"costtime = "<<iCostTime<<std::endl;
 			exit(0);
 		}
 
