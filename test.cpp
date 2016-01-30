@@ -36,7 +36,7 @@ void Test::Process(rd_kafka_message_t * pMessage)
 	if(iCostTime!= -1)
 		{
 			m_mapLogValue[strip].m_CostTime = m_mapLogValue[strip].m_CostTime + iCostTime;
-			std::cout<<"costtime = "<<m_mapLogValue[strip].m_CostTime<<std::endl;
+			std::cout<<"costtime = "<<iCostTime<<std::endl;
 			exit(0);
 		}
 
