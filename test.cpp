@@ -36,7 +36,7 @@ void Test::Process(rd_kafka_message_t * pMessage)
 	if(iCostTime!= -1)
 		{
 			m_mapLogValue[strip].m_CostTime = m_mapLogValue[strip].m_CostTime + iCostTime;
-			std::cout<<"costtime = "<<iCostTime<<std::endl;
+			std::cout<<"costtime = "<<m_mapLogValue[strip].m_CostTime<<std::endl;
 			//exit(0);
 		}
 
@@ -65,7 +65,7 @@ int Test::GetCostTime(const string strlog)
 		return -1;
 	}
 	regex.GetGroupByIdx(0,strcosttime);
-	std::cout<<"log="<<strlog<<std::endl;
+	//std::cout<<"log="<<strlog<<std::endl;
 	std::cout<<"costtime="<<strcosttime<<std::endl;
 	return atoi(strcosttime.c_str());
 }
