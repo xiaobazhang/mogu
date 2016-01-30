@@ -7,6 +7,7 @@ using namespace ckit;
 using namespace std;
 struct LogValue
 {
+	LogValue():m_Time(0),m_Queryps(0),m_CostTime(0),m_SearchFaild(0),m_SearchZero(0),m_SearchDiscard(0){}
 	int m_Time;
 	int m_Queryps;
 	int m_CostTime;
