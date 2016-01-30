@@ -17,12 +17,10 @@ void Test::Process(rd_kafka_message_t * pMessage)
 	if(m_mapLogValue[strip].m_Time == 0)
 	{
 		m_mapLogValue[strip].m_Time = m_mapCurrentTime[strip];
-		std::cout<<"m_mapLogValue[strip].m_Time = "<<m_mapLogValue[strip].m_Time<<std::endl;
 	}
 	if(m_mapLogValue[strip].m_Time != m_mapCurrentTime[strip])
 	{  
 		int iCostTime = m_mapLogValue[strip].m_CostTime/m_mapLogValue[strip].m_Queryps;
-		std::cout<<"ip: "<<strip<<" time: "<<m_mapLogValue[strip].m_Time<<std::endl;
 		m_Metric.HandleMetric("search_qps_test",strip,m_mapLogValue[strip].m_Time,m_mapLogValue[strip].m_Queryps);
 		m_Metric.HandleMetric("search_rt_test",strip,m_mapLogValue[strip].m_Time,iCostTime);
 		m_Metric.HandleMetric("search_zero_test",strip,m_mapLogValue[strip].m_Time,m_mapLogValue[strip].m_SearchZero);
@@ -33,16 +31,13 @@ void Test::Process(rd_kafka_message_t * pMessage)
 	if(IsQueryFinish(strlog))
 	{
 		m_mapLogValue[strip].m_Queryps = m_mapLogValue[strip].m_Queryps + 1;
-		std::cout<<"IsQueryFinish = "<<m_mapLogValue[strip].m_Queryps<<std::endl;
 	}
 
 	int iCostTime = GetCostTime(strlog);
 	if(iCostTime!= -1)
-		{
-			m_mapLogValue[strip].m_CostTime = m_mapLogValue[strip].m_CostTime + iCostTime;
-			std::cout<<"costtime = "<<m_mapLogValue[strip].m_CostTime<<std::endl;
-			exit(0);
-		}
+	{
+		m_mapLogValue[strip].m_CostTime = m_mapLogValue[strip].m_CostTime + iCostTime;
+	}
 
 	if(IsSearchZero(strlog))
 		m_mapLogValue[strip].m_SearchZero = m_mapLogValue[strip].m_SearchZero + 1;
@@ -69,8 +64,6 @@ int Test::GetCostTime(const string strlog)
 		return -1;
 	}
 	regex.GetGroupByIdx(0,strcosttime);
-	//std::cout<<"log="<<strlog<<std::endl;
-	std::cout<<"costtime="<<strcosttime<<std::endl;
 	return atoi(strcosttime.c_str());
 }
 bool Test::IsSearchZero(const string strlog)
