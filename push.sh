@@ -1,4 +1,4 @@
 #/bin/sh
 git add .
 git commit -m "update"
-git push mogu debug 
+git push

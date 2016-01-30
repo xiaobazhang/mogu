@@ -13,8 +13,7 @@ void Test::Process(rd_kafka_message_t * pMessage)
 		m_mapLogValue[strip] = stlogvalue;
 	}
 	m_mapCurrentTime[strip] = iCurrentTime;//记录当前的时间
-	std::cout<<"time = "<<m_mapLogValue[strip].m_Time<<std::endl;
-	exit(0);
+
 	if(m_mapLogValue[strip].m_Time == 0)
 		m_mapLogValue[strip].m_Time = m_mapCurrentTime[strip];
 	
@@ -35,7 +34,11 @@ void Test::Process(rd_kafka_message_t * pMessage)
 
 	int iCostTime = GetCostTime(strlog);
 	if(iCostTime!= -1)
-		m_mapLogValue[strip].m_CostTime = m_mapLogValue[strip].m_CostTime + iCostTime;
+		{
+			m_mapLogValue[strip].m_CostTime = m_mapLogValue[strip].m_CostTime + iCostTime;
+			std::cout<<"costtime = "<<m_mapLogValue[strip].m_CostTime<<std::endl;
+			exit(0);
+		}
 
 	if(IsSearchZero(strlog))
 		m_mapLogValue[strip].m_SearchZero = m_mapLogValue[strip].m_SearchZero + 1;
