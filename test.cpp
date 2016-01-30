@@ -20,8 +20,10 @@ void Test::Process(rd_kafka_message_t * pMessage)
 	}
 	if(m_mapLogValue[strip].m_Time != m_mapCurrentTime[strip])
 	{  
+		int iCostTime = 0;
 		if(m_mapLogValue[strip].m_Queryps != 0)
-			int iCostTime = m_mapLogValue[strip].m_CostTime/m_mapLogValue[strip].m_Queryps;
+			iCostTime = m_mapLogValue[strip].m_CostTime/m_mapLogValue[strip].m_Queryps;
+
 		m_Metric.HandleMetric("search_qps_test",strip,m_mapLogValue[strip].m_Time,m_mapLogValue[strip].m_Queryps);
 		m_Metric.HandleMetric("search_rt_test",strip,m_mapLogValue[strip].m_Time,iCostTime);
 		m_Metric.HandleMetric("search_zero_test",strip,m_mapLogValue[strip].m_Time,m_mapLogValue[strip].m_SearchZero);
