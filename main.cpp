@@ -15,7 +15,7 @@ int main(void)
 	myConsumer.SetTopic("msearch_cpc");
 	myConsumer.SetPartition(0);
 
-	myConsumer1.SetTopicConf("topic.offset.store.method", "file");
+	/*myConsumer1.SetTopicConf("topic.offset.store.method", "file");
 	myConsumer1.SetTopicConf("topic.offset.store.sync.interval.ms", "1");
 	myConsumer1.SetTopicConf("auto.commit.interval.ms", "10");
 	myConsumer1.SetTopicConf("group.id", "g2");
@@ -34,16 +34,16 @@ int main(void)
 	myConsumer3.SetTopicConf("auto.commit.interval.ms", "10");
 	myConsumer3.SetTopicConf("group.id", "g4");
 	myConsumer3.SetTopic("msearch_cpc");
-	myConsumer3.SetPartition(3);
+	myConsumer3.SetPartition(3);*/
 
 	myConsumer.Start();
-	myConsumer1.Start();
-	myConsumer2.Start();
-	myConsumer3.Start();
+	//myConsumer1.Start();
+	//myConsumer2.Start();
+	//myConsumer3.Start();
 	myConsumer.Join();
-	myConsumer1.Join();
-	myConsumer2.Join();
-	myConsumer3.Join();
+	//myConsumer1.Join();
+	//myConsumer2.Join();
+	//myConsumer3.Join();
 	while(1)
 	{
 		sleep(1); 
