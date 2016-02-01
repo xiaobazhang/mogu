@@ -20,14 +20,20 @@ void Metric::SendMetric()
 {
 	if(m_queue.size()>=miQueueMaxNum)
 	{
+		string strcurl;
 		while(!m_queue.empty())
 		{
-			char send_buf[256] ={0};
-			sprintf(send_buf,"/usr/local/bin/curl -s -H 'Content-Type: application/json' -m 5 -X POST --data '[%s]' http://127.0.0.1:40001/api/put  -w \"http_code:[%{http_code}]\"",m_queue.front().c_str());
-			system(send_buf);
-			std::cout<<"queue =:"<<m_queue.front()<<std::endl;
+			//string str1;
+			//char send_buf[256] ={0};
+			//string str2(m_queue.front().c_str());
+			strcurl = strcurl+m_queue.front()+",";
+			//std::cout<<"queue =:"<<m_queue.front()<<std::endl;
 			m_queue.pop();//出队列
 		}
+		char* ptr = new char[5120];
+		sprintf(ptr,"/usr/local/bin/curl -s -H 'Content-Type: application/json' -m 5 -X POST --data '[%s]' http://127.0.0.1:40001/api/put  -w \"http_code:[%{http_code}]\"",strcurl.c_str());
+		system(ptr);
+		delete[] ptr;
 	}
 
 }
