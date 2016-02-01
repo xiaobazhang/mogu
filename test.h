@@ -2,6 +2,7 @@
 #define __TEST_H__
 #include "metric.h"
 #include <map>
+#include <ckit_mailbox.h>
 #include "log_analysis.h"
 using namespace ckit;
 using namespace std;

@@ -13,7 +13,7 @@ int main()
 	myConsumer.SetTopicConf("auto.commit.interval.ms", "10");
 	myConsumer.SetTopicConf("group.id", "g1");
 	myConsumer.SetOffset(RD_KAFKA_OFFSET_END);
-	myConsumer.SetTopic("msearch_cpc");
+	myConsumer.SetTopic("cpc_msearch");
 	myConsumer.SetPartition(0);
 	myConsumer.Start();
 	myConsumer.Join();
