@@ -18,21 +18,21 @@ int main(void)
 	myConsumer1.SetTopicConf("topic.offset.store.method", "file");
 	myConsumer1.SetTopicConf("topic.offset.store.sync.interval.ms", "1");
 	myConsumer1.SetTopicConf("auto.commit.interval.ms", "10");
-	myConsumer1.SetTopicConf("group.id", "g2");
+	myConsumer1.SetTopicConf("group.id", "g1");
 	myConsumer1.SetTopic("msearch_cpc");
 	myConsumer1.SetPartition(1);
 
 	myConsumer2.SetTopicConf("topic.offset.store.method", "file");
 	myConsumer2.SetTopicConf("topic.offset.store.sync.interval.ms", "1");
 	myConsumer2.SetTopicConf("auto.commit.interval.ms", "10");
-	myConsumer2.SetTopicConf("group.id", "g3");
+	myConsumer2.SetTopicConf("group.id", "g1");
 	myConsumer2.SetTopic("msearch_cpc");
 	myConsumer2.SetPartition(2);
 
 	myConsumer3.SetTopicConf("topic.offset.store.method", "file");
 	myConsumer3.SetTopicConf("topic.offset.store.sync.interval.ms", "1");
 	myConsumer3.SetTopicConf("auto.commit.interval.ms", "10");
-	myConsumer3.SetTopicConf("group.id", "g4");
+	myConsumer3.SetTopicConf("group.id", "g1");
 	myConsumer3.SetTopic("msearch_cpc");
 	myConsumer3.SetPartition(3);
 
