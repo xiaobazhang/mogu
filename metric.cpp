@@ -26,7 +26,10 @@ void Metric::SendMetric()
 			//string str1;
 			//char send_buf[256] ={0};
 			//string str2(m_queue.front().c_str());
-			strcurl = strcurl+m_queue.front()+",";
+			if(m_queue.size() == 1)
+				strcurl = strcurl+m_queue.front();
+			else
+				strcurl = strcurl+m_queue.front()+",";
 			//std::cout<<"queue =:"<<m_queue.front()<<std::endl;
 			m_queue.pop();//出队列
 		}
