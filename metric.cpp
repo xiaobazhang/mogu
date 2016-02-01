@@ -35,6 +35,7 @@ void Metric::SendMetric()
 		}
 		char* ptr = new char[5120];
 		sprintf(ptr,"/usr/local/bin/curl -s -H 'Content-Type: application/json' -m 5 -X POST --data '[%s]' http://127.0.0.1:40001/api/put  -w \"http_code:[%{http_code}]\"",strcurl.c_str());
+		printf("%s/n",ptr);
 		system(ptr);
 		delete[] ptr;
 	}
