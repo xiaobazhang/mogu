@@ -4,10 +4,11 @@ void Test::Run()
 {
 	while(1)
 	{
-		IpLog *iplog;
+		IpLog *iplog = NULL;
 		SingleLogQueue::GetInstance()->Recv(&iplog);
 		//std::cout<<"ip:"<<((IpLog*)iplog)->ip<<std::endl;
-		delete iplog;
+		if(iplog !=NULL)
+			delete iplog;
 		//Process(iplog.ip,iplog.log);
 	}	
 }

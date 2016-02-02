@@ -19,7 +19,7 @@ class SingleLogQueue
 public:
 	SingleLogQueue()
 	{
-		iTimeOutMs = 100;
+		iTimeOutMs = -1;
 	}
 	~SingleLogQueue()
 	{
