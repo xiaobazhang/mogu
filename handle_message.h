@@ -19,7 +19,7 @@ class SingleLogQueue
 public:
 	SingleLogQueue()
 	{
-		m_MailBoxR = new MailBoxR<IpLog>;
+		m_MailBoxR = new MailBoxR<IpLog&>;
 		iTimeOutMs = 100;
 	}
 	~SingleLogQueue()
