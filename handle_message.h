@@ -23,11 +23,10 @@ public:
 	}
 	~SingleLogQueue()
 	{
-		delete m_MailBoxR;
 	}
 	void Send(IpLog* pIplog)
 	{
-		m_MailBoxR->Send(m_iplog);
+		m_MailBoxR->Send(pIplog);
 	}
 	void Recv(IpLog* pIplog)
 	{ 
