@@ -48,6 +48,7 @@ public:
 	HandleMessage():iMessage(0)
 	{
 		iCurrent = (int)ckit::time::GetCurrentSecond();
+		flag = 0;
 	}
 	~HandleMessage()
 	{
