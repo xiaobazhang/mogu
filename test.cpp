@@ -12,7 +12,7 @@ void Test::Run()
 		iTime = (int)ckit::time::GetCurrentSecond();
 		if(iCurrent!=iTime)
 		{
-			std::cout<<"iMessageNum="<<iMessage<<std::endl;
+			std::cout<<"iMessageNum="<<iMessage/3<<std::endl;
 			iMessage = 0;
 			iCurrent = iTime;
 		}
