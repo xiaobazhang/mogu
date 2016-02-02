@@ -10,7 +10,6 @@ void Test::Run()
 		Process(iplog->ip,iplog->log);
 		if(iplog !=NULL)
 			delete iplog;
-		//
 	}	
 }
 void Test::Process(const string& strip, const string& strlog)

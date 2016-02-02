@@ -8,7 +8,6 @@
 using namespace std;
 using namespace ckit;
 
-//SingleLogQueue g_SingleLogQueue;
 struct IpLog
 {
 	string log;
