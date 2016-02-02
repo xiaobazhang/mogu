@@ -22,8 +22,9 @@ struct LogValue
 class Test: public Thread
 {
 public:
-	Test()
+	Test():iMessage(0),iCurrent(0)
 	{
+		iCurrent = (int)ckit::time::GetCurrentSecond();
 		//m_LogQueue = g_SingleLogQueue.GetInstance();
 	}
 	~Test()
@@ -42,7 +43,8 @@ private:
 	map<string,LogValue> m_mapLogValue;
 	map<string,int> m_mapCurrentTime;
 	Metric m_Metric;
-	//SingleLogQueue* m_LogQueue;
+	int iMessage;
+	int iCurrent;
 };
 
 #endif

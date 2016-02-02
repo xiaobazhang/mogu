@@ -47,28 +47,12 @@ class HandleMessage : public LogAnalysis
 public:
 	HandleMessage():iMessage(0)
 	{
-		iCurrent = (int)ckit::time::GetCurrentSecond();
-		flag = 0;
 	}
 	~HandleMessage()
 	{
 	}
-	void SetFlag(int i)
-	{
-		flag = i;
-	}
 	virtual void Process(rd_kafka_message_t * pMessage)
 	{
-		int iTime;
-		iMessage++;
-		iTime = (int)ckit::time::GetCurrentSecond();
-		if(iCurrent!=iTime)
-		{
-
-			std::cout<<"flag"<<flag<<"iMessageNum="<<iMessage<<std::endl;
-			iMessage = 0;
-			iCurrent = iTime;
-		}
 		if(pMessage == NULL)
 		return ;
 		IpLog *iplog = new IpLog;
@@ -78,9 +62,6 @@ public:
 			SingleLogQueue::GetInstance()->Send(iplog);
 	}
 private:
-	int iMessage;
-	int iCurrent;
-	int flag;
 };
 
 

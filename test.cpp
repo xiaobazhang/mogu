@@ -4,6 +4,15 @@ void Test::Run()
 {
 	while(1)
 	{
+		int iTime;
+		iMessage++;
+		iTime = (int)ckit::time::GetCurrentSecond();
+		if(iCurrent!=iTime)
+		{
+			std::cout<<"iMessageNum="<<iMessage<<std::endl;
+			iMessage = 0;
+			iCurrent = iTime;
+		}
 		IpLog *iplog = NULL;
 		SingleLogQueue::GetInstance()->Recv(&iplog);
 		//std::cout<<"ip:"<<((IpLog*)iplog)->ip<<std::endl;
