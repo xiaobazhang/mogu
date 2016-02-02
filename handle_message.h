@@ -26,11 +26,11 @@ public:
 	}
 	void Send(IpLog* pIplog)
 	{
-		m_MailBoxR->Send(pIplog);
+		m_MailBoxR.Send(pIplog);
 	}
 	void Recv(IpLog* pIplog)
 	{ 
-		m_MailBoxR->Recv(pIplog,iTimeOutMs);
+		m_MailBoxR.Recv(pIplog,iTimeOutMs);
 	}
 	static SingleLogQueue* GetInstance()
 	{
