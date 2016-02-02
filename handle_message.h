@@ -1,6 +1,7 @@
 #ifndef __HANDLE_MESSAGE_H__
 #define __HANDLE_MESSAGE_H__
 #include <foundation/ckit_mailbox.h>
+#include <foundation/ckit_singleton.h>
 #include <iostream>
 #include "log_analysis.h"
 
@@ -28,12 +29,12 @@ public:
 		m_MailBoxR->Send(m_iplog);
 	}
 	void Recv(IpLog& m_iplog)
-	{
-		m_MailBoxR->Recv(*m_iplog);
+	{ 
+		m_MailBoxR->Recv((*m_iplog));
 	}
 	static SingleLogQueue* GetInstance()
 	{
-		SingletonHolder<SingleLogQueue> m_single;
+		ckit::SingletonHolder<SingleLogQueue> m_single;
 		return m_single.Get();
 	}
 private:
