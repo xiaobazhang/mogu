@@ -45,7 +45,7 @@ private:
 class HandleMessage : public LogAnalysis
 {
 public:
-	HandleMessage():iMessage(0)
+	HandleMessage()
 	{
 	}
 	~HandleMessage()
