@@ -4,8 +4,11 @@ void Test::Run()
 {
 	while(1)
 	{
+		IpLog *iplog = NULL;
+		SingleLogQueue::GetInstance()->Recv(&iplog);
+		//std::cout<<"ip:"<<((IpLog*)iplog)->ip<<std::endl;
+		//Process(iplog->ip,iplog->log);
 		int iTime;
-		iMessage++;
 		iTime = (int)ckit::time::GetCurrentSecond();
 		if(iCurrent!=iTime)
 		{
@@ -13,12 +16,11 @@ void Test::Run()
 			iMessage = 0;
 			iCurrent = iTime;
 		}
-		IpLog *iplog = NULL;
-		SingleLogQueue::GetInstance()->Recv(&iplog);
-		//std::cout<<"ip:"<<((IpLog*)iplog)->ip<<std::endl;
-		//Process(iplog->ip,iplog->log);
 		if(iplog !=NULL)
+		{
+			iMessage++;
 			delete iplog;
+		}
 	}	
 }
 void Test::Process(const string& strip, const string& strlog)
