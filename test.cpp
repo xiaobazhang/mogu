@@ -1,12 +1,13 @@
 #include "test.h"
 
-void Test::Process(rd_kafka_message_t * pMessage)
+void Run()
 {
-
-	if(pMessage == NULL)
-		return ;
-	string strlog = strRecvMes((char*)pMessage->payload,pMessage->len);
-	string strip = strRecvIp((char*)pMessage->key,pMessage->key_len);
+	IpLog iplog;
+	m_LogQueue.Recv(&iplog);
+	Process(iplog.ip,iplog.log);
+}
+void Test::Process(const string& strip, const string& strlog)
+{
 	int iCurrentTime = GetLogTime(strlog);
 	//std::cout<<strlog<<std::endl;
 	if(!m_mapLogValue.count(strip))
@@ -64,7 +65,7 @@ void Test::Process(rd_kafka_message_t * pMessage)
 		m_mapLogValue[strip].m_SearchDiscard = m_mapLogValue[strip].m_SearchDiscard + 1;
 
 }
-int Test::GetCostTime(const string strlog)
+int Test::GetCostTime(const string& strlog)
 {
 	std::string strcosttime;
 	ckit::Regex regex;
@@ -81,7 +82,7 @@ int Test::GetCostTime(const string strlog)
 	regex.GetGroupByIdx(0,strcosttime);
 	return atoi(strcosttime.c_str());
 }
-bool Test::IsSearchZero(const string strlog)
+bool Test::IsSearchZero(const string& strlog)
 {
 	ckit::Regex regex;
 	if(!regex.Compile("return adlist size:0"))
@@ -96,7 +97,7 @@ bool Test::IsSearchZero(const string strlog)
 	}
 	return true;
 }
-bool Test::IsSearchFailed(const string strlog)
+bool Test::IsSearchFailed(const string& strlog)
 {
 	ckit::Regex regex;
 	if(!regex.Compile("ret:false"))
@@ -111,7 +112,7 @@ bool Test::IsSearchFailed(const string strlog)
 	}
 	return true;
 }
-bool Test::IsSearchDiscard(const string strlog)
+bool Test::IsSearchDiscard(const string& strlog)
 {
 	ckit::Regex regex;
 	if(!regex.Compile("discard"))

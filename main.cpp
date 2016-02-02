@@ -1,20 +1,27 @@
 #include <kafka/ckit_kafka.h>
 #include <iostream>
-#include <gtest/gtest.h>
 #include "test.h"
+#include "handle_message.h"
 using namespace ckit;
 
 int main()
 {
 	//ckit::log::SetPrintLogger();
+	char group[4][8] = {"g1","g2","g3","g4"};
+	for(int i=0;i<4;i++)
+	{
+		HandleMessage *myHandleMessage= new HandleMessage();
+		myHandleMessage->SetTopicConf("topic.offset.store.method", "file");
+		myHandleMessage->SetTopicConf("topic.offset.store.sync.interval.ms", "1");
+		myHandleMessage->SetTopicConf("auto.commit.interval.ms", "10");
+		myHandleMessage->SetTopicConf("group.id", group[i]);
+		myHandleMessage->SetOffset(RD_KAFKA_OFFSET_END);
+		myHandleMessage->SetTopic("msearch_cpc");
+		myHandleMessage->SetPartition(i);
+		myHandleMessage->Start();
+		myHandleMessage->Join();
+	}
 	Test myConsumer;
-	myConsumer.SetTopicConf("topic.offset.store.method", "file");
-	myConsumer.SetTopicConf("topic.offset.store.sync.interval.ms", "1");
-	myConsumer.SetTopicConf("auto.commit.interval.ms", "10");
-	myConsumer.SetTopicConf("group.id", "g1");
-	myConsumer.SetOffset(RD_KAFKA_OFFSET_END);
-	myConsumer.SetTopic("cpc_msearch");
-	myConsumer.SetPartition(0);
 	myConsumer.Start();
 	myConsumer.Join();
 	while(1)
