@@ -7,6 +7,7 @@
 
 using namespace std;
 using namespace ckit;
+
 struct IpLog
 {
 	string log;
@@ -30,7 +31,7 @@ public:
 	}
 	void Recv(IpLog& m_iplog)
 	{ 
-		m_MailBoxR->Recv((*m_iplog));
+		m_MailBoxR->Recv(m_iplog);
 	}
 	static SingleLogQueue* GetInstance()
 	{

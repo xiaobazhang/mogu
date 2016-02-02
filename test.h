@@ -7,6 +7,7 @@
 #include "handle_message.h"
 using namespace ckit;
 using namespace std;
+using namespace ckit::time;
 struct LogValue
 {
 	LogValue():m_Time(0),m_Queryps(0),m_CostTime(0),m_SearchFaild(0),m_SearchZero(0),m_SearchDiscard(0){}
