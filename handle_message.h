@@ -1,13 +1,11 @@
 #ifndef __HANDLE_MESSAGE_H__
 #define __HANDLE_MESSAGE_H__
-#include <founation/ckit_mailbox.h>
+#include <foundation/ckit_mailbox.h>
 #include <iostream>
 #include "log_analysis.h"
 
 using namespace std;
 using namespace ckit;
-
-SingleLogQueue g_SingleLogQueue;
 struct IpLog
 {
 	string log;

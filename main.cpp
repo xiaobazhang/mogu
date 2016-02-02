@@ -3,7 +3,8 @@
 #include "test.h"
 #include "handle_message.h"
 using namespace ckit;
-
+using namespace std;
+SingleLogQueue g_SingleLogQueue;
 int main()
 {
 	//ckit::log::SetPrintLogger();
