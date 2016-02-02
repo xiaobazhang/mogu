@@ -42,12 +42,12 @@ int main()
 	myHMess3.SetPartition(3);
 	std::cout<<"4444444444"<<std::endl;
 	myHMess0.Start();
-	myHMess0.Join();
 	myHMess1.Start();
-	myHMess1.Join();
 	myHMess2.Start();
-	myHMess2.Join();
 	myHMess3.Start();
+	myHMess0.Join();
+	myHMess1.Join();
+	myHMess2.Join();
 	myHMess3.Join();
 
 	std::cout<<"123456789"<<std::endl;
