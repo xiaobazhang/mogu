@@ -8,6 +8,7 @@
 using namespace std;
 using namespace ckit;
 
+//SingleLogQueue g_SingleLogQueue;
 struct IpLog
 {
 	string log;
@@ -35,7 +36,7 @@ public:
 	}
 	static SingleLogQueue* GetInstance()
 	{
-		ckit::SingletonHolder<SingleLogQueue> m_single;
+		static ckit::SingletonHolder<SingleLogQueue> m_single;
 		return m_single.Get();
 	}
 private:
