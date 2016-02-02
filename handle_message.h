@@ -19,20 +19,19 @@ class SingleLogQueue
 public:
 	SingleLogQueue()
 	{
-		m_MailBoxR = new MailBoxR<IpLog&>;
 		iTimeOutMs = 100;
 	}
 	~SingleLogQueue()
 	{
 		delete m_MailBoxR;
 	}
-	void Send(IpLog& m_iplog)
+	void Send(IpLog* pIplog)
 	{
 		m_MailBoxR->Send(m_iplog);
 	}
-	void Recv(IpLog& m_iplog)
+	void Recv(IpLog* pIplog)
 	{ 
-		m_MailBoxR->Recv(m_iplog);
+		m_MailBoxR->Recv(pIplog,iTimeOutMs);
 	}
 	static SingleLogQueue* GetInstance()
 	{
@@ -40,7 +39,7 @@ public:
 		return m_single.Get();
 	}
 private:
-	MailBoxR<IpLog&>* m_MailBoxR;
+	MailBoxR<IpLog*> m_MailBoxR;
 	int iTimeOutMs;
 };
 
@@ -59,7 +58,7 @@ public:
 		IpLog iplog;
 		iplog.log = strRecvMes((char*)pMessage->payload,pMessage->len);
 		iplog.ip  = strRecvIp((char*)pMessage->key,pMessage->key_len);
-		SingleLogQueue::GetInstance->Send(iplog);
+		SingleLogQueue::GetInstance->Send(&iplog);
 	}
 private:
 };
