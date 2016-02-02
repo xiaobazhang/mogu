@@ -6,10 +6,11 @@ void Test::Run()
 	{
 		IpLog *iplog = NULL;
 		SingleLogQueue::GetInstance()->Recv(&iplog);
-		//std::cout<<"ip:"<<((IpLog*)iplog)->ip<<std::endl;
+		std::cout<<"ip:"<<((IpLog*)iplog)->ip<<std::endl;
+		Process(iplog.ip,iplog.log);
 		if(iplog !=NULL)
 			delete iplog;
-		//Process(iplog.ip,iplog.log);
+		//
 	}	
 }
 void Test::Process(const string& strip, const string& strlog)
