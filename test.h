@@ -34,6 +34,8 @@ public:
 	bool IsSearchZero(const string& strlog);
 	bool IsSearchFailed(const string& strlog);
 	bool IsSearchDiscard(const string& strlog);
+	int GetLogTime(const string& strlog);
+	bool IsQueryFinish(const string& strlog);
 
 private:
 	map<string,LogValue> m_mapLogValue;

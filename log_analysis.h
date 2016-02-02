@@ -23,8 +23,6 @@ public:
 		return str;
 	}
 	string strRecvIp(char* pstr,int len);
-	int GetLogTime(const string& strlog);
-	bool IsQueryFinish(const string& strlog);
 private:
 
 };

@@ -1,6 +1,6 @@
 #include "test.h"
 
-void Run()
+void Test::Run()
 {
 	IpLog iplog;
 	SingleLogQueue::GetInstance->Recv(&iplog);
@@ -127,7 +127,45 @@ bool Test::IsSearchDiscard(const string& strlog)
 	}
 	return true;
 }
+int Test::GetLogTime(const string& strlog)
+{
+	std::string strlogtime;
+	ckit::Regex regex;
+	if(!regex.Compile("(2[0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9])"))
+	{
+		SET_ERROR_MSG("Compile log time error");
+		return false;
+	}
+	if(!regex.Match(strlog))
+	{
+		SET_ERROR_MSG("Match log time error");
+		return false;
+	}
+	if(!regex.GetGroupByIdx(0,strlogtime))
+	{
+		return false;
+	}
 
+	int logtime = ckit::time::StringTimeToInt(strlogtime);
+	if(logtime <= 0)
+		return 0;
+
+	return logtime;
+}
+bool Test::IsQueryFinish(const string& strlog)
+{
+	ckit::Regex regex;
+	if(!regex.Compile("(query process finish.)"))
+	{
+		SET_ERROR_MSG("Compile query process finish error");
+		return false;
+	}
+	if(!regex.Match(strlog))
+	{
+		return false;
+	}
+	return true;
+}
 
 
 
