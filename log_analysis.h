@@ -7,6 +7,13 @@
 #include <string>
 using namespace ckit;
 using namespace std;
+namespace ckit
+{
+	namespace time
+	{
+		int StringTimeToInt(std::string str)；
+	}
+}
 
 class LogAnalysis : public KafkaConsumer, public KafkaConsumerCb
 {
