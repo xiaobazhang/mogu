@@ -45,8 +45,12 @@ private:
 class HandleMessage : public LogAnalysis
 {
 public:
-	HandleMessage();
-	~HandleMessage();
+	HandleMessage()
+	{
+	}
+	~HandleMessage()
+	{
+	}
 	virtual void Process(rd_kafka_message_t * pMessage)
 	{
 		if(pMessage == NULL)
