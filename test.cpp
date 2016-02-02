@@ -6,7 +6,7 @@ void Test::Run()
 	{
 		IpLog *iplog;
 		SingleLogQueue::GetInstance()->Recv(&iplog);
-		std::cout<<"ip:"<<((IpLog*)iplog)->ip<<std::endl;
+		//std::cout<<"ip:"<<((IpLog*)iplog)->ip<<std::endl;
 		delete iplog;
 		//Process(iplog.ip,iplog.log);
 	}	
