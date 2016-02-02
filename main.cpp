@@ -16,6 +16,7 @@ int main()
 		myHandleMessage->SetTopicConf("topic.offset.store.sync.interval.ms", "1");
 		myHandleMessage->SetTopicConf("auto.commit.interval.ms", "10");
 		myHandleMessage->SetTopicConf("group.id", group[i]);
+		std::cout<<group[i]<<std::endl;
 		myHandleMessage->SetOffset(RD_KAFKA_OFFSET_END);
 		myHandleMessage->SetTopic("msearch_cpc");
 		myHandleMessage->SetPartition(i);
