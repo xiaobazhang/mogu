@@ -59,7 +59,8 @@ public:
 		iplog->log = strRecvMes((char*)pMessage->payload,pMessage->len);
 		iplog->ip  = strRecvIp((char*)pMessage->key,pMessage->key_len);
 		//std::cout<<"send befor ip:"<<iplog.ip<<std::endl;
-		SingleLogQueue::GetInstance()->Send(iplog);
+		if((iplog->log.length()!=0)&&(iplog->ip.length()!=0))
+			SingleLogQueue::GetInstance()->Send(iplog);
 	}
 private:
 };
