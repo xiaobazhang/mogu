@@ -7,7 +7,7 @@ void Test::Run()
 		IpLog *iplog = NULL;
 		SingleLogQueue::GetInstance()->Recv(&iplog);
 		//std::cout<<"ip:"<<((IpLog*)iplog)->ip<<std::endl;
-		Process(iplog->ip,iplog->log);
+		//Process(iplog->ip,iplog->log);
 		if(iplog !=NULL)
 			delete iplog;
 	}	
