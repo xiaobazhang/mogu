@@ -37,7 +37,7 @@ public:
 		return m_single.Get();
 	}
 private:
-	MailBoxR* m_MailBoxR;
+	MailBoxR<IpLog>* m_MailBoxR;
 	int iTimeOutMs;
 };
 
