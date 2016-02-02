@@ -5,10 +5,10 @@ void Test::Run()
 	while(1)
 	{
 		IpLog *iplog;
-	SingleLogQueue::GetInstance()->Recv(&iplog);
-	std::cout<<"ip:"<<iplog->ip<<std::endl;
-	delete iplog;
-	//Process(iplog.ip,iplog.log);
+		SingleLogQueue::GetInstance()->Recv(&iplog);
+		std::cout<<"ip:"<<((IpLog*)iplog)->ip<<std::endl;
+		delete iplog;
+		//Process(iplog.ip,iplog.log);
 	}	
 }
 void Test::Process(const string& strip, const string& strlog)
