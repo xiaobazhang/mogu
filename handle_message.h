@@ -29,11 +29,11 @@ public:
 	}
 	void Recv(IpLog& m_iplog)
 	{
-		m_MailBoxR->Recv(m_iplog);
+		m_MailBoxR->Recv(*m_iplog);
 	}
 	static SingleLogQueue* GetInstance()
 	{
-		ckit::SingletonHolder<SingleLogQueue> m_single;
+		SingletonHolder<SingleLogQueue> m_single;
 		return m_single.Get();
 	}
 private:
