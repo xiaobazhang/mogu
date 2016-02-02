@@ -57,7 +57,7 @@ public:
 		IpLog iplog;
 		iplog.log = strRecvMes((char*)pMessage->payload,pMessage->len);
 		iplog.ip  = strRecvIp((char*)pMessage->key,pMessage->key_len);
-		SingleLogQueue::GetInstance->Send(&iplog);
+		SingleLogQueue::GetInstance()->Send(&iplog);
 	}
 private:
 };
