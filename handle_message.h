@@ -45,10 +45,7 @@ private:
 class HandleMessage : public LogAnalysis
 {
 public:
-	HandleMessage()
-	{
-		//m_LogQueue = g_SingleLogQueue.GetInstance();
-	}
+	HandleMessage();
 	~HandleMessage();
 	virtual void Process(rd_kafka_message_t * pMessage)
 	{
