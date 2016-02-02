@@ -50,6 +50,7 @@ int main()
 	myHMess3.Start();
 	myHMess3.Join();
 
+	std::cout<<"123456789"<<std::endl;
 	Test myConsumer;
 	myConsumer.Start();
 	myConsumer.Join();
