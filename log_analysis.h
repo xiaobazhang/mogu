@@ -11,7 +11,7 @@ namespace ckit
 {
 	namespace time
 	{
-		int StringTimeToInt(std::string str)；
+		int StringTimeToInt(std::string str);
 	}
 }
 
