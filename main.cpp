@@ -16,7 +16,7 @@ int main()
 	myHMess0.SetOffset(RD_KAFKA_OFFSET_END);
 	myHMess0.SetTopic("msearch_cpc");
 	myHMess0.SetPartition(0);
-
+	std::cout<<"11111111111"<<std::endl;
 	myHMess1.SetTopicConf("topic.offset.store.method", "file");
 	myHMess1.SetTopicConf("topic.offset.store.sync.interval.ms", "1");
 	myHMess1.SetTopicConf("auto.commit.interval.ms", "10");
@@ -24,7 +24,7 @@ int main()
 	myHMess1.SetOffset(RD_KAFKA_OFFSET_END);
 	myHMess1.SetTopic("msearch_cpc");
 	myHMess1.SetPartition(1);
-
+	std::cout<<"2222222222"<<std::endl;
 	myHMess2.SetTopicConf("topic.offset.store.method", "file");
 	myHMess2.SetTopicConf("topic.offset.store.sync.interval.ms", "1");
 	myHMess2.SetTopicConf("auto.commit.interval.ms", "10");
@@ -32,7 +32,7 @@ int main()
 	myHMess2.SetOffset(RD_KAFKA_OFFSET_END);
 	myHMess2.SetTopic("msearch_cpc");
 	myHMess2.SetPartition(2);
-
+	std::cout<<"333333333"<<std::endl;
 	myHMess3.SetTopicConf("topic.offset.store.method", "file");
 	myHMess3.SetTopicConf("topic.offset.store.sync.interval.ms", "1");
 	myHMess3.SetTopicConf("auto.commit.interval.ms", "10");
@@ -40,7 +40,7 @@ int main()
 	myHMess3.SetOffset(RD_KAFKA_OFFSET_END);
 	myHMess3.SetTopic("msearch_cpc");
 	myHMess3.SetPartition(3);
-
+	std::cout<<"4444444444"<<std::endl;
 	myHMess0.Start();
 	myHMess0.Join();
 	myHMess1.Start();
