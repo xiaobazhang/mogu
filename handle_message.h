@@ -55,11 +55,11 @@ public:
 	{
 		if(pMessage == NULL)
 		return ;
-		IpLog iplog;
-		iplog.log = strRecvMes((char*)pMessage->payload,pMessage->len);
-		iplog.ip  = strRecvIp((char*)pMessage->key,pMessage->key_len);
+		IpLog *iplog = new IpLog;
+		iplog->log = strRecvMes((char*)pMessage->payload,pMessage->len);
+		iplog->ip  = strRecvIp((char*)pMessage->key,pMessage->key_len);
 		//std::cout<<"send befor ip:"<<iplog.ip<<std::endl;
-		SingleLogQueue::GetInstance()->Send(&iplog);
+		SingleLogQueue::GetInstance()->Send(iplog);
 	}
 private:
 };
