@@ -23,7 +23,7 @@ class Test: public Thread
 public:
 	Test()
 	{
-		m_LogQueue = g_SingleLogQueue.GetInstance();
+		//m_LogQueue = g_SingleLogQueue.GetInstance();
 	}
 	~Test()
 	{
@@ -39,7 +39,7 @@ private:
 	map<string,LogValue> m_mapLogValue;
 	map<string,int> m_mapCurrentTime;
 	Metric m_Metric;
-	SingleLogQueue* m_LogQueue;
+	//SingleLogQueue* m_LogQueue;
 };
 
 #endif

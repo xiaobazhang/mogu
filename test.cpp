@@ -3,7 +3,7 @@
 void Run()
 {
 	IpLog iplog;
-	m_LogQueue.Recv(&iplog);
+	SingleLogQueue::GetInstance->Recv(&iplog);
 	Process(iplog.ip,iplog.log);
 }
 void Test::Process(const string& strip, const string& strlog)

@@ -46,7 +46,7 @@ class HandleMessage : public LogAnalysis
 public:
 	HandleMessage()
 	{
-		m_LogQueue = g_SingleLogQueue.GetInstance();
+		//m_LogQueue = g_SingleLogQueue.GetInstance();
 	}
 	~HandleMessage();
 	virtual void Process(rd_kafka_message_t * pMessage)
@@ -56,10 +56,9 @@ public:
 		IpLog iplog;
 		iplog.log = strRecvMes((char*)pMessage->payload,pMessage->len);
 		iplog.ip  = strRecvIp((char*)pMessage->key,pMessage->key_len);
-		m_LogQueue.Send(iplog);
+		SingleLogQueue::GetInstance->Send(iplog);
 	}
 private:
-	SingleLogQueue* m_LogQueue;
 };
 
 
