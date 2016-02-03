@@ -16,8 +16,6 @@ public:
 	Metric():miQueueMaxNum(18){}
 	~Metric()
 	{
-		this->Start();
-		this->Join();
 	}
 	void HandleMetric(const string strmetric,const string strhost,int itime,int ivalue);
 	void HandleMetric(const string strmetric,const string strhost,int itime,float fvalue);

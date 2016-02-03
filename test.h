@@ -31,6 +31,8 @@ public:
 		m_vecDateName.push_back("SearchFaild");
 		m_vecDateName.push_back("SearchZero");
 		m_vecDateName.push_back("SearchDiscard");
+		m_Metric.Start();
+		m_Metric.Join();
 	}
 	~Test()
 	{
