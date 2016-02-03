@@ -105,13 +105,13 @@ void Test::SendLog()
 			for(int j=0; j<2;j++)
 			{
 				int tmp = iter2->second/iter1->second;
-				std::cout<<std::endl<<"time = "<<ckit::time::ToString(iter1->first)<<std::endl;
+				std::cout<<"time = "<<ckit::time::ToString(iter1->first)<<std::endl;
 				std::cout<<"size = "<<iter->second["Queryps"].size()<<std::endl;
-				m_Metric.HandleMetric("search_qps_test",strip,iter1->first,iter1->second);
-				m_Metric1.HandleMetric("search_rt_test",strip,iter2->first,tmp);
-				m_Metric2.HandleMetric("search_zero_test",strip,iter3->first,iter3->second);
-				m_Metric3.HandleMetric("search_fail_test",strip,iter4->first,iter4->second);
-				m_Metric.HandleMetric("search_discard_test",strip,iter5->first,iter5->second);
+				//m_Metric.HandleMetric("search_qps_test",strip,iter1->first,iter1->second);
+				//m_Metric1.HandleMetric("search_rt_test",strip,iter2->first,tmp);
+				//m_Metric2.HandleMetric("search_zero_test",strip,iter3->first,iter3->second);
+				//m_Metric3.HandleMetric("search_fail_test",strip,iter4->first,iter4->second);
+				//m_Metric.HandleMetric("search_discard_test",strip,iter5->first,iter5->second);
 				iter->second["Queryps"].erase(iter1++);
 				iter->second["CostTime"].erase(iter2++);
 				iter->second["SearchZero"].erase(iter3++);
@@ -123,7 +123,6 @@ void Test::SendLog()
 }
 void Test::Process(const string& strip, const string& strlog)
 {
-	std::cout<<"true";
 	if(!m_DataType.count(strip))
 	{
 		map<int,int> _map;
