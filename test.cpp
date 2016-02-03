@@ -128,7 +128,7 @@ void Test::Process(const string& strip, const string& strlog)
 	}
 	else
 	{
-		CountLog(m_DataType[strip]);
+		CountLog(strlog,m_DataType[strip]);
 	}
 	SendLog();
 	/*int iCurrentTime = GetLogTime(strlog);
