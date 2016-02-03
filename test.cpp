@@ -99,7 +99,6 @@ void Test::SendLog()
 	map<string,map<string,map<int,int> > >::iterator iter;
 	for(iter = m_DataType.begin();iter!=m_DataType.end();iter++)
 	{
-		std::cout<<"12345678"<<std::endl;
 		string strip = iter->first;
 		if(iter->second["Queryps"].size()>=5)
 		{
@@ -112,23 +111,17 @@ void Test::SendLog()
 
 			for(int j=0; j<2;j++)
 			{
-
-				std::cout<<"000000000"<<std::endl;
 				int tmp = iter2->second/iter1->second;
 				m_Metric.HandleMetric("search_qps_test",strip,iter1->first,iter1->second);
-				std::cout<<"111111111"<<std::endl;
 				m_Metric.HandleMetric("search_rt_test",strip,iter2->first,tmp);
-				std::cout<<"222222222"<<std::endl;
 				m_Metric.HandleMetric("search_zero_test",strip,iter3->first,iter3->second);
 				m_Metric.HandleMetric("search_fail_test",strip,iter4->first,iter4->second);
 				m_Metric.HandleMetric("search_discard_test",strip,iter5->first,iter5->second);
-				std::cout<<"333333333"<<std::endl;
 				iter->second["Queryps"].erase(iter1++);
 				iter->second["CostTime"].erase(iter2++);
 				iter->second["SearchZero"].erase(iter3++);
 				iter->second["SearchFaild"].erase(iter4++);
 				iter->second["SearchDiscard"].erase(iter5++);
-				
 			}	
 		}
 	}
