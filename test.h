@@ -6,6 +6,9 @@
 #include "metric.h"
 #include "log_analysis.h"
 #include "handle_message.h"
+#include <stdio.h>
+#include <sys/time.h>
+#include <unistd.h>
 using namespace ckit;
 using namespace std;
 using namespace ckit::time;

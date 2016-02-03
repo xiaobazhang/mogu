@@ -4,6 +4,9 @@ void Test::Run()
 {
 	while(1)
 	{
+		struct timeval start, end;
+	    gettimeofday( &start, NULL );
+	    printf("start : %d.%d\n", start.tv_sec, start.tv_usec);
 		IpLog *iplog = NULL;
 		SingleLogQueue::GetInstance()->Recv(&iplog);
 		Process(iplog->ip,iplog->log);
@@ -12,6 +15,8 @@ void Test::Run()
 			//iMessage++;
 			delete iplog;
 		}
+		gettimeofday( &end, NULL );
+	    printf("end   : %d.%d\n", end.tv_sec, end.tv_usec);
 	}	
 }
 /**
@@ -105,8 +110,8 @@ void Test::SendLog()
 			for(int j=0; j<2;j++)
 			{
 				int tmp = iter2->second/iter1->second;
-				std::cout<<"time = "<<ckit::time::ToString(iter1->first)<<std::endl;
-				std::cout<<"size = "<<iter->second["Queryps"].size()<<std::endl;
+				//std::cout<<"time = "<<ckit::time::ToString(iter1->first)<<std::endl;
+				//std::cout<<"size = "<<iter->second["Queryps"].size()<<std::endl;
 				m_Metric.HandleMetric("search_qps_test",strip,iter1->first,iter1->second);
 				m_Metric.HandleMetric("search_rt_test",strip,iter2->first,tmp);
 				m_Metric.HandleMetric("search_zero_test",strip,iter3->first,iter3->second);
