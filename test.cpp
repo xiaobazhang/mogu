@@ -104,7 +104,7 @@ void Test::SendLog()
 			for(int j=0; j<2;j++)
 			{
 				int tmp = iter2->second/iter1->second;
-				std::cout<<"time = "<<iter1->first<<std::endl;
+				std::cout<<"time = "<<ckit::time::ToString(iter1->first)<<std::endl;
 				m_Metric.HandleMetric("search_qps_test",strip,iter1->first,iter1->second);
 				m_Metric1.HandleMetric("search_rt_test",strip,iter2->first,tmp);
 				m_Metric2.HandleMetric("search_zero_test",strip,iter3->first,iter3->second);

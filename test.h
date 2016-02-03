@@ -1,6 +1,7 @@
 #ifndef __TEST_H__
 #define __TEST_H__
 #include <foundation/ckit_thread.h>
+#include <foundation/ckit_time.h>
 #include <map>
 #include "metric.h"
 #include "log_analysis.h"
