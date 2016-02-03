@@ -33,8 +33,8 @@ public:
 	{
 		while(1)
 		{
-			string str = m_LFQueue.Front();
-			m_LFQueue.Pop();
+			string str = m_LFQueue->Front();
+			m_LFQueue->Pop();
 			m_queue.push(str);
 			SendMetric();
 		}
