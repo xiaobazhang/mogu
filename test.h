@@ -26,11 +26,11 @@ public:
 	Test():iMessage(0),iCurrent(0)
 	{
 		iCurrent = (int)ckit::time::GetCurrentSecond();	
-		m_vecDateName.pushback("Queryps");
-		m_vecDateName.pushback("CostTime");
-		m_vecDateName.pushback("SearchFaild");
-		m_vecDateName.pushback("SearchZero");
-		m_vecDateName.pushback("SearchDiscard");
+		m_vecDateName.push_back("Queryps");
+		m_vecDateName.push_back("CostTime");
+		m_vecDateName.push_back("SearchFaild");
+		m_vecDateName.push_back("SearchZero");
+		m_vecDateName.push_back("SearchDiscard");
 	}
 	~Test()
 	{

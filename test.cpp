@@ -122,7 +122,7 @@ void Test::Process(const string& strip, const string& strlog)
 		map<string,map<int,int> > MapTmp2;
 		for(vector<string>::iterator iter= m_vecDateName.begin();iter !=m_vecDateName.end();iter++)
 		{
-			MapTmp2[iter] = MapTmp1;
+			MapTmp2[*iter] = MapTmp1;
 		}
 		m_DataType[strip] = MapTmp2;
 	}
