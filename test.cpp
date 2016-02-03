@@ -7,14 +7,6 @@ void Test::Run()
 		IpLog *iplog = NULL;
 		SingleLogQueue::GetInstance()->Recv(&iplog);
 		Process(iplog->ip,iplog->log);
-		/*int iTime;
-		iTime = (int)ckit::time::GetCurrentSecond();
-		if(iCurrent!=iTime)
-		{
-			std::cout<<"iMessageNum="<<iMessage/3<<std::endl;
-			iMessage = 0;
-			iCurrent = iTime;
-		}*/
 		if(iplog !=NULL)
 		{
 			//iMessage++;
@@ -152,62 +144,6 @@ void Test::Process(const string& strip, const string& strlog)
 		CountLog(strlog,m_DataType[strip]);
 	}
 	SendLog();
-	/*int iCurrentTime = GetLogTime(strlog);
-	//std::cout<<strlog<<std::endl;
-	if(!m_mapLogValue.count(strip))
-	{
-		LogValue stlogvalue;
-		m_mapLogValue[strip] = stlogvalue;
-	}
-	m_mapCurrentTime[strip] = iCurrentTime;//记录当前的时间
-
-	if(m_mapLogValue[strip].m_Time == 0)
-	{
-		m_mapLogValue[strip].m_Time = m_mapCurrentTime[strip];
-	}
-	if(m_mapLogValue[strip].m_Time != m_mapCurrentTime[strip])
-	{  
-		LogValue tmp = m_mapLogValue[strip];
-		//std::cout<<strip<<":"<<tmp.m_Time<<":"<<tmp.m_Queryps<<std::endl;
-		int iCostTime = 0;
-		if(m_mapLogValue[strip].m_Queryps != 0)
-			iCostTime = m_mapLogValue[strip].m_CostTime/m_mapLogValue[strip].m_Queryps;
-		else
-			iCostTime = 0;
-
-		m_Metric.HandleMetric("search_qps_test",strip,m_mapLogValue[strip].m_Time,m_mapLogValue[strip].m_Queryps);
-		m_Metric.HandleMetric("search_rt_test",strip,m_mapLogValue[strip].m_Time,iCostTime);
-		m_Metric.HandleMetric("search_zero_test",strip,m_mapLogValue[strip].m_Time,m_mapLogValue[strip].m_SearchZero);
-		m_Metric.HandleMetric("search_fail_test",strip,m_mapLogValue[strip].m_Time,m_mapLogValue[strip].m_SearchFaild);
-		m_Metric.HandleMetric("search_discard_test",strip,m_mapLogValue[strip].m_Time,m_mapLogValue[strip].m_SearchDiscard);
-		//发送curl
-		m_mapLogValue[strip].m_Time = m_mapCurrentTime[strip];
-		m_mapLogValue[strip].m_Queryps = 0;
-		m_mapLogValue[strip].m_CostTime = 0;
-		m_mapLogValue[strip].m_SearchZero = 0;
-		m_mapLogValue[strip].m_SearchFaild = 0;
-		m_mapLogValue[strip].m_SearchDiscard = 0;
-	}
-	if(IsQueryFinish(strlog))
-	{
-		m_mapLogValue[strip].m_Queryps = m_mapLogValue[strip].m_Queryps + 1;
-	}
-
-	int iCostTime = GetCostTime(strlog);
-	if(iCostTime!= -1)
-	{
-		m_mapLogValue[strip].m_CostTime = m_mapLogValue[strip].m_CostTime + iCostTime;
-	}
-
-	if(IsSearchZero(strlog))
-		m_mapLogValue[strip].m_SearchZero = m_mapLogValue[strip].m_SearchZero + 1;
-
-	if(IsSearchFailed(strlog))
-		m_mapLogValue[strip].m_SearchFaild = m_mapLogValue[strip].m_SearchFaild + 1;
-
-	if(IsSearchDiscard(strlog))
-		m_mapLogValue[strip].m_SearchDiscard = m_mapLogValue[strip].m_SearchDiscard + 1;
-*/
 }
 int Test::GetCostTime(const string& strlog)
 {
