@@ -21,7 +21,6 @@ public:
 	SingleLogQueue()
 	{
 		iTimeOutMs = -1;
-		m_LFQueue = new LFQueue<string>;
 	}
 	~SingleLogQueue()
 	{
@@ -44,10 +43,6 @@ public:
 		string str = m_LFQueue.Front();
 		m_LFQueue.Pop();
 		return str;
-	}
-	LFQueue<string>* GetLFQueue()
-	{
-		return m_LFQueue;
 	}
 	static SingleLogQueue* GetInstance()
 	{
