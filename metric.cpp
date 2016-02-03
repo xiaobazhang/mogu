@@ -37,7 +37,7 @@ void Metric::SendMetric()
 		struct timeval start, end;
 	    gettimeofday( &start, NULL );
 	    printf("start : %d.%d\n", start.tv_sec, start.tv_usec);
-		system(ptr);
+		system("ls");
 		gettimeofday( &end, NULL );
 	    printf("end   : %d.%d\n", end.tv_sec, end.tv_usec);
 		delete [] ptr;
