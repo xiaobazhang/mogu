@@ -84,10 +84,10 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
  */
 void Test::SendLog()
 {
-	std::cout<<"12345678"<<std::endl;
 	map<string,map<string,map<int,int> > >::iterator iter;
 	for(iter = m_DataType.begin();iter!=m_DataType.end();iter++)
 	{
+		std::cout<<"12345678"<<std::endl;
 		string strip = iter->first;
 		if(m_DataType[strip]["Queryps"].size()>=5)
 		{
@@ -100,6 +100,7 @@ void Test::SendLog()
 
 			for(int j=0; j<2;j++)
 			{
+				std::cout<<"000000000"<<std::endl;
 				int tmp = iter2->second/iter1->second;
 				m_Metric.HandleMetric("search_qps_test",strip,iter1->first,iter1->second);
 				m_Metric.HandleMetric("search_rt_test",strip,iter2->first,tmp);
