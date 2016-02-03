@@ -84,11 +84,12 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
  */
 void Test::SendLog()
 {
+	std::cout<<"12345678"<<std::endl;
 	map<string,map<string,map<int,int> > >::iterator iter;
 	for(iter = m_DataType.begin();iter!=m_DataType.end();iter++)
 	{
 		string strip = iter->first;
-		if(m_DataType[strip]["Queryps"].size()>=10)
+		if(m_DataType[strip]["Queryps"].size()>=5)
 		{
 			map<int,int>::iterator iter1,iter2,iter3,iter4,iter5;
 			iter1 = iter->second["Queryps"].begin();
