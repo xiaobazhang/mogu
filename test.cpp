@@ -105,7 +105,7 @@ void Test::SendLog()
 			for(int j=0; j<2;j++)
 			{
 				int tmp = iter2->second/iter1->second;
-				std::cout<<"time = "<<ckit::time::ToString(iter1->first)<<std::endl;
+				std::cout<<std::endl<<"time = "<<ckit::time::ToString(iter1->first)<<std::endl;
 				std::cout<<"size = "<<iter->second["Queryps"].size()<<std::endl;
 				m_Metric.HandleMetric("search_qps_test",strip,iter1->first,iter1->second);
 				m_Metric1.HandleMetric("search_rt_test",strip,iter2->first,tmp);
@@ -123,7 +123,7 @@ void Test::SendLog()
 }
 void Test::Process(const string& strip, const string& strlog)
 {
-	std::cout<<"true"<<std::endl;
+	std::cout<<"true";
 	if(!m_DataType.count(strip))
 	{
 		map<int,int> _map;
