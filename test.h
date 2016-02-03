@@ -8,6 +8,7 @@
 using namespace ckit;
 using namespace std;
 using namespace ckit::time;
+
 struct LogValue
 {
 	LogValue():m_Time(0),m_Queryps(0),m_CostTime(0),m_SearchFaild(0),m_SearchZero(0),m_SearchDiscard(0){}
@@ -24,8 +25,12 @@ class Test: public Thread
 public:
 	Test():iMessage(0),iCurrent(0)
 	{
-		iCurrent = (int)ckit::time::GetCurrentSecond();
-		//m_LogQueue = g_SingleLogQueue.GetInstance();
+		iCurrent = (int)ckit::time::GetCurrentSecond();	
+		m_vecDateName.pushback("Queryps");
+		m_vecDateName.pushback("CostTime");
+		m_vecDateName.pushback("SearchFaild");
+		m_vecDateName.pushback("SearchZero");
+		m_vecDateName.pushback("SearchDiscard");
 	}
 	~Test()
 	{
@@ -38,11 +43,15 @@ public:
 	bool IsSearchDiscard(const string& strlog);
 	int GetLogTime(const string& strlog);
 	bool IsQueryFinish(const string& strlog);
+	void CountLog(const string& strlog,map<string,map<int,int> >& mapcount);
+	void SendLog();
 
 private:
 	map<string,LogValue> m_mapLogValue;
 	map<string,int> m_mapCurrentTime;
 	Metric m_Metric;
+	map<string,map<string,map<int,int> > > m_DataType;
+	vector<string> m_vecDateName;
 	int iMessage;
 	int iCurrent;
 };

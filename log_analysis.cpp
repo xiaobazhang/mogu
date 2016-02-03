@@ -15,10 +15,22 @@ namespace ckit
 		}
 	}
 }
+/**
+ * @AuthorHTL
+ * @DateTime  2016-02-03T09:22:36+0800
+ * @param
+ */
 void LogAnalysis::Process(rd_kafka_message_t * pMessage)
 {
 	
 }
+/**
+ * @AuthorHTL
+ * @DateTime  2016-02-02T20:54:01+0800
+ * @param
+ * @param
+ * @return
+ */
 string LogAnalysis::strRecvIp(char* pstr,int len)
 {
 	string str(pstr,len);
