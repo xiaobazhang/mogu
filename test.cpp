@@ -115,6 +115,7 @@ void Test::SendLog()
 				std::cout<<"1"<<std::endl;
 				iter->second["Queryps"].erase(iter1++);
 				std::cout<<"2"<<std::endl;
+				std::cout<<iter->second["CostTime"].size()<<std::endl;
 				iter->second["CostTime"].erase(iter2++);
 				std::cout<<"3"<<std::endl;
 				iter->second["SearchZero"].erase(iter3++);
