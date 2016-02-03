@@ -33,17 +33,6 @@ public:
 	{ 
 		m_MailBoxR.Recv(*pIplog,iTimeOutMs);
 	}
-	void push(string str)
-	{
-		m_LFQueue.Back() = str;
-		m_LFQueue.Push();
-	}
-	string pop()
-	{
-		string str = m_LFQueue.Front();
-		m_LFQueue.Pop();
-		return str;
-	}
 	static SingleLogQueue* GetInstance()
 	{
 		static ckit::SingletonHolder<SingleLogQueue> m_single;
@@ -51,7 +40,6 @@ public:
 	}
 private:
 	MailBoxR<IpLog*> m_MailBoxR;
-	LFQueue<string> m_LFQueue;
 	int iTimeOutMs;
 };
 
@@ -71,8 +59,7 @@ public:
 		IpLog *iplog = new IpLog;
 		iplog->log = strRecvMes((char*)pMessage->payload,pMessage->len);
 		iplog->ip  = strRecvIp((char*)pMessage->key,pMessage->key_len);
-		if(((iplog->log).length()>=1)&&((iplog->ip).length()>=1))
-			SingleLogQueue::GetInstance()->Send(iplog);
+		SingleLogQueue::GetInstance()->Send(iplog);
 	}
 private:
 };

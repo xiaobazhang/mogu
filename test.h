@@ -33,9 +33,9 @@ public:
 		m_vecDateName.push_back("SearchZero");
 		m_vecDateName.push_back("SearchDiscard");
 		m_Metric.Start();
-		//m_Metric1.Start();
-		//m_Metric2.Start();
-		//m_Metric3.Start();
+		m_Metric1.Start();
+		m_Metric2.Start();
+		m_Metric3.Start();
 		//m_Metric.Join();
 	}
 	~Test()
@@ -53,8 +53,6 @@ public:
 	void SendLog();
 
 private:
-	map<string,LogValue> m_mapLogValue;
-	map<string,int> m_mapCurrentTime;
 	Metric m_Metric,m_Metric1,m_Metric2,m_Metric3;
 	map<string,map<string,map<int,int> > > m_DataType;
 	vector<string> m_vecDateName;

@@ -4,8 +4,6 @@
 #include <foundation/ckit_basedef.h>
 #include <foundation/ckit_thread.h>
 #include <foundation/ckit_lock.h>
-#include <foundation/ckit_lf_queue.h>
-#include "handle_message.h"
 #include <string>
 #include <iostream>
 #include <queue>
@@ -15,9 +13,7 @@ using namespace std;
 class Metric : public Thread
 {
 public:
-	Metric():miQueueMaxNum(18)
-	{
-	}
+	Metric():miQueueMaxNum(18){}
 	~Metric()
 	{
 	}
@@ -32,9 +28,9 @@ public:
 	{
 		while(1)
 		{
-			string str = SingleLogQueue::GetInstance()->pop();
-			m_queue.push(str);
+			m_LockQueue.Lock();
 			SendMetric();
+			m_LockQueue.UnLock();
 		}
 	}
 
@@ -42,5 +38,6 @@ private:
 	int miQueueMaxNum;
 	queue<string> m_queue;
 	MutexLock m_LockQueue;
+
 };
 #endif
