@@ -106,9 +106,9 @@ void Test::SendLog()
 				int tmp = iter2->second/iter1->second;
 				std::cout<<"time = "<<iter1->first<<std::endl;
 				m_Metric.HandleMetric("search_qps_test",strip,iter1->first,iter1->second);
-				m_Metric.HandleMetric("search_rt_test",strip,iter2->first,tmp);
-				m_Metric.HandleMetric("search_zero_test",strip,iter3->first,iter3->second);
-				m_Metric.HandleMetric("search_fail_test",strip,iter4->first,iter4->second);
+				m_Metric1.HandleMetric("search_rt_test",strip,iter2->first,tmp);
+				m_Metric2.HandleMetric("search_zero_test",strip,iter3->first,iter3->second);
+				m_Metric3.HandleMetric("search_fail_test",strip,iter4->first,iter4->second);
 				m_Metric.HandleMetric("search_discard_test",strip,iter5->first,iter5->second);
 				iter->second["Queryps"].erase(iter1++);
 				iter->second["CostTime"].erase(iter2++);
