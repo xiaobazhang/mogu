@@ -93,7 +93,7 @@ void Test::SendLog()
 	for(iter = m_DataType.begin();iter!=m_DataType.end();iter++)
 	{
 		string strip = iter->first;
-		if(iter->second["Queryps"].size()>=5)
+		if(iter->second["Queryps"].size()>=60)
 		{
 			map<int,int>::iterator iter1,iter2,iter3,iter4,iter5;
 			iter1 = iter->second["Queryps"].begin();

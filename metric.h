@@ -13,7 +13,7 @@
 using namespace ckit;
 using namespace std;
 
-class Metric : public Thread
+class Metric //: public Thread
 {
 public:
 	Metric():miQueueMaxNum(10){}
@@ -27,7 +27,7 @@ public:
 		miQueueMaxNum = num;
 	}
 	void SendMetric();
-	virtual void Run()
+	/*virtual void Run()
 	{
 		while(1)
 		{
@@ -35,7 +35,7 @@ public:
 			SendMetric();
 			m_LockQueue.UnLock();
 		}
-	}
+	}*/
 
 private:
 	int miQueueMaxNum;

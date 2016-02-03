@@ -32,10 +32,6 @@ public:
 		m_vecDateName.push_back("SearchFaild");
 		m_vecDateName.push_back("SearchZero");
 		m_vecDateName.push_back("SearchDiscard");
-		m_Metric.Start();
-		m_Metric1.Start();
-		m_Metric2.Start();
-		m_Metric3.Start();
 		//m_Metric.Join();
 	}
 	~Test()
@@ -53,7 +49,7 @@ public:
 	void SendLog();
 
 private:
-	Metric m_Metric,m_Metric1,m_Metric2,m_Metric3;
+	Metric m_Metric;
 	map<string,map<string,map<int,int> > > m_DataType;
 	vector<string> m_vecDateName;
 	int iMessage;
