@@ -26,7 +26,7 @@ public:
 		miQueueMaxNum = num;
 	}
 	void SendMetric();
-	virtual Run()
+	virtual void Run()
 	{
 		while(1)
 		{
