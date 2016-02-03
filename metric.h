@@ -16,7 +16,7 @@ using namespace std;
 class Metric : public Thread
 {
 public:
-	Metric():miQueueMaxNum(18){}
+	Metric():miQueueMaxNum(10){}
 	~Metric()
 	{
 	}
