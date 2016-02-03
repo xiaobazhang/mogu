@@ -31,6 +31,7 @@ public:
 		while(1)
 		{
 			m_LockQueue.Lock();
+			std::cout<<"while"<<std::endl;
 			SendMetric();
 			m_LockQueue.UnLock();
 		}

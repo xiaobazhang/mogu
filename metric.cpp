@@ -7,6 +7,7 @@ void Metric::HandleMetric(const string strmetric,const string strhost,int itime,
 	string str(buf);
 	m_LockQueue.Lock();
 	m_queue.push(str);
+	std::cout<<"send"<<std::endl;
 	m_LockQueue.UnLock();
 }
 void Metric::HandleMetric(const string strmetric,const string strhost,int itime,float fvalue)
