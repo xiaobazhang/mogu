@@ -4,6 +4,8 @@
 #include <foundation/ckit_basedef.h>
 #include <foundation/ckit_thread.h>
 #include <foundation/ckit_lock.h>
+#include <foundation/ckit_lf_queue.h>
+#include "handle_message.h"
 #include <string>
 #include <iostream>
 #include <queue>
@@ -33,7 +35,7 @@ public:
 		{
 			string str = m_LFQueue.Front();
 			m_LFQueue.Pop();
-			m_queue.push(str)
+			m_queue.push(str);
 			SendMetric();
 		}
 	}
