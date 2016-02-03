@@ -33,53 +33,54 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 		if(mapcount["Queryps"].count(iCurrentTime))
 			mapcount["Queryps"][iCurrentTime]++;
 		else
-			mapcount["Queryps"][iCurrentTime] = 1;
-	}
-	
-	if(int CostTime = GetCostTime(strlog))
-	{
-		if(CostTime != -1)
 		{
-			if(mapcount["CostTime"].count(iCurrentTime))
-				mapcount["CostTime"][iCurrentTime] += CostTime;
-			else
-				mapcount["CostTime"][iCurrentTime] = CostTime;
+			mapcount["Queryps"][iCurrentTime] = 1;
 		}
-	}
-	if(IsSearchZero(strlog))
-	{
-		if(mapcount["SearchZero"].count(iCurrentTime))
-			mapcount["SearchZero"][iCurrentTime]++;
+		if(int CostTime = GetCostTime(strlog))
+		{
+			if(CostTime != -1)
+			{
+				if(mapcount["CostTime"].count(iCurrentTime))
+					mapcount["CostTime"][iCurrentTime] += CostTime;
+				else
+					mapcount["CostTime"][iCurrentTime] = CostTime;
+			}
+		}
+		if(IsSearchZero(strlog))
+		{
+			if(mapcount["SearchZero"].count(iCurrentTime))
+				mapcount["SearchZero"][iCurrentTime]++;
+			else
+				mapcount["SearchZero"][iCurrentTime] = 1;
+		}
 		else
-			mapcount["SearchZero"][iCurrentTime] = 1;
-	}
-	else
-	{
-		mapcount["SearchZero"][iCurrentTime] = 0;
-	}
+		{
+			mapcount["SearchZero"][iCurrentTime] = 0;
+		}
 
-	if(IsSearchFailed(strlog))
-	{
-		if(mapcount["SearchFaild"].count(iCurrentTime))
-			mapcount["SearchFaild"][iCurrentTime]++;
+		if(IsSearchFailed(strlog))
+		{
+			if(mapcount["SearchFaild"].count(iCurrentTime))
+				mapcount["SearchFaild"][iCurrentTime]++;
+			else
+				mapcount["SearchFaild"][iCurrentTime] = 1;
+		}
 		else
-			mapcount["SearchFaild"][iCurrentTime] = 1;
-	}
-	else
-	{
-		mapcount["SearchFaild"][iCurrentTime] = 0;
-	}
+		{
+			mapcount["SearchFaild"][iCurrentTime] = 0;
+		}
 
-	if(IsSearchDiscard(strlog))
-	{
-		if(mapcount["SearchDiscard"].count(iCurrentTime))
-			mapcount["SearchDiscard"][iCurrentTime]++;
+		if(IsSearchDiscard(strlog))
+		{
+			if(mapcount["SearchDiscard"].count(iCurrentTime))
+				mapcount["SearchDiscard"][iCurrentTime]++;
+			else
+				mapcount["SearchDiscard"][iCurrentTime] = 1;
+		}
 		else
-			mapcount["SearchDiscard"][iCurrentTime] = 1;
-	}
-	else
-	{
-		mapcount["SearchDiscard"][iCurrentTime] = 0;
+		{
+			mapcount["SearchDiscard"][iCurrentTime] = 0;
+		}
 	}
 }
 /**
