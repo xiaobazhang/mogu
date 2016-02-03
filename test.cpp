@@ -89,7 +89,7 @@ void Test::SendLog()
 	{
 		std::cout<<"12345678"<<std::endl;
 		string strip = iter->first;
-		if(m_DataType[strip]["Queryps"].size()>=5)
+		if(iter->second["Queryps"].size()>=5)
 		{
 			map<int,int>::iterator iter1,iter2,iter3,iter4,iter5;
 			iter1 = iter->second["Queryps"].begin();
@@ -123,13 +123,21 @@ void Test::Process(const string& strip, const string& strlog)
 {
 	if(!m_DataType.count(strip))
 	{
-		map<int,int> MapTmp1;
+		map<int,int> _map;
+		map<string,map<int,int> > map_tmp;
+		map_tmp["Queryps"] = _map;
+		map_tmp["CostTime"] = _map;
+		map_tmp["SearchZero"] = _map;
+		map_tmp["SearchFaild"] = _map;
+		map_tmp["SearchDiscard"] = _map;
+		m_DataType[strip] = map_tmp;
+		/*map<int,int> MapTmp1;
 		map<string,map<int,int> > MapTmp2;
 		for(vector<string>::iterator iter= m_vecDateName.begin();iter !=m_vecDateName.end();iter++)
 		{
 			MapTmp2[*iter] = MapTmp1;
 		}
-		m_DataType[strip] = MapTmp2;
+		m_DataType[strip] = MapTmp2;*/
 	}
 	else
 	{
