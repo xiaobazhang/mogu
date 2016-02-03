@@ -103,7 +103,9 @@ void Test::SendLog()
 				std::cout<<"000000000"<<std::endl;
 				int tmp = iter2->second/iter1->second;
 				m_Metric.HandleMetric("search_qps_test",strip,iter1->first,iter1->second);
+				std::cout<<"111111111"<<std::endl;
 				m_Metric.HandleMetric("search_rt_test",strip,iter2->first,tmp);
+				std::cout<<"222222222"<<std::endl;
 				m_Metric.HandleMetric("search_zero_test",strip,iter3->first,iter3->second);
 				m_Metric.HandleMetric("search_fail_test",strip,iter4->first,iter4->second);
 				m_Metric.HandleMetric("search_discard_test",strip,iter5->first,iter5->second);
@@ -112,6 +114,7 @@ void Test::SendLog()
 				iter->second["SearchZero"].erase(iter3++);
 				iter->second["SearchFaild"].erase(iter4++);
 				iter->second["SearchDiscard"].erase(iter5++);
+				std::cout<<"333333333"<<std::endl;
 			}	
 		}
 	}
