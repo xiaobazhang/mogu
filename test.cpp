@@ -4,9 +4,6 @@ void Test::Run()
 {
 	while(1)
 	{
-		struct timeval start, end;
-	    gettimeofday( &start, NULL );
-	    printf("start : %d.%d\n", start.tv_sec, start.tv_usec);
 		IpLog *iplog = NULL;
 		SingleLogQueue::GetInstance()->Recv(&iplog);
 		Process(iplog->ip,iplog->log);
@@ -15,8 +12,6 @@ void Test::Run()
 			//iMessage++;
 			delete iplog;
 		}
-		gettimeofday( &end, NULL );
-	    printf("end   : %d.%d\n", end.tv_sec, end.tv_usec);
 	}	
 }
 /**
