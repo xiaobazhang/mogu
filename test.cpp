@@ -112,11 +112,17 @@ void Test::SendLog()
 				m_Metric.HandleMetric("search_zero_test",strip,iter3->first,iter3->second);
 				m_Metric.HandleMetric("search_fail_test",strip,iter4->first,iter4->second);
 				m_Metric.HandleMetric("search_discard_test",strip,iter5->first,iter5->second);
+				std::cout<<"1"<<std::endl;
 				iter->second["Queryps"].erase(iter1++);
+				std::cout<<"2"<<std::endl;
 				iter->second["CostTime"].erase(iter2++);
+				std::cout<<"3"<<std::endl;
 				iter->second["SearchZero"].erase(iter3++);
+				std::cout<<"4"<<std::endl;
 				iter->second["SearchFaild"].erase(iter4++);
+				std::cout<<"5"<<std::endl;
 				iter->second["SearchDiscard"].erase(iter5++);
+				std::cout<<"6"<<std::endl;
 			}	
 		}
 	}
