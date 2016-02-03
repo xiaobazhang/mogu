@@ -5,7 +5,7 @@ void Metric::HandleMetric(const string strmetric,const string strhost,int itime,
 	char buf[256] ={0};
 	sprintf(buf,"{\"metric\":\"%s\",\"tags\":{\"host\":\"%s\"},\"timestamp\":%d,\"value\":%d}",strmetric.c_str(),strhost.c_str(),itime,ivalue);
 	string str(buf);
-	m_LFQueue.push(str);
+	m_LFQueue->push(str);
 	/*m_LockQueue.Lock();
 	m_queue.push(str);
 	m_LockQueue.UnLock();*/
