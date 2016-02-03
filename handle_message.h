@@ -34,6 +34,17 @@ public:
 	{ 
 		m_MailBoxR.Recv(*pIplog,iTimeOutMs);
 	}
+	void push(string str)
+	{
+		m_LFQueue.Back() = str;
+		m_LFQueue.Push();
+	}
+	string pop()
+	{
+		string str = m_LFQueue.Front();
+		m_LFQueue.Pop();
+		return str;
+	}
 	LFQueue<string>* GetLFQueue()
 	{
 		return m_LFQueue;
@@ -45,7 +56,7 @@ public:
 	}
 private:
 	MailBoxR<IpLog*> m_MailBoxR;
-	LFQueue<string>* m_LFQueue;
+	LFQueue<string> m_LFQueue;
 	int iTimeOutMs;
 };
 
