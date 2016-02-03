@@ -22,9 +22,6 @@ void Metric::SendMetric()
 {
 	if(m_queue.size()>=miQueueMaxNum)
 	{
-		struct timeval start, end;
-	    gettimeofday( &start, NULL );
-	    printf("start : %d.%d\n", start.tv_sec, start.tv_usec);
 		string strcurl;
 		while(!m_queue.empty())
 		{
@@ -34,6 +31,9 @@ void Metric::SendMetric()
 				strcurl = strcurl+m_queue.front()+",";
 			m_queue.pop();//出队列
 		}
+		struct timeval start, end;
+	    gettimeofday( &start, NULL );
+	    printf("start : %d.%d\n", start.tv_sec, start.tv_usec);
 		char* ptr = new char[4092];
 		sprintf(ptr,"/usr/local/bin/curl -s -H 'Content-Type: application/json' -m 5 -X POST --data '[%s]' http://127.0.0.1:40001/api/put  -w \"http_code:[%{http_code}]\"",strcurl.c_str());
 		//printf("%s\n",ptr);
