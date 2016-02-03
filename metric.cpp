@@ -37,13 +37,13 @@ void Metric::SendMetric()
 		}
 		char* ptr = new char[4092];
 		sprintf(ptr,"/usr/local/bin/curl -H 'Content-Type: application/json' -m 5 -X POST --data '[%s]' http://127.0.0.1:40001/api/put  -w \"http_code:[%{http_code}]\"",strcurl.c_str());
-		//printf("%s\n",ptr);
-		//struct timeval start, end;
-	    //gettimeofday( &start, NULL );
-	    //printf("start : %d.%d\n", start.tv_sec, start.tv_usec);
+		printf("%s\n",ptr);
+		struct timeval start, end;
+	    gettimeofday( &start, NULL );
+	    printf("start : %d.%d\n", start.tv_sec, start.tv_usec);
 		system(ptr);
-		//gettimeofday( &end, NULL );
-	    //printf("end   : %d.%d\n", end.tv_sec, end.tv_usec);
+		gettimeofday( &end, NULL );
+	    printf("end   : %d.%d\n", end.tv_sec, end.tv_usec);
 		delete [] ptr;
 	}
 

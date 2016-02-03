@@ -93,7 +93,7 @@ void Test::SendLog()
 	for(iter = m_DataType.begin();iter!=m_DataType.end();iter++)
 	{
 		string strip = iter->first;
-		if(iter->second["Queryps"].size()>=60)
+		if(iter->second["Queryps"].size()>=2)
 		{
 			map<int,int>::iterator iter1,iter2,iter3,iter4,iter5;
 			iter1 = iter->second["Queryps"].begin();
@@ -102,7 +102,7 @@ void Test::SendLog()
 			iter4 = iter->second["SearchFaild"].begin();
 			iter5 = iter->second["SearchDiscard"].begin();
 
-			for(int j=0; j<2;j++)
+			for(int j=0; j<1;j++)
 			{
 				int tmp = iter2->second/iter1->second;
 				std::cout<<"time = "<<ckit::time::ToString(iter1->first)<<std::endl;
