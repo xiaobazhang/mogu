@@ -13,7 +13,10 @@ using namespace std;
 class Metric : public Thread
 {
 public:
-	Metric():miQueueMaxNum(18){}
+	Metric():miQueueMaxNum(18)
+	{
+		m_LFQueue = SingleLogQueue::GetInstance()->GetLFQueue();
+	}
 	~Metric()
 	{
 	}
@@ -28,9 +31,10 @@ public:
 	{
 		while(1)
 		{
-			m_LockQueue.Lock();
+			string str = m_LFQueue.Front();
+			m_LFQueue.Pop();
+			m_queue.push(str)
 			SendMetric();
-			m_LockQueue.UnLock();
 		}
 	}
 
@@ -38,6 +42,6 @@ private:
 	int miQueueMaxNum;
 	queue<string> m_queue;
 	MutexLock m_LockQueue;
-
+	LFQueue<string>* m_LFQueue;
 };
 #endif

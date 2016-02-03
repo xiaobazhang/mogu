@@ -3,6 +3,7 @@
 #include <foundation/ckit_mailbox.h>
 #include <foundation/ckit_singleton.h>
 #include <foundation/ckit_time.h>
+#include <foundation/ckit_lf_queue.h>
 #include <iostream>
 #include "log_analysis.h"
 
@@ -20,6 +21,7 @@ public:
 	SingleLogQueue()
 	{
 		iTimeOutMs = -1;
+		m_LFQueue = new LFQueue<string>;
 	}
 	~SingleLogQueue()
 	{
@@ -32,6 +34,10 @@ public:
 	{ 
 		m_MailBoxR.Recv(*pIplog,iTimeOutMs);
 	}
+	LFQueue<string>* GetLFQueue()
+	{
+		return m_LFQueue;
+	}
 	static SingleLogQueue* GetInstance()
 	{
 		static ckit::SingletonHolder<SingleLogQueue> m_single;
@@ -39,6 +45,7 @@ public:
 	}
 private:
 	MailBoxR<IpLog*> m_MailBoxR;
+	LFQueue<string>* m_LFQueue;
 	int iTimeOutMs;
 };
 
