@@ -35,15 +35,15 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 		{
 			mapcount["Queryps"][iCurrentTime] = 1;
 		}
-	}
-	if(int CostTime = GetCostTime(strlog))
-	{
-		if(CostTime != -1)
+		if(int CostTime = GetCostTime(strlog))
 		{
-			if(mapcount["CostTime"].count(iCurrentTime))
-				mapcount["CostTime"][iCurrentTime] += CostTime;
-			else
-				mapcount["CostTime"][iCurrentTime] = CostTime;
+			if(CostTime != -1)
+			{
+				if(mapcount["CostTime"].count(iCurrentTime))
+					mapcount["CostTime"][iCurrentTime] += CostTime;
+				else
+					mapcount["CostTime"][iCurrentTime] = CostTime;
+			}
 		}
 	}
 	if(IsSearchZero(strlog))
@@ -57,7 +57,6 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 	{
 		mapcount["SearchZero"][iCurrentTime] = 0;
 	}
-
 	if(IsSearchFailed(strlog))
 	{
 		if(mapcount["SearchFaild"].count(iCurrentTime))
@@ -69,7 +68,6 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 	{
 		mapcount["SearchFaild"][iCurrentTime] = 0;
 	}
-
 	if(IsSearchDiscard(strlog))
 	{
 		if(mapcount["SearchDiscard"].count(iCurrentTime))
@@ -81,7 +79,7 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 	{
 		mapcount["SearchDiscard"][iCurrentTime] = 0;
 	}
-	
+		
 }
 /**
  * @AuthorHTL
