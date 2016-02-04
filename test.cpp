@@ -48,6 +48,8 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 	}
 	if(IsSearchZero(strlog))
 	{
+		iMessage++;
+		std::cout<<"iMessage= "<<iMessage<<std::endl;
 		if(mapcount["SearchZero"].count(iCurrentTime))
 			mapcount["SearchZero"][iCurrentTime]++;
 		else
@@ -55,6 +57,7 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 	}
 	else
 	{
+
 		mapcount["SearchZero"][iCurrentTime] = 0;
 	}
 	if(IsSearchFailed(strlog))
