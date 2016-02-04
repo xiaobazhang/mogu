@@ -9,7 +9,6 @@ void Test::Run()
 		Process(iplog->ip,iplog->log);
 		if(iplog !=NULL)
 		{
-			//iMessage++;
 			delete iplog;
 		}
 	}	
@@ -36,52 +35,53 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 		{
 			mapcount["Queryps"][iCurrentTime] = 1;
 		}
-		if(int CostTime = GetCostTime(strlog))
+	}
+	if(int CostTime = GetCostTime(strlog))
+	{
+		if(CostTime != -1)
 		{
-			if(CostTime != -1)
-			{
-				if(mapcount["CostTime"].count(iCurrentTime))
-					mapcount["CostTime"][iCurrentTime] += CostTime;
-				else
-					mapcount["CostTime"][iCurrentTime] = CostTime;
-			}
-		}
-		if(IsSearchZero(strlog))
-		{
-			if(mapcount["SearchZero"].count(iCurrentTime))
-				mapcount["SearchZero"][iCurrentTime]++;
+			if(mapcount["CostTime"].count(iCurrentTime))
+				mapcount["CostTime"][iCurrentTime] += CostTime;
 			else
-				mapcount["SearchZero"][iCurrentTime] = 1;
-		}
-		else
-		{
-			mapcount["SearchZero"][iCurrentTime] = 0;
-		}
-
-		if(IsSearchFailed(strlog))
-		{
-			if(mapcount["SearchFaild"].count(iCurrentTime))
-				mapcount["SearchFaild"][iCurrentTime]++;
-			else
-				mapcount["SearchFaild"][iCurrentTime] = 1;
-		}
-		else
-		{
-			mapcount["SearchFaild"][iCurrentTime] = 0;
-		}
-
-		if(IsSearchDiscard(strlog))
-		{
-			if(mapcount["SearchDiscard"].count(iCurrentTime))
-				mapcount["SearchDiscard"][iCurrentTime]++;
-			else
-				mapcount["SearchDiscard"][iCurrentTime] = 1;
-		}
-		else
-		{
-			mapcount["SearchDiscard"][iCurrentTime] = 0;
+				mapcount["CostTime"][iCurrentTime] = CostTime;
 		}
 	}
+	if(IsSearchZero(strlog))
+	{
+		if(mapcount["SearchZero"].count(iCurrentTime))
+			mapcount["SearchZero"][iCurrentTime]++;
+		else
+			mapcount["SearchZero"][iCurrentTime] = 1;
+	}
+	else
+	{
+		mapcount["SearchZero"][iCurrentTime] = 0;
+	}
+
+	if(IsSearchFailed(strlog))
+	{
+		if(mapcount["SearchFaild"].count(iCurrentTime))
+			mapcount["SearchFaild"][iCurrentTime]++;
+		else
+			mapcount["SearchFaild"][iCurrentTime] = 1;
+	}
+	else
+	{
+		mapcount["SearchFaild"][iCurrentTime] = 0;
+	}
+
+	if(IsSearchDiscard(strlog))
+	{
+		if(mapcount["SearchDiscard"].count(iCurrentTime))
+			mapcount["SearchDiscard"][iCurrentTime]++;
+		else
+			mapcount["SearchDiscard"][iCurrentTime] = 1;
+	}
+	else
+	{
+		mapcount["SearchDiscard"][iCurrentTime] = 0;
+	}
+	
 }
 /**
  * @AuthorHTL
@@ -102,27 +102,24 @@ void Test::SendLog()
 			iter4 = iter->second["SearchFaild"].begin();
 			iter5 = iter->second["SearchDiscard"].begin();
 
-			for(int j=0; j<1;j++)
-			{
-				int tmp = iter2->second/iter1->second;
-				std::cout<<"time = "<<ckit::time::ToString(iter2->first)<<std::endl;
-				//std::cout<<"size = "<<iter->second["Queryps"].size()<<std::endl;
-				m_Metric.HandleMetric("search_qps_test",strip,iter1->first,iter1->second);
-				m_Metric.HandleMetric("search_rt_test",strip,iter2->first,tmp);
-				m_Metric.HandleMetric("search_zero_test",strip,iter3->first,iter3->second);
-				m_Metric.HandleMetric("search_fail_test",strip,iter4->first,iter4->second);
-				m_Metric.HandleMetric("search_discard_test",strip,iter5->first,iter5->second);
-				if(iter->second["Queryps"].size())
-					iter->second["Queryps"].erase(iter1++);
-				if(iter->second["CostTime"].size())
-					iter->second["CostTime"].erase(iter2++);
-				if(iter->second["SearchZero"].size())
-					iter->second["SearchZero"].erase(iter3++);
-				if(iter->second["SearchFaild"].size())
-					iter->second["SearchFaild"].erase(iter4++);
-				if(iter->second["SearchDiscard"].size())
-					iter->second["SearchDiscard"].erase(iter5++);
-			}	
+			int tmp = iter2->second/iter1->second;
+			std::cout<<"time = "<<ckit::time::ToString(iter2->first)<<std::endl;
+			//std::cout<<"size = "<<iter->second["Queryps"].size()<<std::endl;
+			m_Metric.HandleMetric("search_qps_test",strip,iter1->first,iter1->second);
+			m_Metric.HandleMetric("search_rt_test",strip,iter2->first,tmp);
+			m_Metric.HandleMetric("search_zero_test",strip,iter3->first,iter3->second);
+			m_Metric.HandleMetric("search_fail_test",strip,iter4->first,iter4->second);
+			m_Metric.HandleMetric("search_discard_test",strip,iter5->first,iter5->second);
+			if(iter->second["Queryps"].size())
+				iter->second["Queryps"].erase(iter1++);
+			if(iter->second["CostTime"].size())
+				iter->second["CostTime"].erase(iter2++);
+			if(iter->second["SearchZero"].size())
+				iter->second["SearchZero"].erase(iter3++);
+			if(iter->second["SearchFaild"].size())
+				iter->second["SearchFaild"].erase(iter4++);
+			if(iter->second["SearchDiscard"].size())
+				iter->second["SearchDiscard"].erase(iter5++);	
 		}
 	}
 }
