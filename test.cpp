@@ -53,6 +53,11 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 		else
 			mapcount["SearchZero"][iCurrentTime] = 1;
 	}
+	else
+	{
+		if(!mapcount["SearchZero"].count(iCurrentTime))
+			mapcount["SearchZero"][iCurrentTime] = 0;
+	}
 	if(IsSearchFailed(strlog))
 	{
 		if(mapcount["SearchFaild"].count(iCurrentTime))
