@@ -105,25 +105,23 @@ void Test::SendLog()
 			for(int j=0; j<1;j++)
 			{
 				int tmp = iter2->second/iter1->second;
-				std::cout<<"time = "<<ckit::time::ToString(iter1->first)<<std::endl;
+				std::cout<<"time = "<<ckit::time::ToString(iter2->first)<<std::endl;
 				//std::cout<<"size = "<<iter->second["Queryps"].size()<<std::endl;
 				m_Metric.HandleMetric("search_qps_test",strip,iter1->first,iter1->second);
 				m_Metric.HandleMetric("search_rt_test",strip,iter2->first,tmp);
 				m_Metric.HandleMetric("search_zero_test",strip,iter3->first,iter3->second);
 				m_Metric.HandleMetric("search_fail_test",strip,iter4->first,iter4->second);
 				m_Metric.HandleMetric("search_discard_test",strip,iter5->first,iter5->second);
-				std::cout<<"1"<<std::endl;
-				iter->second["Queryps"].erase(iter1++);
-				std::cout<<"2"<<std::endl;
-				std::cout<<iter->second["CostTime"].size()<<std::endl;
-				iter->second["CostTime"].erase(iter2++);
-				std::cout<<"3"<<std::endl;
-				iter->second["SearchZero"].erase(iter3++);
-				std::cout<<"4"<<std::endl;
-				iter->second["SearchFaild"].erase(iter4++);
-				std::cout<<"5"<<std::endl;
-				iter->second["SearchDiscard"].erase(iter5++);
-				std::cout<<"6"<<std::endl;
+				if(iter->second["Queryps"].size())
+					iter->second["Queryps"].erase(iter1++);
+				if(iter->second["CostTime"].size())
+					iter->second["CostTime"].erase(iter2++);
+				if(iter->second["SearchZero"].size())
+					iter->second["SearchZero"].erase(iter3++);
+				if(iter->second["SearchFaild"].size())
+					iter->second["SearchFaild"].erase(iter4++);
+				if(iter->second["SearchDiscard"].size())
+					iter->second["SearchDiscard"].erase(iter5++);
 			}	
 		}
 	}
