@@ -101,8 +101,6 @@ void Test::SendLog()
 			iter5 = iter->second["SearchDiscard"].begin();
 
 			int tmp = iter2->second/iter1->second;
-			std::cout<<"time = "<<ckit::time::ToString(iter2->first)<<std::endl;
-			//std::cout<<"size = "<<iter->second["Queryps"].size()<<std::endl;
 			m_Metric.HandleMetric("search_qps_test",strip,iter1->first,iter1->second);
 			m_Metric.HandleMetric("search_rt_test",strip,iter2->first,tmp);
 			m_Metric.HandleMetric("search_zero_test",strip,iter3->first,iter3->second);
@@ -133,13 +131,6 @@ void Test::Process(const string& strip, const string& strlog)
 		map_tmp["SearchFaild"] = _map;
 		map_tmp["SearchDiscard"] = _map;
 		m_DataType[strip] = map_tmp;
-		/*map<int,int> MapTmp1;
-		map<string,map<int,int> > MapTmp2;
-		for(vector<string>::iterator iter= m_vecDateName.begin();iter !=m_vecDateName.end();iter++)
-		{
-			MapTmp2[*iter] = MapTmp1;
-		}
-		m_DataType[strip] = MapTmp2;*/
 	}
 	else
 	{
