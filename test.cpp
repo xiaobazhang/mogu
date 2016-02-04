@@ -60,13 +60,21 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 		else
 			mapcount["SearchFaild"][iCurrentTime] = 1;
 	}
+	else
+	{
+		mapcount["SearchFaild"][iCurrentTime] = 0;
+	}
 	if(IsSearchDiscard(strlog))
 	{
 		if(mapcount["SearchDiscard"].count(iCurrentTime))
 			mapcount["SearchDiscard"][iCurrentTime]++;
 		else
 			mapcount["SearchDiscard"][iCurrentTime] = 1;
-	}	
+	}
+	else
+	{
+		mapcount["SearchDiscard"][iCurrentTime] = 0;
+	}
 }
 /**
  * @AuthorHTL
