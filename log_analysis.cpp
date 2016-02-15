@@ -26,12 +26,10 @@ namespace log_match
 		ckit::Regex regex;
 		if(!regex.Compile("cost_time:([0-9]+)"))
 		{
-			SET_ERROR_MSG("Compile cost_time error");
 			return false;
 		}
 		if(!regex.Match(strlog))
 		{
-			SET_ERROR_MSG("Match cost_time error");
 			return -1;
 		}
 		regex.GetGroupByIdx(0,strcosttime);
@@ -42,12 +40,10 @@ namespace log_match
 		ckit::Regex regex;
 		if(!regex.Compile("return adlist size:0"))
 		{
-			SET_ERROR_MSG("Compile return adlist size:0 error");
 			return false;
 		}
 		if(!regex.Match(strlog))
 		{
-			SET_ERROR_MSG("Match return adlist size:0 error");
 			return false;
 		}
 		return true;
@@ -57,12 +53,10 @@ namespace log_match
 		ckit::Regex regex;
 		if(!regex.Compile("ret:false"))
 		{
-			SET_ERROR_MSG("Compile ret:false error");
 			return false;
 		}
 		if(!regex.Match(strlog))
 		{
-			SET_ERROR_MSG("Match ret:false error");
 			return false;
 		}
 		return true;
@@ -72,12 +66,10 @@ namespace log_match
 		ckit::Regex regex;
 		if(!regex.Compile("discard"))
 		{
-			SET_ERROR_MSG("Compile discard error");
 			return false;
 		}
 		if(!regex.Match(strlog))
 		{
-			SET_ERROR_MSG("Match discard error");
 			return false;
 		}
 		return true;
@@ -88,12 +80,10 @@ namespace log_match
 		ckit::Regex regex;
 		if(!regex.Compile("(2[0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9])"))
 		{
-			SET_ERROR_MSG("Compile log time error");
 			return false;
 		}
 		if(!regex.Match(strlog))
 		{
-			SET_ERROR_MSG("Match log time error");
 			return false;
 		}
 		if(!regex.GetGroupByIdx(0,strlogtime))
@@ -112,7 +102,6 @@ namespace log_match
 		ckit::Regex regex;
 		if(!regex.Compile("(query process finish.)"))
 		{
-			SET_ERROR_MSG("Compile query process finish error");
 			return false;
 		}
 		if(!regex.Match(strlog))
