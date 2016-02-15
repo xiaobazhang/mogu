@@ -34,7 +34,7 @@ private:
 class Metric
 {
 public:
-	Metric():miQueueMaxNum(6){}
+	Metric():miQueueMaxNum(10){}
 	~Metric(){}
 	void HandleMetric(const string strmetric,const string strhost,int itime,int ivalue);
 	void HandleMetric(const string strmetric,const string strhost,int itime,float fvalue);

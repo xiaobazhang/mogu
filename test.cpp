@@ -24,7 +24,7 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 	int iCurrentTime = log_match::GetLogTime(strlog);//获取当前日志时间
 	if(log_match::IsQueryFinish(strlog))
 	{
-		std::cout<<strlog<<std::endl;
+		//std::cout<<strlog<<std::endl;
 		if(mapcount["Queryps"].count(iCurrentTime))
 			mapcount["Queryps"][iCurrentTime]++;
 		else
@@ -87,7 +87,7 @@ void Test::SendLog()
 	for(iter = m_DataType.begin();iter!=m_DataType.end();iter++)
 	{
 		string strip = iter->first;
-		if(iter->second["Queryps"].size()>=4)
+		if(iter->second["Queryps"].size()>=8)
 		{
 			map<int,int>::iterator iter1,iter2,iter3,iter4,iter5;
 			iter1 = iter->second["Queryps"].begin();
