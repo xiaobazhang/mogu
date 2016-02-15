@@ -17,17 +17,12 @@ void Test::Run()
  * @AuthorHTL
  * @DateTime  2016-02-03T10:00:39+0800
  * @param
- * ("Queryps");
- * "CostTime"
- * SearchFaild
- * SearchZero
- * SearchDiscard
  * @param
  */
 void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 {
-	int iCurrentTime = GetLogTime(strlog);//获取当前日志时间
-	if(IsQueryFinish(strlog))
+	int iCurrentTime = log::match::GetLogTime(strlog);//获取当前日志时间
+	if(log::match::IsQueryFinish(strlog))
 	{
 		if(mapcount["Queryps"].count(iCurrentTime))
 			mapcount["Queryps"][iCurrentTime]++;
@@ -35,7 +30,7 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 		{
 			mapcount["Queryps"][iCurrentTime] = 1;
 		}
-		if(int CostTime = GetCostTime(strlog))
+		if(int CostTime = log::match::GetCostTime(strlog))
 		{
 			if(CostTime != -1)
 			{
@@ -46,7 +41,7 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 			}
 		}
 	}
-	if(IsSearchZero(strlog))
+	if(log::match::IsSearchZero(strlog))
 	{
 		if(mapcount["SearchZero"].count(iCurrentTime))
 			mapcount["SearchZero"][iCurrentTime]++;
@@ -58,7 +53,7 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 		if(!mapcount["SearchZero"].count(iCurrentTime))
 			mapcount["SearchZero"][iCurrentTime] = 0;
 	}
-	if(IsSearchFailed(strlog))
+	if(log::match::IsSearchFailed(strlog))
 	{
 		if(mapcount["SearchFaild"].count(iCurrentTime))
 			mapcount["SearchFaild"][iCurrentTime]++;
@@ -69,7 +64,7 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 	{
 		mapcount["SearchFaild"][iCurrentTime] = 0;
 	}
-	if(IsSearchDiscard(strlog))
+	if(log::match::IsSearchDiscard(strlog))
 	{
 		if(mapcount["SearchDiscard"].count(iCurrentTime))
 			mapcount["SearchDiscard"][iCurrentTime]++;
@@ -138,111 +133,3 @@ void Test::Process(const string& strip, const string& strlog)
 	}
 	SendLog();
 }
-int Test::GetCostTime(const string& strlog)
-{
-	std::string strcosttime;
-	ckit::Regex regex;
-	if(!regex.Compile("cost_time:([0-9]+)"))
-	{
-		SET_ERROR_MSG("Compile cost_time error");
-		return false;
-	}
-	if(!regex.Match(strlog))
-	{
-		SET_ERROR_MSG("Match cost_time error");
-		return -1;
-	}
-	regex.GetGroupByIdx(0,strcosttime);
-	return atoi(strcosttime.c_str());
-}
-bool Test::IsSearchZero(const string& strlog)
-{
-	ckit::Regex regex;
-	if(!regex.Compile("return adlist size:0"))
-	{
-		SET_ERROR_MSG("Compile return adlist size:0 error");
-		return false;
-	}
-	if(!regex.Match(strlog))
-	{
-		SET_ERROR_MSG("Match return adlist size:0 error");
-		return false;
-	}
-	return true;
-}
-bool Test::IsSearchFailed(const string& strlog)
-{
-	ckit::Regex regex;
-	if(!regex.Compile("ret:false"))
-	{
-		SET_ERROR_MSG("Compile ret:false error");
-		return false;
-	}
-	if(!regex.Match(strlog))
-	{
-		SET_ERROR_MSG("Match ret:false error");
-		return false;
-	}
-	return true;
-}
-bool Test::IsSearchDiscard(const string& strlog)
-{
-	ckit::Regex regex;
-	if(!regex.Compile("discard"))
-	{
-		SET_ERROR_MSG("Compile discard error");
-		return false;
-	}
-	if(!regex.Match(strlog))
-	{
-		SET_ERROR_MSG("Match discard error");
-		return false;
-	}
-	return true;
-}
-int Test::GetLogTime(const string& strlog)
-{
-	std::string strlogtime;
-	ckit::Regex regex;
-	if(!regex.Compile("(2[0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9])"))
-	{
-		SET_ERROR_MSG("Compile log time error");
-		return false;
-	}
-	if(!regex.Match(strlog))
-	{
-		SET_ERROR_MSG("Match log time error");
-		return false;
-	}
-	if(!regex.GetGroupByIdx(0,strlogtime))
-	{
-		return false;
-	}
-
-	int logtime = ckit::time::StringTimeToInt(strlogtime);
-	if(logtime <= 0)
-		return 0;
-
-	return logtime;
-}
-bool Test::IsQueryFinish(const string& strlog)
-{
-	ckit::Regex regex;
-	if(!regex.Compile("(query process finish.)"))
-	{
-		SET_ERROR_MSG("Compile query process finish error");
-		return false;
-	}
-	if(!regex.Match(strlog))
-	{
-		return false;
-	}
-	return true;
-}
-
-
-
-
-
-
-

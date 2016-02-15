@@ -1,0 +1,72 @@
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_PROGRAM_VERSION	5.8	//
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+GetInstance	handle_message.h	/^	static SingleLogQueue* GetInstance()$/;"	f	class:SingleLogQueue
+HandleMessage	handle_message.h	/^	HandleMessage()$/;"	f	class:HandleMessage
+HandleMessage	handle_message.h	/^class HandleMessage : public LogAnalysis$/;"	c
+IpLog	handle_message.h	/^struct IpLog$/;"	s
+Process	handle_message.h	/^	virtual void Process(rd_kafka_message_t * pMessage)$/;"	f	class:HandleMessage
+Recv	handle_message.h	/^	void Recv(IpLog** pIplog)$/;"	f	class:SingleLogQueue
+Send	handle_message.h	/^	void Send(IpLog* pIplog)$/;"	f	class:SingleLogQueue
+SingleLogQueue	handle_message.h	/^	SingleLogQueue()$/;"	f	class:SingleLogQueue
+SingleLogQueue	handle_message.h	/^class SingleLogQueue$/;"	c
+__HANDLE_MESSAGE_H__	handle_message.h	2;"	d
+iTimeOutMs	handle_message.h	/^	int iTimeOutMs;$/;"	m	class:SingleLogQueue
+ip	handle_message.h	/^	string ip;$/;"	m	struct:IpLog
+log	handle_message.h	/^	string log;$/;"	m	struct:IpLog
+m_MailBoxR	handle_message.h	/^	MailBoxR<IpLog*> m_MailBoxR;$/;"	m	class:SingleLogQueue
+~HandleMessage	handle_message.h	/^	~HandleMessage()$/;"	f	class:HandleMessage
+~SingleLogQueue	handle_message.h	/^	~SingleLogQueue()$/;"	f	class:SingleLogQueue
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+Process	log_analysis.cpp	/^void LogAnalysis::Process(rd_kafka_message_t * pMessage)$/;"	f	class:LogAnalysis
+StringTimeToInt	log_analysis.cpp	/^		int StringTimeToInt(std::string str)$/;"	f	namespace:ckit::time
+ckit	log_analysis.cpp	/^namespace ckit$/;"	n	file:
+strRecvIp	log_analysis.cpp	/^string LogAnalysis::strRecvIp(char* pstr,int len)$/;"	f	class:LogAnalysis
+time	log_analysis.cpp	/^	namespace time$/;"	n	namespace:ckit	file:
+LogAnalysis	log_analysis.h	/^	LogAnalysis()$/;"	f	class:LogAnalysis
+LogAnalysis	log_analysis.h	/^class LogAnalysis : public KafkaConsumer, public KafkaConsumerCb$/;"	c
+__LOG_ANALYSIS_H__	log_analysis.h	2;"	d
+ckit	log_analysis.h	/^namespace ckit$/;"	n
+strRecvMes	log_analysis.h	/^	string strRecvMes(char* pstr,int len)$/;"	f	class:LogAnalysis
+time	log_analysis.h	/^	namespace time$/;"	n	namespace:ckit
+~LogAnalysis	log_analysis.h	/^	~LogAnalysis(){}$/;"	f	class:LogAnalysis
+main	main.cpp	/^int main()$/;"	f
+HandleMetric	metric.cpp	/^void Metric::HandleMetric(const string strmetric,const string strhost,int itime,float fvalue)$/;"	f	class:Metric
+HandleMetric	metric.cpp	/^void Metric::HandleMetric(const string strmetric,const string strhost,int itime,int ivalue)$/;"	f	class:Metric
+SendMetric	metric.cpp	/^void Metric::SendMetric()$/;"	f	class:Metric
+Metric	metric.h	/^	Metric():miQueueMaxNum(10){}$/;"	f	class:Metric
+Metric	metric.h	/^class Metric$/;"	c
+SetQueueMaxNum	metric.h	/^	void SetQueueMaxNum(int num)$/;"	f	class:Metric
+__METRIC_H__	metric.h	2;"	d
+m_queue	metric.h	/^	queue<string> m_queue;$/;"	m	class:Metric
+miQueueMaxNum	metric.h	/^	int miQueueMaxNum;$/;"	m	class:Metric
+~Metric	metric.h	/^	~Metric()$/;"	f	class:Metric
+CountLog	test.cpp	/^void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)$/;"	f	class:Test
+GetCostTime	test.cpp	/^int Test::GetCostTime(const string& strlog)$/;"	f	class:Test
+GetLogTime	test.cpp	/^int Test::GetLogTime(const string& strlog)$/;"	f	class:Test
+IsQueryFinish	test.cpp	/^bool Test::IsQueryFinish(const string& strlog)$/;"	f	class:Test
+IsSearchDiscard	test.cpp	/^bool Test::IsSearchDiscard(const string& strlog)$/;"	f	class:Test
+IsSearchFailed	test.cpp	/^bool Test::IsSearchFailed(const string& strlog)$/;"	f	class:Test
+IsSearchZero	test.cpp	/^bool Test::IsSearchZero(const string& strlog)$/;"	f	class:Test
+Process	test.cpp	/^void Test::Process(const string& strip, const string& strlog)$/;"	f	class:Test
+Run	test.cpp	/^void Test::Run()$/;"	f	class:Test
+SendLog	test.cpp	/^void Test::SendLog()$/;"	f	class:Test
+LogValue	test.h	/^	LogValue():m_Time(0),m_Queryps(0),m_CostTime(0),m_SearchFaild(0),m_SearchZero(0),m_SearchDiscard(0){}$/;"	f	struct:LogValue
+LogValue	test.h	/^struct LogValue$/;"	s
+Test	test.h	/^	Test():iMessage(0),iCurrent(0)$/;"	f	class:Test
+Test	test.h	/^class Test: public Thread$/;"	c
+__TEST_H__	test.h	2;"	d
+iCurrent	test.h	/^	int iCurrent;$/;"	m	class:Test
+iMessage	test.h	/^	int iMessage;$/;"	m	class:Test
+m_CostTime	test.h	/^	int m_CostTime;$/;"	m	struct:LogValue
+m_DataType	test.h	/^	map<string,map<string,map<int,int> > > m_DataType;$/;"	m	class:Test
+m_Metric	test.h	/^	Metric m_Metric;$/;"	m	class:Test
+m_Queryps	test.h	/^	int m_Queryps;$/;"	m	struct:LogValue
+m_SearchDiscard	test.h	/^	int m_SearchDiscard;$/;"	m	struct:LogValue
+m_SearchFaild	test.h	/^	int m_SearchFaild;$/;"	m	struct:LogValue
+m_SearchZero	test.h	/^	int m_SearchZero;$/;"	m	struct:LogValue
+m_Time	test.h	/^	int m_Time;$/;"	m	struct:LogValue
+m_vecDateName	test.h	/^	vector<string> m_vecDateName;$/;"	m	class:Test
+~Test	test.h	/^	~Test()$/;"	f	class:Test

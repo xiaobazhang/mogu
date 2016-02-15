@@ -15,12 +15,14 @@ struct IpLog
 	string log;
 	string ip;
 };
+/**
+ * 单例类，用于同步读取log四个线程和一个处理线程
+ */
 class SingleLogQueue
 {
 public:
-	SingleLogQueue()
+	SingleLogQueue():iTimeOutMs(-1)//阻塞，直到读到数据
 	{
-		iTimeOutMs = -1;
 	}
 	~SingleLogQueue()
 	{

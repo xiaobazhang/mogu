@@ -15,8 +15,20 @@ namespace ckit
 		int StringTimeToInt(std::string str);
 	}
 }
-
+namespace log
+{
+	namespace match
+	{
+		int GetLogTime(const string& strlog);
+		int GetCostTime(const string& strlog);
+		bool IsSearchZero(const string& strlog);
+		bool IsQueryFinish(const string& strlog);
+		bool IsSearchFailed(const string& strlog);
+		bool IsSearchDiscard(const string& strlog);
+	}
+}
 /**
+ * 
  * 
  */
 class LogAnalysis : public KafkaConsumer, public KafkaConsumerCb
