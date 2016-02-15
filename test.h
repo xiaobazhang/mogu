@@ -12,7 +12,7 @@ using namespace std;
 class Test: public Thread
 {
 public:
-	Test()
+	Test():iMaxMapSize(60)
 	{
 		m_vecDateName.push_back("Queryps");
 		m_vecDateName.push_back("CostTime");
@@ -23,6 +23,10 @@ public:
 	~Test()
 	{
 	}
+	void SetMaxMapSize(int num)
+	{
+		iMaxMapSize = num;
+	}
 	virtual void Run();
 	void Process(const string& strip,const string& strlog);
 	void CountLog(const string& strlog,map<string,map<int,int> >& mapcount);
@@ -32,6 +36,7 @@ private:
 	Metric m_Metric;
 	map<string,map<string,map<int,int> > > m_DataType;
 	vector<string> m_vecDateName;
+	int iMaxMapSize;
 };
 
 #endif
