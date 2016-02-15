@@ -15,17 +15,14 @@ namespace ckit
 		int StringTimeToInt(std::string str);
 	}
 }
-namespace log
+namespace log_match
 {
-	namespace match
-	{
-		int GetLogTime(const string& strlog);
-		int GetCostTime(const string& strlog);
-		bool IsSearchZero(const string& strlog);
-		bool IsQueryFinish(const string& strlog);
-		bool IsSearchFailed(const string& strlog);
-		bool IsSearchDiscard(const string& strlog);
-	}
+	int GetLogTime(const string& strlog);
+	int GetCostTime(const string& strlog);
+	bool IsSearchZero(const string& strlog);
+	bool IsQueryFinish(const string& strlog);
+	bool IsSearchFailed(const string& strlog);
+	bool IsSearchDiscard(const string& strlog);
 }
 /**
  * 

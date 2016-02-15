@@ -21,8 +21,8 @@ void Test::Run()
  */
 void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 {
-	int iCurrentTime = log::match::GetLogTime(strlog);//获取当前日志时间
-	if(log::match::IsQueryFinish(strlog))
+	int iCurrentTime = log_match::GetLogTime(strlog);//获取当前日志时间
+	if(log_match::IsQueryFinish(strlog))
 	{
 		if(mapcount["Queryps"].count(iCurrentTime))
 			mapcount["Queryps"][iCurrentTime]++;
@@ -30,7 +30,7 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 		{
 			mapcount["Queryps"][iCurrentTime] = 1;
 		}
-		if(int CostTime = log::match::GetCostTime(strlog))
+		if(int CostTime = log_match::GetCostTime(strlog))
 		{
 			if(CostTime != -1)
 			{
@@ -41,7 +41,7 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 			}
 		}
 	}
-	if(log::match::IsSearchZero(strlog))
+	if(log_match::IsSearchZero(strlog))
 	{
 		if(mapcount["SearchZero"].count(iCurrentTime))
 			mapcount["SearchZero"][iCurrentTime]++;
@@ -53,7 +53,7 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 		if(!mapcount["SearchZero"].count(iCurrentTime))
 			mapcount["SearchZero"][iCurrentTime] = 0;
 	}
-	if(log::match::IsSearchFailed(strlog))
+	if(log_match::IsSearchFailed(strlog))
 	{
 		if(mapcount["SearchFaild"].count(iCurrentTime))
 			mapcount["SearchFaild"][iCurrentTime]++;
@@ -64,7 +64,7 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 	{
 		mapcount["SearchFaild"][iCurrentTime] = 0;
 	}
-	if(log::match::IsSearchDiscard(strlog))
+	if(log_match::IsSearchDiscard(strlog))
 	{
 		if(mapcount["SearchDiscard"].count(iCurrentTime))
 			mapcount["SearchDiscard"][iCurrentTime]++;
