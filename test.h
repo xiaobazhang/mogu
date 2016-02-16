@@ -19,6 +19,7 @@ public:
 		m_vecDateName.push_back("SearchFaild");
 		m_vecDateName.push_back("SearchZero");
 		m_vecDateName.push_back("SearchDiscard");
+		m_MessageSend.SetAppName("cpc_msearch_test");
 	}
 	~Test()
 	{
@@ -34,6 +35,7 @@ public:
 
 private:
 	Metric m_Metric;
+	MessageSend m_MessageSend;
 	map<string,map<string,map<int,int> > > m_DataType;
 	vector<string> m_vecDateName;
 	int iMaxMapSize;

@@ -15,6 +15,9 @@ namespace ckit
 		int StringTimeToInt(std::string str);
 	}
 }
+/**
+ * 该工具箱为获取日志中关键字
+ */
 namespace log_match
 {
 	int GetLogTime(const string& strlog);

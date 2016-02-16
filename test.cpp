@@ -24,7 +24,6 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 	int iCurrentTime = log_match::GetLogTime(strlog);//获取当前日志时间
 	if(log_match::IsQueryFinish(strlog))
 	{
-		std::cout<<strlog<<std::endl;
 		if(mapcount["Queryps"].count(iCurrentTime))
 			mapcount["Queryps"][iCurrentTime]++;
 		else
@@ -97,6 +96,10 @@ void Test::SendLog()
 			iter5 = iter->second["SearchDiscard"].begin();
 
 			int tmp = iter2->second/iter1->second;
+			if(tmp> 200)
+			{
+				std::cout<<"CostTime"<<iter2->second<<"qps"<<iter1->second<<std::endl;
+			}
 			m_Metric.HandleMetric("search_qps_test",strip,iter1->first,iter1->second);
 			m_Metric.HandleMetric("search_rt_test",strip,iter2->first,tmp);
 			m_Metric.HandleMetric("search_zero_test",strip,iter3->first,iter3->second);
