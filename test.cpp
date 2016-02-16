@@ -24,10 +24,6 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 	int iCurrentTime = log_match::GetLogTime(strlog);//获取当前日志时间
 	if(log_match::IsQueryFinish(strlog))
 	{
-<<<<<<< HEAD
-=======
-		//std::cout<<strlog<<std::endl;
->>>>>>> 653c178644489d9b25b763ac16eae95545b476bf
 		if(mapcount["Queryps"].count(iCurrentTime))
 			mapcount["Queryps"][iCurrentTime]++;
 		else
