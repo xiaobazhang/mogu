@@ -95,26 +95,29 @@ void Test::SendLog()
 			iter4 = iter->second["SearchFaild"].begin();
 			iter5 = iter->second["SearchDiscard"].begin();
 
-			int tmp = iter2->second/iter1->second;
-			if(tmp> 200)
+			if(iter1->second !=1)
 			{
-				std::cout<<"CostTime"<<iter2->second<<"qps"<<iter1->second<<std::endl;
+				int tmp = iter2->second/iter1->second;
+				m_Metric.HandleMetric("search_qps_test",strip,iter1->first,iter1->second);
+				m_Metric.HandleMetric("search_rt_test",strip,iter2->first,tmp);
+				m_Metric.HandleMetric("search_zero_test",strip,iter3->first,iter3->second);
+				m_Metric.HandleMetric("search_fail_test",strip,iter4->first,iter4->second);
+				m_Metric.HandleMetric("search_discard_test",strip,iter5->first,iter5->second);
+				if(iter->second["Queryps"].size())
+					iter->second["Queryps"].erase(iter1++);
+				if(iter->second["CostTime"].size())
+					iter->second["CostTime"].erase(iter2++);
+				if(iter->second["SearchZero"].size())
+					iter->second["SearchZero"].erase(iter3++);
+				if(iter->second["SearchFaild"].size())
+					iter->second["SearchFaild"].erase(iter4++);
+				if(iter->second["SearchDiscard"].size())
+					iter->second["SearchDiscard"].erase(iter5++);	
 			}
-			m_Metric.HandleMetric("search_qps_test",strip,iter1->first,iter1->second);
-			m_Metric.HandleMetric("search_rt_test",strip,iter2->first,tmp);
-			m_Metric.HandleMetric("search_zero_test",strip,iter3->first,iter3->second);
-			m_Metric.HandleMetric("search_fail_test",strip,iter4->first,iter4->second);
-			m_Metric.HandleMetric("search_discard_test",strip,iter5->first,iter5->second);
-			if(iter->second["Queryps"].size())
+			else
+			{
 				iter->second["Queryps"].erase(iter1++);
-			if(iter->second["CostTime"].size())
-				iter->second["CostTime"].erase(iter2++);
-			if(iter->second["SearchZero"].size())
-				iter->second["SearchZero"].erase(iter3++);
-			if(iter->second["SearchFaild"].size())
-				iter->second["SearchFaild"].erase(iter4++);
-			if(iter->second["SearchDiscard"].size())
-				iter->second["SearchDiscard"].erase(iter5++);	
+			}	
 		}
 	}
 }
