@@ -19,8 +19,8 @@ using namespace std;
 class MessageSend
 {
 public:
-	MessageSend();
-	~MessageSend();
+	MessageSend(){}
+	~MessageSend(){}
 	bool SendMessage(const string& host,const string& method,const string& metaData)
 	{
 		char *ptr = new char[512];
