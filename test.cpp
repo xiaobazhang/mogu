@@ -19,7 +19,7 @@ void Test::QpsAlarm()
 }
 void Test::RtAlarm(const string ip, int value)
 {
-	if(vec3[CostTime]!=0&&vec3[CostTime]>5)
+	if(vec3[CostTime]!=0)
 	{
 		string message = GetCurrentTime()+" Return Time is to long!!!";
 		if(value > vec3[CostTime])
@@ -54,56 +54,56 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 	int iCurrentTime = log_match::GetLogTime(strlog);//获取当前日志时间
 	if(log_match::IsQueryFinish(strlog))
 	{
-		if(mapcount[vec1[0]].count(iCurrentTime))
-			mapcount[vec1[0]][iCurrentTime]++;
+		if(mapcount[vec1[qps]].count(iCurrentTime))
+			mapcount[vec1[qps]][iCurrentTime]++;
 		else
 		{
-			mapcount[vec1[0]][iCurrentTime] = 1;
+			mapcount[vec1[qps]][iCurrentTime] = 1;
 		}
 		if(int CostTime = log_match::GetCostTime(strlog))
 		{
 			if(CostTime != -1)
 			{
-				if(mapcount[vec1[1]].count(iCurrentTime))
-					mapcount[vec1[1]][iCurrentTime] += CostTime;
+				if(mapcount[vec1[CostTime]].count(iCurrentTime))
+					mapcount[vec1[CostTime]][iCurrentTime] += CostTime;
 				else
-					mapcount[vec1[1]][iCurrentTime] = CostTime;
+					mapcount[vec1[CostTime]][iCurrentTime] = CostTime;
 			}
 		}
 	}
 	if(log_match::IsSearchZero(strlog))
 	{
-		if(mapcount[vec1[2]].count(iCurrentTime))
-			mapcount[vec1[2]][iCurrentTime]++;
+		if(mapcount[vec1[SearchZero]].count(iCurrentTime))
+			mapcount[vec1[SearchZero]][iCurrentTime]++;
 		else
-			mapcount[vec1[2]][iCurrentTime] = 1;
+			mapcount[vec1[SearchZero]][iCurrentTime] = 1;
 	}
 	else
 	{
-		if(!mapcount[vec1[2]].count(iCurrentTime))
-			mapcount[vec1[2]][iCurrentTime] = 0;
+		if(!mapcount[vec1[SearchZero]].count(iCurrentTime))
+			mapcount[vec1[SearchZero]][iCurrentTime] = 0;
 	}
 	if(log_match::IsSearchFailed(strlog))
 	{
-		if(mapcount[vec1[3]].count(iCurrentTime))
-			mapcount[vec1[3]][iCurrentTime]++;
+		if(mapcount[vec1[SearchFaild]].count(iCurrentTime))
+			mapcount[vec1[SearchFaild]][iCurrentTime]++;
 		else
-			mapcount[vec1[3]][iCurrentTime] = 1;
+			mapcount[vec1[SearchFaild]][iCurrentTime] = 1;
 	}
 	else
 	{
-		mapcount[vec1[3]][iCurrentTime] = 0;
+		mapcount[vec1[SearchFaild]][iCurrentTime] = 0;
 	}
 	if(log_match::IsSearchDiscard(strlog))
 	{
-		if(mapcount[vec1[4]].count(iCurrentTime))
-			mapcount[vec1[4]][iCurrentTime]++;
+		if(mapcount[vec1[SearchDiscard]].count(iCurrentTime))
+			mapcount[vec1[SearchDiscard]][iCurrentTime]++;
 		else
-			mapcount[vec1[4]][iCurrentTime] = 1;
+			mapcount[vec1[SearchDiscard]][iCurrentTime] = 1;
 	}
 	else
 	{
-		mapcount[vec1[4]][iCurrentTime] = 0;
+		mapcount[vec1[SearchDiscard]][iCurrentTime] = 0;
 	}
 }
 /**
@@ -117,34 +117,34 @@ void Test::SendLog()
 	for(iter = m_DataType.begin();iter!=m_DataType.end();iter++)
 	{
 		string strip = iter->first;
-		if(iter->second[vec1[0]].size()>=iMaxMapSize)
+		if(iter->second[vec1[qps]].size()>=iMaxMapSize)
 		{
 			map<int,int>::iterator iter1,iter2,iter3,iter4,iter5;
-			iter1 = iter->second[vec1[0]].begin();
-			iter2 = iter->second[vec1[1]].begin();
-			iter3 = iter->second[vec1[2]].begin();
-			iter4 = iter->second[vec1[3]].begin();
-			iter5 = iter->second[vec1[4]].begin();
+			iter1 = iter->second[vec1[qps]].begin();
+			iter2 = iter->second[vec1[CostTime]].begin();
+			iter3 = iter->second[vec1[SearchZero]].begin();
+			iter4 = iter->second[vec1[SearchFaild]].begin();
+			iter5 = iter->second[vec1[SearchDiscard]].begin();
 	
 			int tmp = iter2->second/iter1->second;
-			m_Metric.HandleMetric(vec2[0],strip,iter1->first,iter1->second);
-			RtAlarm(strip,tmp);
-			m_Metric.HandleMetric(vec2[1],strip,iter2->first,tmp);
-			m_Metric.HandleMetric(vec2[2],strip,iter3->first,iter3->second);
-			SearchFaildAlarm(strip,iter4->second);
-			m_Metric.HandleMetric(vec2[3],strip,iter4->first,iter4->second);
-			SearchDiscardAlarm(strip,iter5->second);
-			m_Metric.HandleMetric(vec2[4],strip,iter5->first,iter5->second);
-			if(iter->second[vec1[0]].size())
-				iter->second[vec1[0]].erase(iter1++);
-			if(iter->second[vec1[1]].size())
-				iter->second[vec1[1]].erase(iter2++);
-			if(iter->second[vec1[2]].size())
-				iter->second[vec1[2]].erase(iter3++);
-			if(iter->second[vec1[3]].size())
-				iter->second[vec1[3]].erase(iter4++);
-			if(iter->second[vec1[4]].size())
-				iter->second[vec1[4]].erase(iter5++);		
+			m_Metric.HandleMetric(vec2[qps],strip,iter1->first,iter1->second);
+			//RtAlarm(strip,tmp);
+			m_Metric.HandleMetric(vec2[CostTime],strip,iter2->first,tmp);
+			m_Metric.HandleMetric(vec2[SearchZero],strip,iter3->first,iter3->second);
+			//SearchFaildAlarm(strip,iter4->second);
+			m_Metric.HandleMetric(vec2[SearchFaild],strip,iter4->first,iter4->second);
+			//SearchDiscardAlarm(strip,iter5->second);
+			m_Metric.HandleMetric(vec2[SearchDiscard],strip,iter5->first,iter5->second);
+			if(iter->second[vec1[qps]].size())
+				iter->second[vec1[qps]].erase(iter1++);
+			if(iter->second[vec1[CostTime]].size())
+				iter->second[vec1[CostTime]].erase(iter2++);
+			if(iter->second[vec1[SearchZero]].size())
+				iter->second[vec1[SearchZero]].erase(iter3++);
+			if(iter->second[vec1[SearchFaild]].size())
+				iter->second[vec1[SearchFaild]].erase(iter4++);
+			if(iter->second[vec1[SearchDiscard]].size())
+				iter->second[vec1[SearchDiscard]].erase(iter5++);		
 		}
 	}
 }

@@ -10,6 +10,15 @@
 using namespace ckit;
 using namespace std;
 
+enum emCpcMearch
+{
+	qps,
+	CostTime,
+	SearchZero,
+	SearchFaild,
+	SearchDiscard
+};
+
 class Test: public Thread
 {
 public:

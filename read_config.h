@@ -7,15 +7,6 @@
 #include <string>
 #include <map>
 using namespace std;
-enum emCpcMearch
-{
-	qps,
-	CostTime,
-	SearchZero,
-	SearchFaild,
-	SearchDiscard
-};
-
 
 class ReadConfig
 {
