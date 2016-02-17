@@ -13,72 +13,103 @@ void Test::Run()
 		}
 	}	
 }
+void Test::QpsAlarm()
+{
+
+}
+void Test::RtAlarm(const string ip, int value)
+{
+	if(vec3[CostTime]!=0&&vec3[CostTime]>15)
+	{
+		string message = ckit::time::GetCurrentTime()+" Return Time is to long!!!";
+		if(value > vec3[CostTime])
+			m_MessageSend.SendMessage(ip,"rt",message);
+	}
+}
+void Test::SearchFaildAlarm(const string ip, int value)
+{
+	if(value > vec3[SearchFaild])
+	{
+		string message = ckit::time::GetCurrentTime()+" have search faild!!!";
+		m_MessageSend.SendMessage(ip,"search faild",message);
+	}
+}
+void Test::SearchDiscardAlarm(const string ip, int value)
+{
+	if(value > vec3[SearchDiscard])
+	{
+		string message = ckit::time::GetCurrentTime()+" have search discard!!!";
+		m_MessageSend.SendMessage(ip,"search discard",message);
+	}
+}
 /**
- * @AuthorHTL
- * @DateTime  2016-02-03T10:00:39+0800
- * @param
- * @param
+ * [Test::CountLog description]
+ * @Author:suli
+ * @DateTime    2016-02-17T16:33:09+0800
+ * @param       strlog                   [description]
+ * @param       mapcount                 [description]
  */
 void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 {
 	int iCurrentTime = log_match::GetLogTime(strlog);//获取当前日志时间
 	if(log_match::IsQueryFinish(strlog))
 	{
-		if(mapcount["Queryps"].count(iCurrentTime))
-			mapcount["Queryps"][iCurrentTime]++;
+		if(mapcount[vec1[0]].count(iCurrentTime))
+			mapcount[vec1[0]][iCurrentTime]++;
 		else
 		{
-			mapcount["Queryps"][iCurrentTime] = 1;
+			mapcount[vec1[0]][iCurrentTime] = 1;
 		}
 		if(int CostTime = log_match::GetCostTime(strlog))
 		{
 			if(CostTime != -1)
 			{
-				if(mapcount["CostTime"].count(iCurrentTime))
-					mapcount["CostTime"][iCurrentTime] += CostTime;
+				if(mapcount[vec1[1]].count(iCurrentTime))
+					mapcount[vec1[1]][iCurrentTime] += CostTime;
 				else
-					mapcount["CostTime"][iCurrentTime] = CostTime;
+					mapcount[vec1[1]][iCurrentTime] = CostTime;
 			}
 		}
 	}
 	if(log_match::IsSearchZero(strlog))
 	{
-		if(mapcount["SearchZero"].count(iCurrentTime))
-			mapcount["SearchZero"][iCurrentTime]++;
+		if(mapcount[vec1[2]].count(iCurrentTime))
+			mapcount[vec1[2]][iCurrentTime]++;
 		else
-			mapcount["SearchZero"][iCurrentTime] = 1;
+			mapcount[vec1[2]][iCurrentTime] = 1;
 	}
 	else
 	{
-		if(!mapcount["SearchZero"].count(iCurrentTime))
-			mapcount["SearchZero"][iCurrentTime] = 0;
+		if(!mapcount[vec1[2]].count(iCurrentTime))
+			mapcount[vec1[2]][iCurrentTime] = 0;
 	}
 	if(log_match::IsSearchFailed(strlog))
 	{
-		if(mapcount["SearchFaild"].count(iCurrentTime))
-			mapcount["SearchFaild"][iCurrentTime]++;
+		if(mapcount[vec1[3]].count(iCurrentTime))
+			mapcount[vec1[3]][iCurrentTime]++;
 		else
-			mapcount["SearchFaild"][iCurrentTime] = 1;
+			mapcount[vec1[3]][iCurrentTime] = 1;
 	}
 	else
 	{
-		mapcount["SearchFaild"][iCurrentTime] = 0;
+		mapcount[vec1[3]][iCurrentTime] = 0;
 	}
 	if(log_match::IsSearchDiscard(strlog))
 	{
-		if(mapcount["SearchDiscard"].count(iCurrentTime))
-			mapcount["SearchDiscard"][iCurrentTime]++;
+		if(mapcount[vec1[4]].count(iCurrentTime))
+			mapcount[vec1[4]][iCurrentTime]++;
 		else
-			mapcount["SearchDiscard"][iCurrentTime] = 1;
+			mapcount[vec1[4]][iCurrentTime] = 1;
 	}
 	else
 	{
-		mapcount["SearchDiscard"][iCurrentTime] = 0;
+		mapcount[vec1[4]][iCurrentTime] = 0;
 	}
 }
 /**
- * @AuthorHTL
- * @DateTime  2016-02-03T11:15:58+0800
+ * [Test::SendLog description]
+ * @Author:suli
+ * @DateTime    2016-02-17T16:37:32+0800
  */
 void Test::SendLog()
 {
@@ -86,52 +117,54 @@ void Test::SendLog()
 	for(iter = m_DataType.begin();iter!=m_DataType.end();iter++)
 	{
 		string strip = iter->first;
-		if(iter->second["Queryps"].size()>=iMaxMapSize)
+		if(iter->second[vec1[0]].size()>=iMaxMapSize)
 		{
 			map<int,int>::iterator iter1,iter2,iter3,iter4,iter5;
-			iter1 = iter->second["Queryps"].begin();
-			iter2 = iter->second["CostTime"].begin();
-			iter3 = iter->second["SearchZero"].begin();
-			iter4 = iter->second["SearchFaild"].begin();
-			iter5 = iter->second["SearchDiscard"].begin();
-
-			if(iter1->second !=1)
-			{
-				int tmp = iter2->second/iter1->second;
-				m_Metric.HandleMetric("search_qps_test",strip,iter1->first,iter1->second);
-				m_Metric.HandleMetric("search_rt_test",strip,iter2->first,tmp);
-				m_Metric.HandleMetric("search_zero_test",strip,iter3->first,iter3->second);
-				m_Metric.HandleMetric("search_fail_test",strip,iter4->first,iter4->second);
-				m_Metric.HandleMetric("search_discard_test",strip,iter5->first,iter5->second);
-				if(iter->second["Queryps"].size())
-					iter->second["Queryps"].erase(iter1++);
-				if(iter->second["CostTime"].size())
-					iter->second["CostTime"].erase(iter2++);
-				if(iter->second["SearchZero"].size())
-					iter->second["SearchZero"].erase(iter3++);
-				if(iter->second["SearchFaild"].size())
-					iter->second["SearchFaild"].erase(iter4++);
-				if(iter->second["SearchDiscard"].size())
-					iter->second["SearchDiscard"].erase(iter5++);	
-			}
-			else
-			{
-				iter->second["Queryps"].erase(iter1++);
-			}	
+			iter1 = iter->second[vec1[0]].begin();
+			iter2 = iter->second[vec1[1]].begin();
+			iter3 = iter->second[vec1[2]].begin();
+			iter4 = iter->second[vec1[3]].begin();
+			iter5 = iter->second[vec1[4]].begin();
+	
+			int tmp = iter2->second/iter1->second;
+			m_Metric.HandleMetric(vec2[0],strip,iter1->first,iter1->second);
+			RtAlarm(strip,tmp);
+			m_Metric.HandleMetric(vec2[1],strip,iter2->first,tmp);
+			m_Metric.HandleMetric(vec2[2],strip,iter3->first,iter3->second);
+			SearchFaildAlarm(strip,iter4->second);
+			m_Metric.HandleMetric(vec2[3],strip,iter4->first,iter4->second);
+			SearchDiscardAlarm(strip,iter5->second);
+			m_Metric.HandleMetric(vec2[4],strip,iter5->first,iter5->second);
+			if(iter->second[vec1[0]].size())
+				iter->second[vec1[0]].erase(iter1++);
+			if(iter->second[vec1[1]].size())
+				iter->second[vec1[1]].erase(iter2++);
+			if(iter->second[vec1[2]].size())
+				iter->second[vec1[2]].erase(iter3++);
+			if(iter->second[vec1[3]].size())
+				iter->second[vec1[3]].erase(iter4++);
+			if(iter->second[vec1[4]].size())
+				iter->second[vec1[4]].erase(iter5++);		
 		}
 	}
 }
+/**
+ * [Test::Process description]
+ * @Author:suli
+ * @DateTime    2016-02-17T16:37:42+0800
+ * @param       strip                    [description]
+ * @param       strlog                   [description]
+ */
 void Test::Process(const string& strip, const string& strlog)
 {
 	if(!m_DataType.count(strip))
 	{
 		map<int,int> _map;
 		map<string,map<int,int> > map_tmp;
-		map_tmp["Queryps"] = _map;
-		map_tmp["CostTime"] = _map;
-		map_tmp["SearchZero"] = _map;
-		map_tmp["SearchFaild"] = _map;
-		map_tmp["SearchDiscard"] = _map;
+		for(int i=0;i<vec1.size();i++)
+		{
+			map_tmp[vec1[i]] = _map;
+		}
 		m_DataType[strip] = map_tmp;
 	}
 	else

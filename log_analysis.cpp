@@ -13,6 +13,11 @@ namespace ckit
 			unixtime = mktime(&tm_time);  
 			return unixtime; 
 		}
+		string GetCurrentTime()
+		{
+			time_t tmp = ckit::time::GetCurrentSecond();
+			return ckit::time::ToString(tmp);
+		}
 	}
 }
 /**

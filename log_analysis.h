@@ -13,6 +13,7 @@ namespace ckit
 	namespace time
 	{
 		int StringTimeToInt(std::string str);
+		string GetCurrentTime();
 	}
 }
 /**
