@@ -27,12 +27,10 @@ public:
 	{
 		if(filename != "")
 		{
-			int ret = m_ifstream.open(filename.c_str());
-			std::cout<<"open "<<ret<<std::endl;
+			m_ifstream.open(filename.c_str());
 		}
 		else
 		{
-			std::cout<<"error"<<std::endl;
 			return ;	
 		}
 	}
@@ -42,6 +40,7 @@ public:
 		Json::Value  root;
 		if(!reader.parse(m_ifstream,root,false))
 		{
+			std::cout<<"error"<<std::endl;
 			return ;
 		}
 		Json::Value tmpvalue = root["cpc_mearch"];

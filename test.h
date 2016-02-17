@@ -15,7 +15,7 @@ class Test: public Thread
 public:
 	Test():iMaxMapSize(60)
 	{
-		m_ReadConfig.OpenFile("cpc_mearch.json");
+		m_ReadConfig.OpenFile("/home/suli/work/ckit/build/cpc_mearch.json");
 		m_ReadConfig.GetCpcMsearchConfig(vec1,vec2,vec3);
 		for(int i=0;i<vec1.size();i++)
 		{
