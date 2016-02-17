@@ -1,8 +1,6 @@
-{"cpc_mearch":[
-{"name":"qps","metric":"search_qps_test","valve":"20"},
-{"name":"costtime","metric":"search_rt_test","valve":"20"},
-{"name":"searchzero","metric":"search_zero_test","valve":"0"},
-{"name":"searchfaild","metric":"search_fail_test","valve":"0"},
-{"name":"searchdiscard","metric":"search_discard_test","valve":"0"},
-]
-}
+{"cpc_mearch":[{"name":"qps","metric":"search_qps_test","valve":"20"}]}
+//{"name":"costtime","metric":"search_rt_test","valve":"20"},
+//{"name":"searchzero","metric":"search_zero_test","valve":"0"},
+//{"name":"searchfaild","metric":"search_fail_test","valve":"0"},
+//{"name":"searchdiscard","metric":"search_discard_test","valve":"0"},
+//]}
