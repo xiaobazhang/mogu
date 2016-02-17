@@ -60,14 +60,14 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
 		{
 			mapcount[vec1[qps]][iCurrentTime] = 1;
 		}
-		if(int CostTime = log_match::GetCostTime(strlog))
+		if(int rt = log_match::GetCostTime(strlog))
 		{
-			if(CostTime != -1)
+			if(rt != -1)
 			{
 				if(mapcount[vec1[CostTime]].count(iCurrentTime))
-					mapcount[vec1[CostTime]][iCurrentTime] += CostTime;
+					mapcount[vec1[CostTime]][iCurrentTime] += rt;
 				else
-					mapcount[vec1[CostTime]][iCurrentTime] = CostTime;
+					mapcount[vec1[CostTime]][iCurrentTime] = rt;
 			}
 		}
 	}
