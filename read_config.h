@@ -28,9 +28,13 @@ public:
 		if(filename != "")
 		{
 			m_ifstream.open(filename.c_str());
+			std::cout<<"open"<<filename<<std::endl;
 		}
 		else
+		{
+			std::cout<<"error"<<std::endl;
 			return ;	
+		}
 	}
 	void GetCpcMsearchConfig(vector<string>& vec1,vector<string>& vec2,vector<int>& vec3)//获取cpc_mearch配置文件
 	{
@@ -38,7 +42,6 @@ public:
 		Json::Value  root;
 		if(!reader.parse(m_ifstream,root,false))
 		{
-			std::cout<<"error"<<std::endl;
 			return ;
 		}
 		Json::Value tmpvalue = root["cpc_mearch"];
