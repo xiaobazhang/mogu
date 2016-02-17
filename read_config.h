@@ -38,6 +38,7 @@ public:
 		Json::Value  root;
 		if(!reader.parse(m_ifstream,root,false))
 		{
+			std::cout<<"error"<<std::endl;
 			return ;
 		}
 		Json::Value tmpvalue = root["cpc_mearch"];
@@ -45,12 +46,15 @@ public:
 		{
 			Json::Value tmp = tmpvalue[i];
 			string arg1 = tmpvalue["name"].asString();
+			std::cout<<"arg1: "<<arg1<<std::endl;
 			vec1.push_back(arg1);
 			
 			string arg2 = tmpvalue["metric"].asString();
+			std::cout<<"arg2: "<<arg2<<std::endl;
 			vec2.push_back(arg2);
 			
 			int arg3 = tmpvalue["valve"].asInt();
+			std::cout<<"arg3: "<<arg3<<std::endl;
 			vec3.push_back(arg3);
 		}
 	}

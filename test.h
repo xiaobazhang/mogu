@@ -24,6 +24,7 @@ public:
 			std::cout<<"33333333"<<vec3[i]<<std::endl;
 		}
 		m_MessageSend.SetAppName("cpc_msearch_test");
+		exit(0);
 	}
 	~Test()
 	{
