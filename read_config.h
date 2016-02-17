@@ -27,8 +27,8 @@ public:
 	{
 		if(filename != "")
 		{
-			m_ifstream.open(filename.c_str());
-			std::cout<<"open"<<filename<<std::endl;
+			int ret = m_ifstream.open(filename.c_str());
+			std::cout<<"open "<<ret<<std::endl;
 		}
 		else
 		{
