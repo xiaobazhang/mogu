@@ -15,8 +15,8 @@ namespace ckit
 		}
 		string GetCurrentTime()
 		{
-			time_t tmp = ckit::time::GetCurrentSecond();
-			return ckit::time::ToString(tmp);
+			time_t tmp = GetCurrentSecond();
+			return ToString(tmp);
 		}
 	}
 }
