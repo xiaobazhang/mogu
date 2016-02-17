@@ -45,6 +45,7 @@ public:
 			std::cout<<"error2"<<std::endl;
 			return ;
 		}
+		std::cout<<"error3"<<std::endl;
 		Json::Value tmpvalue = root["cpc_mearch"];
 		for(int i=0;i<tmpvalue.size();i++)
 		{
