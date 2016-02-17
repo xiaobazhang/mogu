@@ -28,7 +28,6 @@ public:
 		if(filename != "")
 		{
 			m_ifstream.open(filename.c_str());
-			std::cout<<"error1"<<std::endl;
 			assert(m_ifstream.is_open());
 		}
 		else
@@ -49,15 +48,12 @@ public:
 		{
 			Json::Value tmp = tmpvalue[i];
 			string arg1 = tmp["name"].asString();
-			std::cout<<"arg1: "<<arg1<<std::endl;
 			vec1.push_back(arg1);
 			
 			string arg2 = tmp["metric"].asString();
-			std::cout<<"arg2: "<<arg2<<std::endl;
 			vec2.push_back(arg2);
 			
 			int arg3 = tmp["valve"].asInt();
-			std::cout<<"arg3: "<<arg3<<std::endl;
 			vec3.push_back(arg3);
 		}
 	}

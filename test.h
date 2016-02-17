@@ -17,12 +17,6 @@ public:
 	{
 		m_ReadConfig.OpenFile("cpc_mearch.json");
 		m_ReadConfig.GetCpcMsearchConfig(vec1,vec2,vec3);
-		for(int i=0;i<vec1.size();i++)
-		{
-			std::cout<<"11111111"<<vec1[i]<<std::endl;
-			std::cout<<"22222222"<<vec2[i]<<std::endl;
-			std::cout<<"33333333"<<vec3[i]<<std::endl;
-		}
 		m_MessageSend.SetAppName("cpc_msearch_test");
 		exit(0);
 	}
