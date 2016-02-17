@@ -21,7 +21,7 @@ void Test::RtAlarm(const string ip, int value)
 {
 	if(vec3[CostTime]!=0&&vec3[CostTime]>15)
 	{
-		string message = ckit::time::GetCurrentTime()+" Return Time is to long!!!";
+		string message = GetCurrentTime()+" Return Time is to long!!!";
 		if(value > vec3[CostTime])
 			m_MessageSend.SendMessage(ip,"rt",message);
 	}
@@ -30,7 +30,7 @@ void Test::SearchFaildAlarm(const string ip, int value)
 {
 	if(value > vec3[SearchFaild])
 	{
-		string message = ckit::time::GetCurrentTime()+" have search faild!!!";
+		string message = GetCurrentTime()+" have search faild!!!";
 		m_MessageSend.SendMessage(ip,"search faild",message);
 	}
 }
@@ -38,7 +38,7 @@ void Test::SearchDiscardAlarm(const string ip, int value)
 {
 	if(value > vec3[SearchDiscard])
 	{
-		string message = ckit::time::GetCurrentTime()+" have search discard!!!";
+		string message = GetCurrentTime()+" have search discard!!!";
 		m_MessageSend.SendMessage(ip,"search discard",message);
 	}
 }

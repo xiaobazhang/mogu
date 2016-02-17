@@ -34,7 +34,11 @@ public:
 	void RtAlarm(const string ip, int value);
 	void SearchFaildAlarm(const string ip, int value);
 	void SearchDiscardAlarm(const string ip, int value);
-
+	string GetCurrentTime()
+	{
+		time_t tmp = ckit::time::GetCurrentSecond();
+		return ckit::time::ToString(tmp);
+	}
 private:
 	Metric m_Metric;
 	MessageSend m_MessageSend;
