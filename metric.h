@@ -23,12 +23,13 @@ public:
 	~MessageSend(){}
 	bool SendMessage(const string& host,const string& method,const string& metaData)
 	{
-		char *ptr = new char[512];
 		if(m_appName == "")
 			return false;
+		char *ptr = new char[1024];
 		sprintf(ptr,"/user/local/bin/curl -d \"appName=%s&host=%s&method=%s&metaData=%s\" \
 			http://monitor.bit.service.mogujie.org:8080/alarmcenter/service/alarm",\
 			m_appName.c_str(),host.c_str(),method.c_str(),metaData.c_str());
+		std::cout<<"SendMessage="<<*ptr<<std::endl;
 		system(ptr);
 		delete [] ptr;
 		return true;
