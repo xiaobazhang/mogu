@@ -28,6 +28,7 @@ public:
 		if(filename != "")
 		{
 			m_ifstream.open(filename.c_str());
+			assert(m_ifstream.is_open());
 		}
 		else
 		{
