@@ -20,8 +20,8 @@ enum emCpcMearch
 class ReadConfig
 {
 public:
-	ReadConfig();
-	~ReadConfig();
+	ReadConfig(){}
+	~ReadConfig(){}
 	
 	void OpenFile(const string filename)
 	{
