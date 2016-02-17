@@ -19,7 +19,7 @@ void Test::QpsAlarm()
 }
 void Test::RtAlarm(const string ip, int value)
 {
-	if(vec3[CostTime]!=0&&vec3[CostTime]>15)
+	if(vec3[CostTime]!=0&&vec3[CostTime]>5)
 	{
 		string message = GetCurrentTime()+" Return Time is to long!!!";
 		if(value > vec3[CostTime])

@@ -27,7 +27,7 @@ public:
 			return false;
 		char *ptr = new char[1024];
 		sprintf(ptr,"/usr/local/bin/curl -d \"appName=%s&host=%s&method=%s&metaData=%s\" http://monitor.bit.service.mogujie.org:8080/alarmcenter/service/alarm",m_appName.c_str(),host.c_str(),method.c_str(),metaData.c_str());
-		std::cout<<"SendMessage="<<*ptr<<std::endl;
+		printf("SendMessage=%s",ptr);
 		system(ptr);
 		delete [] ptr;
 		return true;
