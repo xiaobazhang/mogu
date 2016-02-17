@@ -16,7 +16,7 @@ public:
 	Test():iMaxMapSize(60)
 	{
 		m_ReadConfig.OpenFile("cpc_mearch.json");
-		m_ReadConfig.GetCpcMsearchConfig(&vec1,&vec2,&vec3);
+		m_ReadConfig.GetCpcMsearchConfig(vec1,vec2,vec3);
 		m_MessageSend.SetAppName("cpc_msearch_test");
 	}
 	~Test()

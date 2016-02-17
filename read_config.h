@@ -27,7 +27,7 @@ public:
 	{
 		if(filename != "")
 		{
-			m_ifstream.open(filename);
+			m_ifstream.open(filename.c_str());
 		}
 		else
 			return ;	
@@ -45,13 +45,13 @@ public:
 		{
 			Json::Value tmp = tmpvalue[i];
 			string arg1 = tmpvalue["name"].asString();
-			vec1.pushback(arg1);
+			vec1.push_back(arg1);
 			
 			string arg2 = tmpvalue["metric"].asString();
-			vec2.pushback(arg2);
+			vec2.push_back(arg2);
 			
-			string arg3 = tmpvalue["valve"].asInt();
-			vec3.pushback(arg3);
+			int arg3 = tmpvalue["valve"].asInt();
+			vec3.push_back(arg3);
 		}
 	}
 private:
