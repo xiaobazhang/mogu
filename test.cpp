@@ -128,12 +128,12 @@ void Test::SendLog()
 	
 			int tmp = iter2->second/iter1->second;
 			m_Metric.HandleMetric(vec2[qps],strip,iter1->first,iter1->second);
-			RtAlarm(strip,tmp);
+			//RtAlarm(strip,tmp);
 			m_Metric.HandleMetric(vec2[CostTime],strip,iter2->first,tmp);
 			m_Metric.HandleMetric(vec2[SearchZero],strip,iter3->first,iter3->second);
-			SearchFaildAlarm(strip,iter4->second);
+			//SearchFaildAlarm(strip,iter4->second);
 			m_Metric.HandleMetric(vec2[SearchFaild],strip,iter4->first,iter4->second);
-			SearchDiscardAlarm(strip,iter5->second);
+			//SearchDiscardAlarm(strip,iter5->second);
 			m_Metric.HandleMetric(vec2[SearchDiscard],strip,iter5->first,iter5->second);
 			if(iter->second[vec1[qps]].size())
 				iter->second[vec1[qps]].erase(iter1++);

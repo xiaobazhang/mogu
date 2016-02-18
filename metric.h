@@ -26,7 +26,7 @@ public:
 		if(m_appName == "")
 			return false;
 		char ptr[512] = {0};
-		sprintf(ptr,"/usr/local/bin/curl -d \"appName=%s&host=%s&method=%s&metaData=%s\" http://monitor.bit.service.mogujie.org:8080/alarmcenter/service/alarm",m_appName.c_str(),host.c_str(),method.c_str(),metaData.c_str());
+		sprintf(ptr,"/usr/local/bin/curl -s -d \"appName=%s&host=%s&method=%s&metaData=%s\" http://monitor.bit.service.mogujie.org:8080/alarmcenter/service/alarm",m_appName.c_str(),host.c_str(),method.c_str(),metaData.c_str());
 		system(ptr);
 		return true;
 	}
