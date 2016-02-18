@@ -6,7 +6,7 @@ void Test::Run()
 	{
 		IpLog *iplog = NULL;
 		SingleLogQueue::GetInstance()->Recv(&iplog);
-		//Process(iplog->ip,iplog->log);
+		Process(iplog->ip,iplog->log);
 		if(iplog !=NULL)
 		{
 			delete iplog;
@@ -169,7 +169,7 @@ void Test::Process(const string& strip, const string& strlog)
 	}
 	else
 	{
-		CountLog(strlog,m_DataType[strip]);
+		//CountLog(strlog,m_DataType[strip]);
 	}
 	SendLog();
 }
