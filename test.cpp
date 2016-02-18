@@ -169,7 +169,7 @@ void Test::Process(const string& strip, const string& strlog)
 	}
 	else
 	{
-		CountLog(strlog,m_DataType[strip]);
+		//CountLog(strlog,m_DataType[strip]);
 	}
-	SendLog();
+	//SendLog();
 }
