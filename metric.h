@@ -25,11 +25,9 @@ public:
 	{
 		if(m_appName == "")
 			return false;
-		char *ptr = new char[1024];
+		char ptr[512] = {0};
 		sprintf(ptr,"/usr/local/bin/curl -d \"appName=%s&host=%s&method=%s&metaData=%s\" http://monitor.bit.service.mogujie.org:8080/alarmcenter/service/alarm",m_appName.c_str(),host.c_str(),method.c_str(),metaData.c_str());
-		printf("SendMessage=%s",ptr);
 		system(ptr);
-		delete [] ptr;
 		return true;
 	}
 	void SetAppName(const string appName)

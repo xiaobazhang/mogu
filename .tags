@@ -4,69 +4,92 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
+CostTime	test.h	/^	CostTime,$/;"	e	enum:emCpcMearch
 CountLog	test.cpp	/^void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)$/;"	f	class:Test
-GetCostTime	test.cpp	/^int Test::GetCostTime(const string& strlog)$/;"	f	class:Test
+GetCostTime	log_analysis.cpp	/^	int GetCostTime(const string& strlog)$/;"	f	namespace:log_match
+GetCpcMsearchConfig	read_config.h	/^	void GetCpcMsearchConfig(vector<string>& vec1,vector<string>& vec2,vector<int>& vec3)\/\/获取cpc_mearch配置文件$/;"	f	class:ReadConfig
+GetCurrentTime	test.h	/^	string GetCurrentTime()$/;"	f	class:Test
 GetInstance	handle_message.h	/^	static SingleLogQueue* GetInstance()$/;"	f	class:SingleLogQueue
-GetLogTime	test.cpp	/^int Test::GetLogTime(const string& strlog)$/;"	f	class:Test
+GetLogTime	log_analysis.cpp	/^	int GetLogTime(const string& strlog)$/;"	f	namespace:log_match
 HandleMessage	handle_message.h	/^	HandleMessage()$/;"	f	class:HandleMessage
 HandleMessage	handle_message.h	/^class HandleMessage : public LogAnalysis$/;"	c
 HandleMetric	metric.cpp	/^void Metric::HandleMetric(const string strmetric,const string strhost,int itime,float fvalue)$/;"	f	class:Metric
 HandleMetric	metric.cpp	/^void Metric::HandleMetric(const string strmetric,const string strhost,int itime,int ivalue)$/;"	f	class:Metric
 IpLog	handle_message.h	/^struct IpLog$/;"	s
-IsQueryFinish	test.cpp	/^bool Test::IsQueryFinish(const string& strlog)$/;"	f	class:Test
-IsSearchDiscard	test.cpp	/^bool Test::IsSearchDiscard(const string& strlog)$/;"	f	class:Test
-IsSearchFailed	test.cpp	/^bool Test::IsSearchFailed(const string& strlog)$/;"	f	class:Test
-IsSearchZero	test.cpp	/^bool Test::IsSearchZero(const string& strlog)$/;"	f	class:Test
+IsQueryFinish	log_analysis.cpp	/^	bool IsQueryFinish(const string& strlog)$/;"	f	namespace:log_match
+IsSearchDiscard	log_analysis.cpp	/^	bool IsSearchDiscard(const string& strlog)$/;"	f	namespace:log_match
+IsSearchFailed	log_analysis.cpp	/^	bool IsSearchFailed(const string& strlog)$/;"	f	namespace:log_match
+IsSearchZero	log_analysis.cpp	/^	bool IsSearchZero(const string& strlog)$/;"	f	namespace:log_match
 LogAnalysis	log_analysis.h	/^	LogAnalysis()$/;"	f	class:LogAnalysis
 LogAnalysis	log_analysis.h	/^class LogAnalysis : public KafkaConsumer, public KafkaConsumerCb$/;"	c
-LogValue	test.h	/^	LogValue():m_Time(0),m_Queryps(0),m_CostTime(0),m_SearchFaild(0),m_SearchZero(0),m_SearchDiscard(0){}$/;"	f	struct:LogValue
-LogValue	test.h	/^struct LogValue$/;"	s
+MessageSend	metric.h	/^	MessageSend(){}$/;"	f	class:MessageSend
+MessageSend	metric.h	/^class MessageSend$/;"	c
 Metric	metric.h	/^	Metric():miQueueMaxNum(10){}$/;"	f	class:Metric
 Metric	metric.h	/^class Metric$/;"	c
+OpenFile	read_config.h	/^	void OpenFile(const string filename)$/;"	f	class:ReadConfig
 Process	handle_message.h	/^	virtual void Process(rd_kafka_message_t * pMessage)$/;"	f	class:HandleMessage
 Process	log_analysis.cpp	/^void LogAnalysis::Process(rd_kafka_message_t * pMessage)$/;"	f	class:LogAnalysis
 Process	test.cpp	/^void Test::Process(const string& strip, const string& strlog)$/;"	f	class:Test
+QpsAlarm	test.cpp	/^void Test::QpsAlarm()$/;"	f	class:Test
+ReadConfig	read_config.h	/^	ReadConfig(){}$/;"	f	class:ReadConfig
+ReadConfig	read_config.h	/^class ReadConfig$/;"	c
 Recv	handle_message.h	/^	void Recv(IpLog** pIplog)$/;"	f	class:SingleLogQueue
+RtAlarm	test.cpp	/^void Test::RtAlarm(const string ip, int value)$/;"	f	class:Test
 Run	test.cpp	/^void Test::Run()$/;"	f	class:Test
+SearchDiscard	test.h	/^	SearchDiscard$/;"	e	enum:emCpcMearch
+SearchDiscardAlarm	test.cpp	/^void Test::SearchDiscardAlarm(const string ip, int value)$/;"	f	class:Test
+SearchFaild	test.h	/^	SearchFaild,$/;"	e	enum:emCpcMearch
+SearchFaildAlarm	test.cpp	/^void Test::SearchFaildAlarm(const string ip, int value)$/;"	f	class:Test
+SearchZero	test.h	/^	SearchZero,$/;"	e	enum:emCpcMearch
 Send	handle_message.h	/^	void Send(IpLog* pIplog)$/;"	f	class:SingleLogQueue
 SendLog	test.cpp	/^void Test::SendLog()$/;"	f	class:Test
+SendMessage	metric.h	/^	bool SendMessage(const string& host,const string& method,const string& metaData)$/;"	f	class:MessageSend
 SendMetric	metric.cpp	/^void Metric::SendMetric()$/;"	f	class:Metric
+SetAppName	metric.h	/^	void SetAppName(const string appName)$/;"	f	class:MessageSend
+SetMaxMapSize	test.h	/^	void SetMaxMapSize(int num)$/;"	f	class:Test
 SetQueueMaxNum	metric.h	/^	void SetQueueMaxNum(int num)$/;"	f	class:Metric
-SingleLogQueue	handle_message.h	/^	SingleLogQueue()$/;"	f	class:SingleLogQueue
+SingleLogQueue	handle_message.h	/^	SingleLogQueue():iTimeOutMs(-1)\/\/阻塞，直到读到数据$/;"	f	class:SingleLogQueue
 SingleLogQueue	handle_message.h	/^class SingleLogQueue$/;"	c
 StringTimeToInt	log_analysis.cpp	/^		int StringTimeToInt(std::string str)$/;"	f	namespace:ckit::time
-Test	test.h	/^	Test():iMessage(0),iCurrent(0)$/;"	f	class:Test
+Test	test.h	/^	Test():iMaxMapSize(60)$/;"	f	class:Test
 Test	test.h	/^class Test: public Thread$/;"	c
 __HANDLE_MESSAGE_H__	handle_message.h	2;"	d
 __LOG_ANALYSIS_H__	log_analysis.h	2;"	d
 __METRIC_H__	metric.h	2;"	d
+__READ_CONFIG_H__	read_config.h	2;"	d
 __TEST_H__	test.h	2;"	d
 ckit	log_analysis.cpp	/^namespace ckit$/;"	n	file:
 ckit	log_analysis.h	/^namespace ckit$/;"	n
-iCurrent	test.h	/^	int iCurrent;$/;"	m	class:Test
-iMessage	test.h	/^	int iMessage;$/;"	m	class:Test
+emCpcMearch	test.h	/^enum emCpcMearch$/;"	g
+iMaxMapSize	test.h	/^	int iMaxMapSize;$/;"	m	class:Test
 iTimeOutMs	handle_message.h	/^	int iTimeOutMs;$/;"	m	class:SingleLogQueue
 ip	handle_message.h	/^	string ip;$/;"	m	struct:IpLog
 log	handle_message.h	/^	string log;$/;"	m	struct:IpLog
-m_CostTime	test.h	/^	int m_CostTime;$/;"	m	struct:LogValue
+log_match	log_analysis.cpp	/^namespace log_match$/;"	n	file:
+log_match	log_analysis.h	/^namespace log_match$/;"	n
 m_DataType	test.h	/^	map<string,map<string,map<int,int> > > m_DataType;$/;"	m	class:Test
 m_MailBoxR	handle_message.h	/^	MailBoxR<IpLog*> m_MailBoxR;$/;"	m	class:SingleLogQueue
+m_MessageSend	test.h	/^	MessageSend m_MessageSend;$/;"	m	class:Test
 m_Metric	test.h	/^	Metric m_Metric;$/;"	m	class:Test
-m_Queryps	test.h	/^	int m_Queryps;$/;"	m	struct:LogValue
-m_SearchDiscard	test.h	/^	int m_SearchDiscard;$/;"	m	struct:LogValue
-m_SearchFaild	test.h	/^	int m_SearchFaild;$/;"	m	struct:LogValue
-m_SearchZero	test.h	/^	int m_SearchZero;$/;"	m	struct:LogValue
-m_Time	test.h	/^	int m_Time;$/;"	m	struct:LogValue
+m_ReadConfig	test.h	/^	ReadConfig m_ReadConfig;$/;"	m	class:Test
+m_appName	metric.h	/^	string m_appName;$/;"	m	class:MessageSend
+m_ifstream	read_config.h	/^	ifstream m_ifstream; $/;"	m	class:ReadConfig
 m_queue	metric.h	/^	queue<string> m_queue;$/;"	m	class:Metric
-m_vecDateName	test.h	/^	vector<string> m_vecDateName;$/;"	m	class:Test
 main	main.cpp	/^int main()$/;"	f
 miQueueMaxNum	metric.h	/^	int miQueueMaxNum;$/;"	m	class:Metric
+qps	test.h	/^	qps,$/;"	e	enum:emCpcMearch
 strRecvIp	log_analysis.cpp	/^string LogAnalysis::strRecvIp(char* pstr,int len)$/;"	f	class:LogAnalysis
 strRecvMes	log_analysis.h	/^	string strRecvMes(char* pstr,int len)$/;"	f	class:LogAnalysis
 time	log_analysis.cpp	/^	namespace time$/;"	n	namespace:ckit	file:
 time	log_analysis.h	/^	namespace time$/;"	n	namespace:ckit
+vec1	test.h	/^	vector<string> vec1,vec2;$/;"	m	class:Test
+vec2	test.h	/^	vector<string> vec1,vec2;$/;"	m	class:Test
+vec3	test.h	/^	vector<int> vec3,vec4;\/\/vec3储存着报警阀门，vec4保存了10分钟的平均值$/;"	m	class:Test
+vec4	test.h	/^	vector<int> vec3,vec4;\/\/vec3储存着报警阀门，vec4保存了10分钟的平均值$/;"	m	class:Test
 ~HandleMessage	handle_message.h	/^	~HandleMessage()$/;"	f	class:HandleMessage
 ~LogAnalysis	log_analysis.h	/^	~LogAnalysis(){}$/;"	f	class:LogAnalysis
-~Metric	metric.h	/^	~Metric()$/;"	f	class:Metric
+~MessageSend	metric.h	/^	~MessageSend(){}$/;"	f	class:MessageSend
+~Metric	metric.h	/^	~Metric(){}$/;"	f	class:Metric
+~ReadConfig	read_config.h	/^	~ReadConfig(){}$/;"	f	class:ReadConfig
 ~SingleLogQueue	handle_message.h	/^	~SingleLogQueue()$/;"	f	class:SingleLogQueue
 ~Test	test.h	/^	~Test()$/;"	f	class:Test
