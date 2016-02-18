@@ -6,7 +6,7 @@ void Test::Run()
 	{
 		IpLog *iplog = NULL;
 		SingleLogQueue::GetInstance()->Recv(&iplog);
-		Process(iplog->ip,iplog->log);
+		//Process(iplog->ip,iplog->log);
 		if(iplog !=NULL)
 		{
 			delete iplog;
