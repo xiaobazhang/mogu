@@ -16,7 +16,7 @@ int main()
 	myHMess0.SetTopic("msearch_cpc");
 	myHMess0.SetPartition(0);
 	
-	/*myHMess1.SetTopicConf("topic.offset.store.method", "file");
+	myHMess1.SetTopicConf("topic.offset.store.method", "file");
 	myHMess1.SetTopicConf("topic.offset.store.sync.interval.ms", "1");
 	myHMess1.SetTopicConf("auto.commit.interval.ms", "10");
 	myHMess1.SetTopicConf("group.id","g2");
@@ -38,20 +38,20 @@ int main()
 	myHMess3.SetTopicConf("group.id","g4");
 	myHMess3.SetOffset(RD_KAFKA_OFFSET_END);
 	myHMess3.SetTopic("msearch_cpc");
-	myHMess3.SetPartition(3);*/
+	myHMess3.SetPartition(3);
 	
 	myHMess0.Start();
-	//myHMess1.Start();
-	//myHMess2.Start();
-	//myHMess3.Start();
+	myHMess1.Start();
+	myHMess2.Start();
+	myHMess3.Start();
 	
 	Test myConsumer;
 	myConsumer.SetMaxMapSize(30);
 	myConsumer.Start();
 	myHMess0.Join();
-	//myHMess1.Join();
-	//myHMess2.Join();
-	//myHMess3.Join();
+	myHMess1.Join();
+	myHMess2.Join();
+	myHMess3.Join();
 	myConsumer.Join();
 	while(1)
 	{
