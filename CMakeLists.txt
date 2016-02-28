@@ -25,6 +25,7 @@ target_link_libraries(ad_monitor ckit)
 target_link_libraries(ad_monitor rdkafka)
 target_link_libraries(ad_monitor jsoncpp)
 target_link_libraries(ad_monitor zookeeper_mt)
+target_link_libraries(cache_ctl dl)
 
 #install library
 #install (TARGETS ad_monitor DESTINATION bin)
