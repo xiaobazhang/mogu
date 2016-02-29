@@ -4,6 +4,8 @@ void Test::Run()
 {
 	while(1)
 	{
+		int64 first = ckit::time::GetCurrentMs();
+		int64 end;
 		IpLog *iplog = NULL;
 		SingleLogQueue::GetInstance()->Recv(&iplog);
 		Process(iplog->ip,iplog->log);
@@ -12,6 +14,8 @@ void Test::Run()
 			delete iplog;
 			m_messageNum++;
 		}
+		end = ckit::time::GetCurrentMs() - first;
+		std::cout<<"time =:"<<end<<std::endl;
 		std::cout<<"Recv message="<<m_messageNum<<std::endl;
 	}	
 }
