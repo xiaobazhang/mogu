@@ -22,7 +22,7 @@ enum emCpcMearch
 class Test: public Thread
 {
 public:
-	Test():iMaxMapSize(60)
+	Test():iMaxMapSize(60):m_messageNum(0)
 	{
 		m_ReadConfig.OpenFile("cpc_mearch.json");
 		m_ReadConfig.GetCpcMsearchConfig(vec1,vec2,vec3);
@@ -56,6 +56,7 @@ private:
 	vector<int> vec3,vec4;//vec3储存着报警阀门，vec4保存了10分钟的平均值
 	map<string,map<string,map<int,int> > > m_DataType;
 	int iMaxMapSize;
+	int64 m_messageNum;
 };
 
 #endif

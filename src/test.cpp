@@ -8,9 +8,11 @@ void Test::Run()
 		SingleLogQueue::GetInstance()->Recv(&iplog);
 		Process(iplog->ip,iplog->log);
 		if(iplog !=NULL)
-		{
+		{	
 			delete iplog;
+			m_messageNum++;
 		}
+		std::cout<<"Recv message="<<m_messageNum<<std::endl;
 	}	
 }
 void Test::QpsAlarm()

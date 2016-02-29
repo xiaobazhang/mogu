@@ -48,7 +48,7 @@ private:
 class HandleMessage : public LogAnalysis
 {
 public:
-	HandleMessage()
+	HandleMessage():m_messageNum(0)
 	{
 	}
 	~HandleMessage()
@@ -58,13 +58,16 @@ public:
 	{
 		if(pMessage == NULL)
 		return ;
+		m_messageNum++;
 		IpLog *iplog = new IpLog;
 		iplog->log = strRecvMes((char*)pMessage->payload,pMessage->len);
 		iplog->ip  = strRecvIp((char*)pMessage->key,pMessage->key_len);
-		if(iplog->ip == "10.11.12.19")
+		//if(iplog->ip == "10.11.12.19")
 			//std::cout<<iplog->ip<<":"<<iplog->log<<std::endl;
 		SingleLogQueue::GetInstance()->Send(iplog);
+		std::cout<<"send message="<<m_messageNum<<std::endl;
 	}
 private:
+	int64 m_messageNum;
 };
 #endif
