@@ -22,7 +22,7 @@ enum emCpcMearch
 class Test: public Thread
 {
 public:
-	Test():iMaxMapSize(60):m_messageNum(0)
+	Test():iMaxMapSize(60),m_messageNum(0)
 	{
 		m_ReadConfig.OpenFile("cpc_mearch.json");
 		m_ReadConfig.GetCpcMsearchConfig(vec1,vec2,vec3);
