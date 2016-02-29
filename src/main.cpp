@@ -46,7 +46,7 @@ int main()
 	myHMess3.Start();
 	
 	Test myConsumer;
-	myConsumer.SetMaxMapSize(1);
+	myConsumer.SetMaxMapSize(2);
 	myConsumer.Start();
 	myHMess0.Join();
 	myHMess1.Join();
