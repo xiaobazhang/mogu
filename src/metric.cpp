@@ -31,10 +31,11 @@ void Metric::SendMetric()
 		}
 		int64 first = ckit::time::GetCurrentMs();
 		int64 end;
-		char* ptr = new char[4092];
+		char ptr[4092] = {0};
+		//char* ptr = new char[4092];
 		sprintf(ptr,"/usr/local/bin/curl -s -H 'Content-Type: application/json' -m 5 -X POST --data '[%s]' http://127.0.0.1:40001/api/put  -w \"http_code:[%{http_code}]\"",strcurl.c_str());
 		system(ptr);
-		delete [] ptr;
+		//delete [] ptr;
 		end = ckit::time::GetCurrentMs() - first;
 		std::cout<<"time =:"<<end<<std::endl;
 	}
