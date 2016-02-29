@@ -4,6 +4,7 @@
 #include <foundation/ckit_singleton.h>
 #include <foundation/ckit_time.h>
 #include <foundation/ckit_lf_queue.h>
+#include <foundation/ckit_lock.h>
 #include <iostream>
 #include "log_analysis.h"
 
@@ -23,6 +24,7 @@ class SingleLogQueue
 public:
 	SingleLogQueue():iTimeOutMs(-1)//阻塞，直到读到数据
 	{
+		m_messageNum =0;
 	}
 	~SingleLogQueue()
 	{
@@ -40,6 +42,7 @@ public:
 		static ckit::SingletonHolder<SingleLogQueue> m_single;
 		return m_single.Get();
 	}
+	int64 m_messageNum;
 private:
 	MailBoxR<IpLog*> m_MailBoxR;
 	int iTimeOutMs;
@@ -48,7 +51,7 @@ private:
 class HandleMessage : public LogAnalysis
 {
 public:
-	HandleMessage():m_messageNum(0)
+	HandleMessage()
 	{
 	}
 	~HandleMessage()
@@ -58,16 +61,18 @@ public:
 	{
 		if(pMessage == NULL)
 		return ;
-		m_messageNum++;
+		MutexLock m_lock;
+		m_lock.Lock();
+		SingleLogQueue::GetInstance()->m_messageNum++;
+		std::cout<<"send message="<<m_messageNum<<std::endl;
+		m_lock.UnLock();
 		IpLog *iplog = new IpLog;
 		iplog->log = strRecvMes((char*)pMessage->payload,pMessage->len);
 		iplog->ip  = strRecvIp((char*)pMessage->key,pMessage->key_len);
 		//if(iplog->ip == "10.11.12.19")
 			//std::cout<<iplog->ip<<":"<<iplog->log<<std::endl;
 		SingleLogQueue::GetInstance()->Send(iplog);
-		std::cout<<"send message="<<m_messageNum<<std::endl;
 	}
 private:
-	int64 m_messageNum;
 };
 #endif
