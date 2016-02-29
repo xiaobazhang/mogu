@@ -64,7 +64,7 @@ public:
 		MutexLock m_lock;
 		m_lock.Lock();
 		SingleLogQueue::GetInstance()->m_messageNum++;
-		std::cout<<"send message="<<m_messageNum<<std::endl;
+		std::cout<<"send message="<<SingleLogQueue::GetInstance()->m_messageNum<<std::endl;
 		m_lock.UnLock();
 		IpLog *iplog = new IpLog;
 		iplog->log = strRecvMes((char*)pMessage->payload,pMessage->len);
