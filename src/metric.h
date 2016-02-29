@@ -4,6 +4,7 @@
 #include <foundation/ckit_basedef.h>
 #include <foundation/ckit_thread.h>
 #include <foundation/ckit_lock.h>
+#include <foundation/ckit_time.h>
 #include <string>
 #include <iostream>
 #include <queue>

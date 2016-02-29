@@ -62,7 +62,7 @@ public:
 		iplog->log = strRecvMes((char*)pMessage->payload,pMessage->len);
 		iplog->ip  = strRecvIp((char*)pMessage->key,pMessage->key_len);
 		if(iplog->ip == "10.11.12.19")
-			std::cout<<iplog->ip<<":"<<iplog->log<<std::endl;
+			//std::cout<<iplog->ip<<":"<<iplog->log<<std::endl;
 		SingleLogQueue::GetInstance()->Send(iplog);
 	}
 private:
