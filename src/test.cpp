@@ -15,11 +15,9 @@ void Test::Run()
 			m_messageNum++;
 		}
 		end = ckit::time::GetCurrentMs() - first;
-		std::cout<<"time =:"<<end<<std::endl;
-		std::cout<<"Recv message="<<m_messageNum<<std::endl;
 	}	
 }
-void Test::QpsAlarm()
+void Test::QpsAlarm(
 {
 
 }
