@@ -123,9 +123,8 @@ public:
 	int SearchDiscard;
 };
 
-class Test
+class Test : public SupportErrorMsg
 {
-public:
 	
 public:
 	Test():m_messageNum(0),iLastTime(0)
