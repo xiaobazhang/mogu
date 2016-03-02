@@ -29,7 +29,7 @@ void Test::CountLog(const string& strlog,log_mess& logstruct)
 	{
 		m_ip_time[current_ip] = iCurrentTime;
 	}
-	if(m_ip_time[current_ip] > iLastTime)
+	if(iCurrentTime > m_ip_time[current_ip])
 	{
 		std::cout<<"qps = "<<logstruct.Qps<<std::endl;
 		SendLog(iCurrentTime,logstruct);

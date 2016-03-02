@@ -127,7 +127,7 @@ class Test : public SupportErrorMsg
 {
 	
 public:
-	Test():m_messageNum(0),iLastTime(0)
+	Test():m_messageNum(0)
 	{
 		LogReadConf m_ReadConfig;
 		if(!m_ReadConfig.OpenFile("cpc_mearch.json"))
