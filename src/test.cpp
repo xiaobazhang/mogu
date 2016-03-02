@@ -14,35 +14,6 @@ void Test::Run()
 		}
 	}	
 }
-void Test::QpsAlarm()
-{
-
-}
-void Test::RtAlarm(const string ip, int value)
-{
-	if(vec3[CostTime]!=0)
-	{
-		string message = GetCurrentTime()+" Return Time is to long!!!";
-		if(value > vec3[CostTime])
-			m_MessageSend.SendMessage(ip,"rt",message);
-	}
-}
-void Test::SearchFaildAlarm(const string ip, int value)
-{
-	if(value > vec3[SearchFaild])
-	{
-		string message = GetCurrentTime()+" have search faild!!!";
-		m_MessageSend.SendMessage(ip,"search faild",message);
-	}
-}
-void Test::SearchDiscardAlarm(const string ip, int value)
-{
-	if(value > vec3[SearchDiscard])
-	{
-		string message = GetCurrentTime()+" have search discard!!!";
-		m_MessageSend.SendMessage(ip,"search discard",message);
-	}
-}
 /**
  * [Test::CountLog description]
  * @Author:suli
@@ -50,61 +21,97 @@ void Test::SearchDiscardAlarm(const string ip, int value)
  * @param       strlog                   [description]
  * @param       mapcount                 [description]
  */
-void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
+void Test::CountLog(const string& strlog,map<int,log_mess>& mapcount)
 {
 	int iCurrentTime = log_match::GetLogTime(strlog);//获取当前日志时间
+	if(!mapcount.count(iCurrentTime))
+	{
+		log_mess tmp;
+		mapcount[iCurrentTime] = tmp;
+	}
 	if(log_match::IsQueryFinish(strlog))
 	{
-		if(mapcount[vec1[qps]].count(iCurrentTime))
-			mapcount[vec1[qps]][iCurrentTime]++;
-		else
-		{
-			mapcount[vec1[qps]][iCurrentTime] = 1;
-		}
+		mapcount[iCurrentTime].Qps++;
+
 		if(int rt = log_match::GetCostTime(strlog))
 		{
 			if(rt != -1)
 			{
-				if(mapcount[vec1[CostTime]].count(iCurrentTime))
-					mapcount[vec1[CostTime]][iCurrentTime] += rt;
-				else
-					mapcount[vec1[CostTime]][iCurrentTime] = rt;
+				mapcount[iCurrentTime].CostTime += rt;
 			}
 		}
 	}
 	if(log_match::IsSearchZero(strlog))
 	{
-		if(mapcount[vec1[SearchZero]].count(iCurrentTime))
-			mapcount[vec1[SearchZero]][iCurrentTime]++;
-		else
-			mapcount[vec1[SearchZero]][iCurrentTime] = 1;
-	}
-	else
-	{
-		if(!mapcount[vec1[SearchZero]].count(iCurrentTime))
-			mapcount[vec1[SearchZero]][iCurrentTime] = 0;
+		mapcount[iCurrentTime].SearchZero++;
 	}
 	if(log_match::IsSearchFailed(strlog))
 	{
-		if(mapcount[vec1[SearchFaild]].count(iCurrentTime))
-			mapcount[vec1[SearchFaild]][iCurrentTime]++;
-		else
-			mapcount[vec1[SearchFaild]][iCurrentTime] = 1;
-	}
-	else
-	{
-		mapcount[vec1[SearchFaild]][iCurrentTime] = 0;
+		mapcount[iCurrentTime].SearchFaild++;
 	}
 	if(log_match::IsSearchDiscard(strlog))
 	{
-		if(mapcount[vec1[SearchDiscard]].count(iCurrentTime))
-			mapcount[vec1[SearchDiscard]][iCurrentTime]++;
-		else
-			mapcount[vec1[SearchDiscard]][iCurrentTime] = 1;
+		mapcount[iCurrentTime].SearchDiscard++;
 	}
-	else
+}
+bool Test::QpsAlarm(int qps,string& message)
+{
+	message = "ERROR: "+log_match::GetCurrentTime()+ \
+	"mearch_cpc_log QPS error num is"+ckit::strings::Itoa(qps);
+	return false;
+}
+bool Test::CostTimeAlarm(int cost,string& message)
+{
+	message = "ERROR: "+log_match::GetCurrentTime()+ \
+	"mearch_cpc_log CostTime error num is"+ckit::strings::Itoa(cost);
+	return false;
+}
+bool Test::SearchZeroAlarm(int zero,string& message)
+{
+	message = "ERROR: "+log_match::GetCurrentTime()+ \
+	"mearch_cpc_log SearchZero error num is"+ckit::strings::Itoa(zero);
+	return false;
+}
+bool Test::SearchFaildAlarm(int faild,string& message)
+{
+	message = "ERROR: "+log_match::GetCurrentTime()+ \
+	"mearch_cpc_log SearchFaild error num is"+ckit::strings::Itoa(faild);
+	return false;
+}
+bool Test::SearchDiscardAlarm(int discard,string& message)
+{
+	message = "ERROR: "+log_match::GetCurrentTime()+ \
+	"mearch_cpc_log SearchDiscard error num is"+ckit::strings::Itoa(discard);
+	return false;
+}
+void Test::Alarm(string ip,map<int,log_mess>::iterator iter)
+{
+	int itime = iter->first;
+	int iqps = iter->second.Qps;
+	string message;
+	if(QpsAlarm(iqps,message))
 	{
-		mapcount[vec1[SearchDiscard]][iCurrentTime] = 0;
+		metric::SendAlarmMessage(m_logname.SendMessName,ip,"QPS",message);
+	}
+	if(iqps != 0)
+	{
+		int icost = iter->second.CostTime/iqps;
+		if(CostTimeAlarm(icost,message))
+		{
+			metric::SendAlarmMessage(m_logname.SendMessName,ip,"CostTime",message);
+		}
+	}
+	if(SearchZeroAlarm(iter->second.SearchZero,message))
+	{
+		metric::SendAlarmMessage(m_logname.SendMessName,ip,"SearchZero",message);
+	}
+	if(SearchFaildAlarm(iter->second.SearchFaild,message))
+	{
+		metric::SendAlarmMessage(m_logname.SendMessName,ip,"SearchFaild",message);
+	}
+	if(SearchDiscardAlarm())
+	{
+		metric::SendAlarmMessage(m_logname.SendMessName,ip,"SearchDiscard",message);
 	}
 }
 /**
@@ -114,38 +121,27 @@ void Test::CountLog(const string& strlog,map<string,map<int,int> >& mapcount)
  */
 void Test::SendLog()
 {
-	map<string,map<string,map<int,int> > >::iterator iter;
-	for(iter = m_DataType.begin();iter!=m_DataType.end();iter++)
+	map<string,map<int,log_mess> >::iterator iter;
+	for(iter = m_DataType.begin();iter!=m_DataType.end();iter++)//遍历所有的IP地址
 	{
-		string strip = iter->first;
-		if(iter->second[vec1[qps]].size()>=iMaxMapSize)
+		string ip = iter->first;
+		map<int,log_mess>::iterator _iter = iter->second.begin();
+		for(int i=0; i< iMaxMapSendSize;i++)
 		{
-			map<int,int>::iterator iter1,iter2,iter3,iter4,iter5;
-			iter1 = iter->second[vec1[qps]].begin();
-			iter2 = iter->second[vec1[CostTime]].begin();
-			iter3 = iter->second[vec1[SearchZero]].begin();
-			iter4 = iter->second[vec1[SearchFaild]].begin();
-			iter5 = iter->second[vec1[SearchDiscard]].begin();
-	
-			int tmp = iter2->second/iter1->second;
-			m_Metric.HandleMetric(vec2[qps],strip,iter1->first,iter1->second);
-			//RtAlarm(strip,tmp);
-			m_Metric.HandleMetric(vec2[CostTime],strip,iter2->first,tmp);
-			m_Metric.HandleMetric(vec2[SearchZero],strip,iter3->first,iter3->second);
-			//SearchFaildAlarm(strip,iter4->second);
-			m_Metric.HandleMetric(vec2[SearchFaild],strip,iter4->first,iter4->second);
-			//SearchDiscardAlarm(strip,iter5->second);
-			m_Metric.HandleMetric(vec2[SearchDiscard],strip,iter5->first,iter5->second);
-			if(iter->second[vec1[qps]].size())
-				iter->second[vec1[qps]].erase(iter1++);
-			if(iter->second[vec1[CostTime]].size())
-				iter->second[vec1[CostTime]].erase(iter2++);
-			if(iter->second[vec1[SearchZero]].size())
-				iter->second[vec1[SearchZero]].erase(iter3++);
-			if(iter->second[vec1[SearchFaild]].size())
-				iter->second[vec1[SearchFaild]].erase(iter4++);
-			if(iter->second[vec1[SearchDiscard]].size())
-				iter->second[vec1[SearchDiscard]].erase(iter5++);		
+			Alarm(ip,_iter);
+			int itime = _iter->first;
+			int iqps = _iter->second.Qps; 
+			metric::SprintfMetric(m_logname.Qps,ip,itime,iqps);
+			if(iqps!=0)
+			{
+				int icost = _iter->second.CostTime/iqps;//计算平均时间
+				metric::SprintfMetric(m_logname.CostTime,ip,itime,icost);
+			}
+			metric::SprintfMetric(m_logname.SearchZero,ip,itime,_iter->second.SearchZero);
+			metric::SprintfMetric(m_logname.SearchFaild,ip,itime,_iter->second.SearchFaild);
+			metric::SprintfMetric(m_logname.SearchDiscard,ip,itime,_iter->second.SearchDiscard);
+			if(iter->second.size())
+				iter->second.erase(_iter++);//删除当前时间的数据
 		}
 	}
 }
@@ -160,13 +156,8 @@ void Test::Process(const string& strip, const string& strlog)
 {
 	if(!m_DataType.count(strip))
 	{
-		map<int,int> _map;
-		map<string,map<int,int> > map_tmp;
-		for(int i=0;i<vec1.size();i++)
-		{
-			map_tmp[vec1[i]] = _map;
-		}
-		m_DataType[strip] = map_tmp;
+		map<int,log_mess> _map;
+		m_DataType[strip] = _map;//初始化每个ip中的记录单元
 	}
 	else
 	{

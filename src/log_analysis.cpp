@@ -20,6 +20,11 @@ namespace ckit
  */
 namespace log_match
 {
+	string GetCurrentTime()
+	{
+		time_t tmp = ckit::time::GetCurrentSecond();
+		return ckit::time::ToString(tmp);
+	}
 	int GetCostTime(const string& strlog)
 	{
 		std::string strcosttime;
@@ -80,20 +85,20 @@ namespace log_match
 		ckit::Regex regex;
 		if(!regex.Compile("(2[0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9])"))
 		{
-			return false;
+			return -1;
 		}
 		if(!regex.Match(strlog))
 		{
-			return false;
+			return -1;
 		}
 		if(!regex.GetGroupByIdx(0,strlogtime))
 		{
-			return false;
+			return -1;
 		}
 
 		int logtime = ckit::time::StringTimeToInt(strlogtime);
 		if(logtime <= 0)
-			return 0;
+			return -1;
 
 		return logtime;
 	}
@@ -109,6 +114,71 @@ namespace log_match
 			return false;
 		}
 		return true;
+	}
+	bool IsIndexFailed(const string& strlog)
+	{
+		ckit::Regex regex;
+		if(!regex.Compile("(Processx failed)"))
+			return false;
+		if(regex.Match(strlog))
+			reutrn true;
+		return false;
+	}
+	int GetIndexCostTime(const string& strlog)
+	{
+		float tmp;
+		string strindexRt;
+		ckit::Regex regex;
+		if(!regex.Compile("cost time (.*) ms"))
+		{
+			return -1;
+		}
+		if(!regex.Match(strlog))
+		{
+			return -1;
+		}
+		if(!regex.GetGroupByIdx(0,strindexRt))
+		{
+			return -1;
+		}
+		ConvertType(tmp,strindexRt);
+		return (tmp*1000);
+	}
+	int GetIndexAsapdiff(const string& strlog)
+	{
+		string strAsdiff;
+		ckit::Regex regex;
+		if(!regex.Compile("asapdiff (.*),"))
+		{
+			return -1;
+		}
+		if(!regex,Match(strlog))
+		{
+			return -1;
+		}
+		if(!regex.GetGroupByIdx(0,strAsdiff))
+		{
+			return -1;
+		}
+		return atoi(strAsdiff.c_str());
+	}
+	int GetIndexMergerdiff(const string& strlog)
+	{
+		string strMergerdiff;
+		ckit::Regex regex;
+		if(!regex.Compile("mergerdiff (.*)."))
+		{
+			return -1;
+		}
+		if(!regex,Match(strlog))
+		{
+			return -1;
+		}
+		if(!regex.GetGroupByIdx(0,strMergerdiff))
+		{
+			return -1;
+		}
+		return atoi(strMergerdiff.c_str());
 	}
 }
 /**

@@ -4,6 +4,8 @@
 #include <foundation/ckit_basedef.h>
 #include <kafka/ckit_kafka.h>
 #include <foundation/ckit_regex.h>
+#include <foundation/ckit_string.h>
+#include <foundation/ckit_time.h>
 #include <map>
 #include <string>
 using namespace ckit;
@@ -20,12 +22,17 @@ namespace ckit
  */
 namespace log_match
 {
+	string GetCurrentTime();
 	int GetLogTime(const string& strlog);
 	int GetCostTime(const string& strlog);
 	bool IsSearchZero(const string& strlog);
 	bool IsQueryFinish(const string& strlog);
 	bool IsSearchFailed(const string& strlog);
 	bool IsSearchDiscard(const string& strlog);
+	bool IsIndexFailed(const string& strlog);
+	int GetIndexCostTime(const string& strlog);
+	int GetIndexAsapdiff(const string& strlog);
+	int GetIndexMergerdiff(const string& strlog);
 }
 /**
  * 

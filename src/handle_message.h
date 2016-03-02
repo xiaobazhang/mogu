@@ -43,6 +43,8 @@ public:
 		return m_single.Get();
 	}
 	int64 m_messageNum;
+	MailBoxR<char*> m_MetricMailBoxR;
+	MailBoxR<char*> m_AlarmMailBoxR;
 private:
 	MailBoxR<IpLog*> m_MailBoxR;
 	int iTimeOutMs;
@@ -61,18 +63,24 @@ public:
 	{
 		if(pMessage == NULL)
 		return ;
-		MutexLock m_lock;
-		m_lock.Lock();
-		SingleLogQueue::GetInstance()->m_messageNum++;
-//		std::cout<<"send message="<<SingleLogQueue::GetInstance()->m_messageNum<<std::endl;
-		m_lock.UnLock();
 		IpLog *iplog = new IpLog;
 		iplog->log = strRecvMes((char*)pMessage->payload,pMessage->len);
 		iplog->ip  = strRecvIp((char*)pMessage->key,pMessage->key_len);
-		//if(iplog->ip == "10.11.12.19")
-			//std::cout<<iplog->ip<<":"<<iplog->log<<std::endl;
 		SingleLogQueue::GetInstance()->Send(iplog);
 	}
 private:
+};
+class HandIndexMess : public LogAnalysis
+{
+public:
+	HandIndexMess();
+	~HandIndexMess();
+	virtual void Process(rd_kafka_message_t * pMessage)
+	{
+		IpLog* iplog = new IpLog;
+		iplog->log = strRecvMes((char*)pMessage->payload,pMessage->len);
+		iplog->ip = "10.15.15.38";
+		SingleLogQueue::GetInstance()->m_MailBox.Send(iplog);
+	}
 };
 #endif
