@@ -39,7 +39,7 @@ public:
 	{
 		m_index.SetMaxSize(40,10);
 	}
-	~HandIndexMess();
+	~HandIndexMess(){}
 	virtual void Process(rd_kafka_message_t * pMessage)
 	{
 		string data = strRecvMes((char*)pMessage->payload,pMessage->len);

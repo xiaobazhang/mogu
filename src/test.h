@@ -51,8 +51,8 @@ public:
 class LogReadConf : public ReadConfig
 {
 public:
-	LogReadConf();
-	~LogReadConf();
+	LogReadConf(){}
+	~LogReadConf(){}
 	void GetLogConfig(log_name& arg1,log_valve& arg2)//获取cpc_mearch配置文件
 	{
 		Json::Value tmpvalue = root["cpc_mearch"];
