@@ -2,13 +2,15 @@
 #define __INDEX_MERGER_H__
 #include <foundation/ckit_strings.h>
 #include <foundation/ckit_baseclass.h>
-#include <foundation/ckit_bassdef.h>
+#include <foundation/ckit_basedef.h>
 #include "metric.h"
+#include "read_config.h"
 #include <iostream>
 
 using namespace std;
 using namespace ckit;
 
+class IndexMerger;
 class IndexMerger::index_metric_name;
 class IndexMerger::index_valve;
 

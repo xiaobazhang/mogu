@@ -10,6 +10,7 @@
 using namespace ckit;
 using namespace std;
 
+class Test;
 class Test::log_name;
 class Test::log_valve;
 
