@@ -8,6 +8,8 @@
 #include <foundation/ckit_time.h>
 #include <map>
 #include <string>
+#include <iostream>
+
 using namespace ckit;
 using namespace std;
 namespace ckit
