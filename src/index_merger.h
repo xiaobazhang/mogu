@@ -91,6 +91,7 @@ class index_merger
  
 class IndexMerger : public SupportErrorMsg
 {
+public:
 	class index_metric_name
 	{
 		string alarmName;

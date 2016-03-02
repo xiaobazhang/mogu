@@ -89,6 +89,7 @@ public:
 
 class Test: public Thread
 {
+public:
 	/*!
 	 * 储存从配置文件中读取的log名字
 	 */
