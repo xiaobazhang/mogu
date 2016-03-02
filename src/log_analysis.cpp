@@ -121,7 +121,7 @@ namespace log_match
 		if(!regex.Compile("(Processx failed)"))
 			return false;
 		if(regex.Match(strlog))
-			reutrn true;
+			return true;
 		return false;
 	}
 	int GetIndexCostTime(const string& strlog)
@@ -141,7 +141,7 @@ namespace log_match
 		{
 			return -1;
 		}
-		ConvertType(tmp,strindexRt);
+		ckit::strings::ConvertType(tmp,strindexRt);
 		return (tmp*1000);
 	}
 	int GetIndexAsapdiff(const string& strlog)
@@ -152,7 +152,7 @@ namespace log_match
 		{
 			return -1;
 		}
-		if(!regex,Match(strlog))
+		if(!regex.Match(strlog))
 		{
 			return -1;
 		}
@@ -170,7 +170,7 @@ namespace log_match
 		{
 			return -1;
 		}
-		if(!regex,Match(strlog))
+		if(!regex.Match(strlog))
 		{
 			return -1;
 		}
