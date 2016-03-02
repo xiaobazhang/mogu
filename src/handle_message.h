@@ -1,9 +1,6 @@
 #ifndef __HANDLE_MESSAGE_H__
 #define __HANDLE_MESSAGE_H__
-#include <foundation/ckit_mailbox.h>
 #include <foundation/ckit_time.h>
-#include <foundation/ckit_lf_queue.h>
-#include <foundation/ckit_lock.h>
 #include <iostream>
 #include "singlehandle.h"
 #include "index_merger.h"

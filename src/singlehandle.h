@@ -1,6 +1,13 @@
 #ifndef __SINGHANDLE_H__
 #define __SINGHANDLE_H__
 #include <foundation/ckit_singleton.h>
+#include <foundation/ckit_mailbox.h>
+#include <foundation/ckit_lf_queue.h>
+#include <foundation/ckit_lock.h>
+
+using namespace std;
+using namespace ckit;
+
 
 struct IpLog
 {
