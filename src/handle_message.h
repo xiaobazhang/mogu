@@ -21,16 +21,23 @@ public:
 	~HandleMessage()
 	{
 	}
+	void SetName(string str)
+	{
+		name = str;
+	}
 	virtual void Process(rd_kafka_message_t * pMessage)
 	{
 		if(pMessage == NULL)
 		return ;
 		string strlog = strRecvMes((char*)pMessage->payload,pMessage->len);
 		string strip  = strRecvIp((char*)pMessage->key,pMessage->key_len);
+		if(strip == "10.15.15.11")
+			std::cout<<name<<std::endl;
 		m_test.Process(strip,strlog);
 	}
 private:
 	Test m_test;
+	string name;
 };
 
 class HandIndexMess : public LogAnalysis

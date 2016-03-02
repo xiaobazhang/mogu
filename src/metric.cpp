@@ -49,7 +49,7 @@ void Metric::Run()
 			delete [] alarm;
 		}
 		int end = ckit::time::GetCurrentUs()-first;
-		std::cout<<"user time "<<end<<std::endl;	
+		//std::cout<<"user time "<<end<<std::endl;	
 	}
 }
 
