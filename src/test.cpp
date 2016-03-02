@@ -109,7 +109,7 @@ void Test::Alarm(string ip,map<int,log_mess>::iterator iter)
 	{
 		metric::SendAlarmMessage(m_logname.SendMessName,ip,"SearchFaild",message);
 	}
-	if(SearchDiscardAlarm())
+	if(SearchDiscardAlarm(iter->second.SearchDiscard,message))
 	{
 		metric::SendAlarmMessage(m_logname.SendMessName,ip,"SearchDiscard",message);
 	}

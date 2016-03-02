@@ -96,6 +96,7 @@ class index_merger
  	}
  	~index_merger(){}
  public:
+ 	int successnum;
  	int faildnum;
 	int costtime;
 	int asapdiff;

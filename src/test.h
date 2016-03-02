@@ -59,36 +59,36 @@ public:
 		for(int i=0; i < tmpvalue.size(); i++)
 		{
 			Json::Value tmp = tmpvalue[i];
-			string arg1 = tmp["name"].asString();
-			if(arg1 == "qps")
+			string str1 = tmp["name"].asString();
+			if(str1 == "qps")
 			{
 				string str2 = tmp["metric"].asString();
 				int ivalve = tmp["valve"].asInt();
 				arg1.Qps = str2;
 				arg2.QpsValve = ivalve;
 			}
-			if(arg1 == "costtime")
+			if(str1 == "costtime")
 			{
 				string str2 = tmp["metric"].asString();
 				int ivalve = tmp["valve"].asInt();
 				arg1.CostTime = str2;
 				arg2.CostTimeValve = ivalve;
 			}
-			if(arg1 == "searchzero")
+			if(str1 == "searchzero")
 			{
 				string str2 = tmp["metric"].asString();
 				int ivalve = tmp["valve"].asInt();
 				arg1.SearchZero = str2;
 				arg2.SearchZeroValve = ivalve;
 			}
-			if(arg1 == "searchfaild")
+			if(str1 == "searchfaild")
 			{
 				string str2 = tmp["metric"].asString();
 				int ivalve = tmp["valve"].asInt();
 				arg1.SearchFaild = str2;
 				arg2.SearchFaildValve = ivalve;
 			}
-			if(arg1 == "searchdiscard")
+			if(str1 == "searchdiscard")
 			{
 				string str2 = tmp["metric"].asString();
 				int ivalve = tmp["valve"].asInt();
@@ -151,15 +151,11 @@ public:
 	virtual bool SearchFaildAlarm(int faild,string& message);
 	virtual bool SearchDiscardAlarm(int discard,string& message);
 private:
-	Metric m_Metric;
-	MessageSend m_MessageSend;
-	vector<string> vec1,vec2;
-	vector<int> vec3,vec4;//vec3储存着报警阀门，vec4保存了10分钟的平均值
 	/*!
 	 * 计算数据的结构
 	 * 其中 string参数是ip，后面int类型是当前时间
 	 */
-	map<string,map<int,log_mess> > m_DataType
+	map<string,map<int,log_mess> > m_DataType;
 	/*!
 	 * map中最大储存的个数
 	 */
