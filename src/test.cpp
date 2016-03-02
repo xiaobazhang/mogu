@@ -23,6 +23,7 @@ void Test::Run()
  */
 void Test::CountLog(const string& strlog,map<int,log_mess>& mapcount)
 {
+	std::cout<<strlog<<std::endl;
 	int iCurrentTime = log_match::GetLogTime(strlog);//获取当前日志时间
 	if(!mapcount.count(iCurrentTime))
 	{
@@ -158,7 +159,6 @@ void Test::Process(const string& strip, const string& strlog)
 {
 	if(!m_DataType.count(strip))
 	{
-		std::cout<<"ip ="<<strip<<std::endl;
 		map<int,log_mess> _map;
 		m_DataType[strip] = _map;//初始化每个ip中的记录单元
 	}
