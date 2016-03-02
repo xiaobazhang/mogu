@@ -28,11 +28,12 @@ void Test::CountLog(const string& strlog,map<int,log_mess>& mapcount)
 	{
 		log_mess tmp;
 		mapcount[iCurrentTime] = tmp;
+		std::cout<<"map size ="mapcount.size()<<std::endl;
 	}
 	if(log_match::IsQueryFinish(strlog))
 	{
 		mapcount[iCurrentTime].Qps++;
-
+		std::cout<<"qps ="<<mapcount[iCurrentTime].Qps<<std::endl;
 		if(int rt = log_match::GetCostTime(strlog))
 		{
 			if(rt != -1)
@@ -127,10 +128,9 @@ void Test::SendLog()
 		//std::cout<<"map size:"<<m_DataType.size()<<std::endl;
 		string ip = iter->first;
 		map<int,log_mess>::iterator _iter = iter->second.begin();
-		std::cout<<"_iter size:"<<_iter->size()<<std::endl;
 		for(int i=0; i< iMaxMapSendSize;i++)
 		{
-			//Alarm(ip,_iter);
+			Alarm(ip,_iter);
 			int itime = _iter->first;
 			int iqps = _iter->second.Qps; 
 			metric::SprintfMetric(m_logname.Qps,ip,itime,iqps);
