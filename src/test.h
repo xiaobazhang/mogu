@@ -130,7 +130,11 @@ public:
 	Test():iMaxMapSize(40),iMaxMapSendSize(10),m_messageNum(0)
 	{
 		LogReadConf m_ReadConfig;
-		m_ReadConfig.OpenFile("cpc_mearch.json");
+		if(!m_ReadConfig.OpenFile("cpc_mearch.json"))
+		{
+			SET_ERROR_MSG("Log read conf open file error");
+			//exit(0);
+		}
 		m_ReadConfig.GetLogConfig(m_logname,m_logvalve);
 	}
 	~Test()

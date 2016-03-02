@@ -47,11 +47,11 @@ int main()
 	myHMess3.Start();
 	
 	Test myConsumer;
-	HandIndexMess index;
+	//HandIndexMess index;
 	Metric metric;
 	metric.SetQueueMaxNum(10);
 	myConsumer.SetMaxMapSize(40);
-	index.Start();
+	//index.Start();
 	metric.Start();
 	myConsumer.Start();
 	myHMess0.Join();
@@ -59,7 +59,7 @@ int main()
 	myHMess2.Join();
 	myHMess3.Join();
 	myConsumer.Join();
-	index.Join();
+	//index.Join();
 	metric.Join();
 	while(1)
 	{
