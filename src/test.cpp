@@ -154,7 +154,6 @@ void Test::SendLog(int itime,log_mess& logdata)
  */
 void Test::Process(const string& strip, const string& strlog)
 {
-	int first = ckit::time::GetCurrentUs();
 	if(!m_DataType.count(strip))
 	{
 		log_mess tmp_logmess;
@@ -163,6 +162,4 @@ void Test::Process(const string& strip, const string& strlog)
 	}
 	current_ip = strip;
 	CountLog(strlog,m_DataType[strip]);	//SendLog();
-	int end = ckit::time::GetCurrentUs()-first;
-	std::cout<<"user time "<<end<<std::endl;
 }

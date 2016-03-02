@@ -28,6 +28,7 @@ void Metric::Run()
 {
 	while(1)
 	{
+		int first = ckit::time::GetCurrentUs();
 		char* tmp = NULL;
 		char* alarm = NULL;
 		SingleLogQueue::GetInstance()->m_MetricMailBoxR.Recv(tmp,50);
@@ -46,7 +47,9 @@ void Metric::Run()
 			sprintf(char_alarm,"/usr/local/bin/curl -s -d %s http://monitor.bit.service.mogujie.org:8080/alarmcenter/service/alarm",str2.c_str());
 			system(char_alarm);
 			delete [] alarm;
-		}	
+		}
+		int end = ckit::time::GetCurrentUs()-first;
+		std::cout<<"user time "<<end<<std::endl;	
 	}
 }
 
