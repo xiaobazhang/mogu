@@ -15,7 +15,8 @@ void Test::Run()
 			if(m_messageNum%100 == 0)
 				std::cout<<"m_messageNum = "<<m_messageNum<<std::endl;
 		}
-		std::cout<<"user time"<<(ckit::time::GetCurrentMs()-first)<<std::endl;
+		int last = ckit::time::GetCurrentMs()-first;
+		std::cout<<"user time"<<last<<std::endl;
 	}	
 }
 /**
