@@ -36,13 +36,15 @@ void Metric::Run()
 		char* tmp = NULL;
 		char* alarm = NULL;
 		SingleLogQueue::GetInstance()->m_MetricMailBoxR.Recv(tmp,1);
-		SingleLogQueue::GetInstance()->m_mesRecvNum++;
-		int64 num = SingleLogQueue::GetInstance()->m_mesRecvNum;
-		if(num%100==0)
-			std::cout<<"Recv num "<<num<<std::endl;
+		
 		SingleLogQueue::GetInstance()->m_AlarmMailBoxR.Recv(alarm,1);
 		if(tmp!=NULL)
 		{
+			SingleLogQueue::GetInstance()->m_mesRecvNum++;
+			int64 num = SingleLogQueue::GetInstance()->m_mesRecvNum;
+			if(num%100==0)
+				std::cout<<"Recv num "<<num<<std::endl;
+			
 			string str1(tmp);
 			m_queue.push(str1);
 			delete [] tmp;
