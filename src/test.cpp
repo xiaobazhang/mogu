@@ -4,7 +4,7 @@ void Test::Run()
 {
 	while(1)
 	{
-		int first = ckit::time::GetCurrentMs();
+		int first = ckit::time::GetCurrentUs();
 		IpLog *iplog = NULL;
 		SingleLogQueue::GetInstance()->Recv(&iplog);
 		Process(iplog->ip,iplog->log);
@@ -15,7 +15,7 @@ void Test::Run()
 			if(m_messageNum%100 == 0)
 				std::cout<<"m_messageNum = "<<m_messageNum<<std::endl;
 		}
-		int last = ckit::time::GetCurrentMs()-first;
+		int last = ckit::time::GetCurrentUs()-first;
 		std::cout<<"user time"<<last<<std::endl;
 	}	
 }
