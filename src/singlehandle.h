@@ -40,6 +40,14 @@ public:
 		static ckit::SingletonHolder<SingleLogQueue> m_single;
 		return m_single.Get();
 	}
+	void count()
+	{
+		m_messageNum++;
+		if(m_messageNum%100==0)
+		{
+			std::cout<<"m_messageNum="<<m_messageNum<<std::endl;
+		}
+	}
 	int64 m_messageNum;
 	MailBoxR<char*> m_MetricMailBoxR;
 	MailBoxR<char*> m_AlarmMailBoxR;

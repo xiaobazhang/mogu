@@ -11,6 +11,8 @@ void Test::Run()
 		{	
 			delete iplog;
 			m_messageNum++;
+			if(m_messageNum%100 == 0)
+				std::cout<<"m_messageNum = "<<m_messageNum<<std::endl;
 		}
 	}	
 }
@@ -29,12 +31,12 @@ void Test::CountLog(const string& strlog,map<int,log_mess>& mapcount)
 	{
 		log_mess tmp;
 		mapcount[iCurrentTime] = tmp;
-		std::cout<<"map size ="<<mapcount.size()<<std::endl;
+		//std::cout<<"map size = "<<mapcount.size()<<std::endl;
 	}
 	if(log_match::IsQueryFinish(strlog))
 	{
 		mapcount[iCurrentTime].Qps++;
-		std::cout<<"qps ="<<mapcount[iCurrentTime].Qps<<std::endl;
+		//std::cout<<"qps = "<<mapcount[iCurrentTime].Qps<<std::endl;
 		if(int rt = log_match::GetCostTime(strlog))
 		{
 			if(rt != -1)
@@ -162,7 +164,7 @@ void Test::Process(const string& strip, const string& strlog)
 		map<int,log_mess> _map;
 		m_DataType[strip] = _map;//初始化每个ip中的记录单元
 	}
-	std::cout<<"ip = "<<strip<<std::endl;
+	//std::cout<<"ip = "<<strip<<std::endl;
 	CountLog(strlog,m_DataType[strip]);
 	SendLog();
 }
