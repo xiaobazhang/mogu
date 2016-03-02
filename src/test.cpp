@@ -28,7 +28,7 @@ void Test::CountLog(const string& strlog,map<int,log_mess>& mapcount)
 	{
 		log_mess tmp;
 		mapcount[iCurrentTime] = tmp;
-		std::cout<<"map size ="mapcount.size()<<std::endl;
+		std::cout<<"map size ="<<mapcount.size()<<std::endl;
 	}
 	if(log_match::IsQueryFinish(strlog))
 	{
