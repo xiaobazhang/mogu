@@ -4,7 +4,7 @@
 #include <foundation/ckit_mailbox.h>
 #include <foundation/ckit_lf_queue.h>
 #include <foundation/ckit_lock.h>
-
+#include <iostream>
 using namespace std;
 using namespace ckit;
 
