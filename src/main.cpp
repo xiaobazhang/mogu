@@ -16,7 +16,6 @@ int main()
 	myHMess0.SetOffset(RD_KAFKA_OFFSET_END);
 	myHMess0.SetTopic("msearch_cpc");
 	myHMess0.SetPartition(0);
-	myHMess0.SetName("this is Partition 000000");
 	
 	myHMess1.SetTopicConf("topic.offset.store.method", "file");
 	myHMess1.SetTopicConf("topic.offset.store.sync.interval.ms", "1");
@@ -25,7 +24,6 @@ int main()
 	myHMess1.SetOffset(RD_KAFKA_OFFSET_END);
 	myHMess1.SetTopic("msearch_cpc");
 	myHMess1.SetPartition(1);
-	myHMess1.SetName("this is Partition 111111");
 	
 	myHMess2.SetTopicConf("topic.offset.store.method", "file");
 	myHMess2.SetTopicConf("topic.offset.store.sync.interval.ms", "1");
@@ -34,7 +32,6 @@ int main()
 	myHMess2.SetOffset(RD_KAFKA_OFFSET_END);
 	myHMess2.SetTopic("msearch_cpc");
 	myHMess2.SetPartition(2);
-	myHMess2.SetName("this is Partition 222222");
  
  	myHMess3.SetTopicConf("topic.offset.store.method", "file");
 	myHMess3.SetTopicConf("topic.offset.store.sync.interval.ms", "1");
@@ -43,7 +40,6 @@ int main()
 	myHMess3.SetOffset(RD_KAFKA_OFFSET_END);
 	myHMess3.SetTopic("msearch_cpc");
 	myHMess3.SetPartition(3);
-	myHMess3.SetName("this is Partition 333333");
 	
 	myHMess0.Start();
 	myHMess1.Start();

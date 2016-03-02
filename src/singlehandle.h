@@ -22,7 +22,8 @@ class SingleLogQueue
 public:
 	SingleLogQueue():iTimeOutMs(-1)//阻塞，直到读到数据
 	{
-		m_messageNum =0;
+		m_mesSendNum = 0;
+		m_mesRecvNum = 0
 	}
 	~SingleLogQueue()
 	{
@@ -40,15 +41,8 @@ public:
 		static ckit::SingletonHolder<SingleLogQueue> m_single;
 		return m_single.Get();
 	}
-	void count()
-	{
-		m_messageNum++;
-		if(m_messageNum%100==0)
-		{
-			std::cout<<"m_Num="<<m_messageNum<<std::endl;
-		}
-	}
-	int64 m_messageNum;
+	int64 m_mesSendNum;
+	int64 m_mesRecvNum;
 	MailBoxR<char*> m_MetricMailBoxR;
 	MailBoxR<char*> m_AlarmMailBoxR;
 private:

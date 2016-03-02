@@ -213,8 +213,6 @@ string LogAnalysis::strRecvIp(char* pstr,int len)
 	}
 	int num = regex.GetGroupNum();
 	regex.GetGroupByIdx(0,strip);
-	if(strip == "10.11.12.40")
-		std::cout<<str<<std::endl;
 	return strip;
 }
 

@@ -6,7 +6,11 @@ namespace metric
 	{
 		char *buf = new char[256]();
 		sprintf(buf,"{\"metric\":\"%s\",\"tags\":{\"host\":\"%s\"},\"timestamp\":%d,\"value\":%d}",strmetric.c_str(),strhost.c_str(),itime,ivalue);
+		SingleLogQueue::GetInstance()->m_mesSendNum++;
 		SingleLogQueue::GetInstance()->m_MetricMailBoxR.Send(buf);
+		int64 num = SingleLogQueue::GetInstance()->m_mesSendNum;
+		if(num%100==0)
+			std::cout<<"send num "<<num<<std::endl;
 	}
 	void SprintfMetric(const string strmetric,const string strhost,int itime,float fvalue)
 	{
@@ -32,6 +36,10 @@ void Metric::Run()
 		char* tmp = NULL;
 		char* alarm = NULL;
 		SingleLogQueue::GetInstance()->m_MetricMailBoxR.Recv(tmp,1);
+		SingleLogQueue::GetInstance()->m_mesRecvNum++;
+		int64 num = SingleLogQueue::GetInstance()->m_mesRecvNum;
+		if(num%100==0)
+			std::cout<<"Recv num "<<num<<std::endl;
 		SingleLogQueue::GetInstance()->m_AlarmMailBoxR.Recv(alarm,1);
 		if(tmp!=NULL)
 		{

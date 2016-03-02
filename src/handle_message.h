@@ -21,10 +21,6 @@ public:
 	~HandleMessage()
 	{
 	}
-	void SetName(string str)
-	{
-		name = str;
-	}
 	virtual void Process(rd_kafka_message_t * pMessage)
 	{
 		if(pMessage == NULL)
@@ -35,7 +31,6 @@ public:
 	}
 private:
 	Test m_test;
-	string name;
 };
 
 class HandIndexMess : public LogAnalysis
