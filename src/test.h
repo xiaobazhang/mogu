@@ -65,7 +65,6 @@ public:
 			{
 				string str2 = tmp["metric"].asString();
 				int ivalve = tmp["valve"].asInt();
-				std::cout<<"qps"<<str2<<":"<<ivalve<<std::endl;
 				arg1.Qps = str2;
 				arg2.QpsValve = ivalve;
 			}
@@ -73,7 +72,6 @@ public:
 			{
 				string str2 = tmp["metric"].asString();
 				int ivalve = tmp["valve"].asInt();
-				std::cout<<"costtime"<<str2<<":"<<ivalve<<std::endl;
 				arg1.CostTime = str2;
 				arg2.CostTimeValve = ivalve;
 			}
@@ -136,15 +134,9 @@ public:
 		if(!m_ReadConfig.OpenFile("cpc_mearch.json"))
 		{
 			SET_ERROR_MSG("Log read conf open file error");
-			std::cout<<"open error"<<std::endl;
 			exit(0);
 		}
 		m_ReadConfig.GetLogConfig(m_logname,m_logvalve);
-		std::cout<<m_logname.SendMessName<<m_logname.Qps<<m_logname.CostTime<<m_logname.SearchZero\
-		<<m_logname.SearchFaild<<m_logname.SearchDiscard<<std::endl;
-		std::cout<<m_logvalve.QpsValve<<m_logvalve.CostTimeValve<<m_logvalve.SearchZeroValve<<\
-		m_logvalve.SearchFaildValve<<m_logvalve.SearchDiscardValve<<std::endl;
-		
 	}
 	~Test()
 	{

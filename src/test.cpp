@@ -24,6 +24,7 @@ void Test::Run()
 void Test::CountLog(const string& strlog,map<int,log_mess>& mapcount)
 {
 	int iCurrentTime = log_match::GetLogTime(strlog);//获取当前日志时间
+	std::cout<<"current time"<<iCurrentTime<<std::endl;
 	if(!mapcount.count(iCurrentTime))
 	{
 		log_mess tmp;
@@ -124,6 +125,8 @@ void Test::SendLog()
 	map<string,map<int,log_mess> >::iterator iter;
 	for(iter = m_DataType.begin();iter!=m_DataType.end();iter++)//遍历所有的IP地址
 	{
+		std::cout<<"map size:"<<m_DataType.size()<<std::endl;
+		std::cout<<"_iter size:"<<iter->second.size()<<std::endl;
 		string ip = iter->first;
 		map<int,log_mess>::iterator _iter = iter->second.begin();
 		for(int i=0; i< iMaxMapSendSize;i++)
@@ -156,12 +159,10 @@ void Test::Process(const string& strip, const string& strlog)
 {
 	if(!m_DataType.count(strip))
 	{
+		std::cout<<"ip ="<<strip<<std::endl;
 		map<int,log_mess> _map;
 		m_DataType[strip] = _map;//初始化每个ip中的记录单元
 	}
-	else
-	{
-		CountLog(strlog,m_DataType[strip]);
-	}
+	CountLog(strlog,m_DataType[strip]);
 	SendLog();
 }
