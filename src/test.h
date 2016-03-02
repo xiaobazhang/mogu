@@ -136,6 +136,10 @@ public:
 			//exit(0);
 		}
 		m_ReadConfig.GetLogConfig(m_logname,m_logvalve);
+		std::cout<<m_logname.SendMessName<<m_logname.Qps<<m_logname.CostTime<<m_logname.SearchZero\
+		<<m_logname.SearchFaild<<m_logname.SearchDiscard<<std::endl;
+		std::cout<<m_logvalve.QpsValve<<m_logvalve.CostTimeValve<<m_logvalve.SearchZeroValve<<\
+		m_logvalve.SearchFaildValve<<m_logvalve.SearchDiscardValve<<std::endl;
 	}
 	~Test()
 	{
