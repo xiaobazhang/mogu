@@ -12,6 +12,7 @@ using namespace ckit;
 
 class index_metric_name
 {
+public:
 	string alarmName;
 	string faildnum;
 	string costtime;
@@ -21,7 +22,7 @@ class index_metric_name
 class index_valve
 {
 public: 
-	index_valve():failvalve(100),costtime(100),asapvalve(5),mergervalve(5)
+	index_valve():failvalve(100),costtimevalve(100),asapvalve(5),mergervalve(5)
 	{}
 	~index_valve(){}
 	int failvalve;
@@ -38,12 +39,6 @@ public:
 	~IndexReadConf(){}
 	void GetIndexConfMes(index_metric_name& arg1,index_valve& arg2)
 	{
-		Json::Reader reader;
-		Json::Value  root;
-		if(!reader.parse(m_ifstream,root,false))
-		{
-			return ;
-		}
 		Json::Value tmpvalue = root["index_merger"];
 		for(int i=0; i < tmpvalue.size(); i++)
 		{

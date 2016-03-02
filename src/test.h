@@ -17,6 +17,7 @@ using namespace std;
  */
 class log_name
 {
+public:
 	string Qps;
 	string CostTime;
 	string SearchZero;
