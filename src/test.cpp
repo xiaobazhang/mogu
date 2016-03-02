@@ -31,6 +31,7 @@ void Test::CountLog(const string& strlog,log_mess& logstruct)
 	}
 	if(iCurrentTime > iLastTime)
 	{
+		std::cout<<"qps = "<<logstruct.Qps<<std::endl;
 		SendLog(iCurrentTime,logstruct);
 		iLastTime = iCurrentTime;
 	}
