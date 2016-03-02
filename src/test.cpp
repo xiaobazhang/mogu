@@ -155,8 +155,8 @@ void Test::Process(const string& strip, const string& strlog)
 {
 	if(!m_DataType.count(strip))
 	{
-		map<int,log_mess> _map;
-		m_DataType[strip] = _map;//初始化每个ip中的记录单元
+		log_mess tmp_logmess;
+		m_DataType[strip] = tmp_logmess;//初始化每个ip中的记录单元
 	}
 	current_ip = strip;
 	CountLog(strlog,m_DataType[strip]);	//SendLog();

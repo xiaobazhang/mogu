@@ -143,7 +143,7 @@ public:
 	}
 	void Process(const string& strip,const string& strlog);
 	void CountLog(const string& strlog,log_mess& mapcount);
-	void SendLog(log_mess& logdata);
+	void SendLog(int itime,log_mess& logdata);
 	void Alarm(string ip,log_mess& logdata);
 	virtual bool QpsAlarm(int qps,string& message);
 	virtual bool CostTimeAlarm(int cost,string& message);
