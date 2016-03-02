@@ -45,7 +45,7 @@ public:
 		m_messageNum++;
 		if(m_messageNum%100==0)
 		{
-			std::cout<<"m_messageNum="<<m_messageNum<<std::endl;
+			std::cout<<"m_Num="<<m_messageNum<<std::endl;
 		}
 	}
 	int64 m_messageNum;

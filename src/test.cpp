@@ -25,7 +25,7 @@ void Test::Run()
  */
 void Test::CountLog(const string& strlog,map<int,log_mess>& mapcount)
 {
-	std::cout<<strlog<<std::endl;
+	//std::cout<<strlog<<std::endl;
 	int iCurrentTime = log_match::GetLogTime(strlog);//获取当前日志时间
 	if(!mapcount.count(iCurrentTime))
 	{
