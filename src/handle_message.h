@@ -70,17 +70,23 @@ public:
 	}
 private:
 };
+
+
 class HandIndexMess : public LogAnalysis
 {
 public:
-	HandIndexMess();
+	HandIndexMess()
+	{
+		m_index.SetMaxSize(40,10);
+	}
 	~HandIndexMess();
 	virtual void Process(rd_kafka_message_t * pMessage)
 	{
-		IpLog* iplog = new IpLog;
-		iplog->log = strRecvMes((char*)pMessage->payload,pMessage->len);
-		iplog->ip = "10.15.15.38";
-		SingleLogQueue::GetInstance()->m_MailBox.Send(iplog);
+		string data = strRecvMes((char*)pMessage->payload,pMessage->len);
+		string ip = "10.15.15.38";
+		m_index.Process(ip,data);
 	}
+private:
+	IndexMerger m_index;
 };
 #endif

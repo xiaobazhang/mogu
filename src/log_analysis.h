@@ -4,7 +4,7 @@
 #include <foundation/ckit_basedef.h>
 #include <kafka/ckit_kafka.h>
 #include <foundation/ckit_regex.h>
-#include <foundation/ckit_string.h>
+#include <foundation/ckit_strings.h>
 #include <foundation/ckit_time.h>
 #include <map>
 #include <string>

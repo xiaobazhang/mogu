@@ -1,6 +1,6 @@
 #ifndef __INDEX_MERGER_H__
 #define __INDEX_MERGER_H__
-#include <foundation/ckit_string.h>
+#include <foundation/ckit_strings.h>
 #include <foundation/ckit_baseclass.h>
 #include <foundation/ckit_bassdef.h>
 #include "metric.h"
@@ -8,6 +8,8 @@
 
 using namespace std;
 using namespace ckit;
+
+class IndexMerger;
 
 class IndexReadConf : public ReadConfig
 {
@@ -113,6 +115,11 @@ public:
 		m_readconf.GetIndexConfMes(m_MetricName,m_index_valve);
 	}
 	~IndexMerger(){}
+	void SetMaxSize(int mapmaxsize,int sendmaxsize)
+	{
+		MapMaxSize = mapmaxsize;
+		SendMaxSize = sendmaxsize;
+	}
 	virtual void Process(const string& strip,const string& strlog);
 	virtual void Alarm(map<int,index_merger>::iterator iter);
 private:

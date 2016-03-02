@@ -10,6 +10,8 @@
 using namespace ckit;
 using namespace std;
 
+class Test;
+
 class LogReadConf : public ReadConfig
 {
 public:
@@ -118,7 +120,7 @@ class Test: public Thread
 		int SearchDiscardValve;
 	};
 public:
-	Test():iMaxMapSize(60),iMaxMapSendSize(10),m_messageNum(0)
+	Test():iMaxMapSize(40),iMaxMapSendSize(10),m_messageNum(0)
 	{
 		LogReadConf m_ReadConfig;
 		m_ReadConfig.OpenFile("cpc_mearch.json");

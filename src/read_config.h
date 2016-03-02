@@ -25,7 +25,7 @@ public:
 		{
 			m_ifstream.open(filename.c_str());
 			assert(m_ifstream.is_open());
-			retuen true;
+			return true;
 		}
 		else
 		{

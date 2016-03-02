@@ -30,9 +30,9 @@ public:
 	{
 		miQueueMaxNum = num;
 	}
-	void SendMetric();
 	virtual void Run();
 private:
+	void SendMetric();
 	int miQueueMaxNum;
 	queue<string> m_queue;
 };

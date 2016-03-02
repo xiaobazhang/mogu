@@ -1,6 +1,7 @@
 #include <kafka/ckit_kafka.h>
 #include <iostream>
 #include "test.h"
+#include "index_merger.h"
 #include "handle_message.h"
 using namespace ckit;
 using namespace std;
@@ -46,13 +47,20 @@ int main()
 	myHMess3.Start();
 	
 	Test myConsumer;
+	HandIndexMess index;
+	Metric metric;
+	metric.SetQueueMaxNum(10);
 	myConsumer.SetMaxMapSize(40);
+	index.Start();
+	metric.Start();
 	myConsumer.Start();
 	myHMess0.Join();
 	myHMess1.Join();
 	myHMess2.Join();
 	myHMess3.Join();
 	myConsumer.Join();
+	index.Join();
+	metric.Join();
 	while(1)
 	{
 		sleep(1); 
