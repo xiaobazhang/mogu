@@ -155,10 +155,13 @@ private:
 	 * 其中 string参数是ip
 	 */
 	map<string,log_mess> m_DataType;
+	/*!
+	 * 记录每个ip上次日志时间 
+	 */
+	map<string,int> m_ip_time;
 	log_name m_logname;
 	log_valve m_logvalve;
 	int64 m_messageNum;
-	int iLastTime;
 	string current_ip;
 };
 #endif

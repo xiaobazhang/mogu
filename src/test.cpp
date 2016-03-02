@@ -25,17 +25,17 @@
 void Test::CountLog(const string& strlog,log_mess& logstruct)
 {
 	int iCurrentTime = log_match::GetLogTime(strlog);//获取当前日志时间
-	if(iLastTime == 0)
+	if(m_ip_time[current_ip] == 0)
 	{
-		iLastTime = iCurrentTime;
+		m_ip_time[current_ip] = iCurrentTime;
 	}
-	if(iCurrentTime > iLastTime)
+	if(m_ip_time[current_ip] > iLastTime)
 	{
 		std::cout<<"qps = "<<logstruct.Qps<<std::endl;
 		SendLog(iCurrentTime,logstruct);
-		iLastTime = iCurrentTime;
+		m_ip_time[current_ip] = iCurrentTime;
 	}
-	if(iCurrentTime == iLastTime)
+	if(iCurrentTime == m_ip_time[current_ip])
 	{
 		if(log_match::IsQueryFinish(strlog))
 		{
@@ -158,6 +158,7 @@ void Test::Process(const string& strip, const string& strlog)
 	{
 		log_mess tmp_logmess;
 		m_DataType[strip] = tmp_logmess;//初始化每个ip中的记录单元
+		m_ip_time[strip] = 0; //初始化上次的时间
 	}
 	current_ip = strip;
 	CountLog(strlog,m_DataType[strip]);	//SendLog();
