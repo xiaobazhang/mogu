@@ -5,11 +5,9 @@
 #include <map>
 #include "metric.h"
 #include "log_analysis.h"
-#include "handle_message.h"
 #include "read_config.h"
 using namespace ckit;
 using namespace std;
-
 
 
 /*!

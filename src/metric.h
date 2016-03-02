@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <sys/time.h>
 #include <unistd.h>
-#include "handle_message.h"
+#include "singlehandle.h"
 
 using namespace ckit;
 using namespace std;
