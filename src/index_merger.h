@@ -10,16 +10,33 @@
 using namespace std;
 using namespace ckit;
 
-class IndexMerger;
-class IndexMerger::index_metric_name;
-class IndexMerger::index_valve;
+class index_metric_name
+{
+	string alarmName;
+	string faildnum;
+	string costtime;
+	string asapdiff;
+	string mergerdiff;
+};
+class index_valve
+{
+public: 
+	index_valve():failvalve(100),costtime(100),asapvalve(5),mergervalve(5)
+	{}
+	~index_valve(){}
+	int failvalve;
+	int costtimevalve;
+	int asapvalve;
+	int mergervalve;
+};
+
 
 class IndexReadConf : public ReadConfig
 {
 public:
 	IndexReadConf(){}
 	~IndexReadConf(){}
-	void GetIndexConfMes(IndexMerger::index_metric_name& arg1,IndexMerger::index_valve& arg2)
+	void GetIndexConfMes(index_metric_name& arg1,index_valve& arg2)
 	{
 		Json::Reader reader;
 		Json::Value  root;
@@ -70,6 +87,7 @@ public:
 		}
 	}
 };
+
 class index_merger
 {
  public:
@@ -91,26 +109,6 @@ class index_merger
  
 class IndexMerger : public SupportErrorMsg
 {
-public:
-	class index_metric_name
-	{
-		string alarmName;
-		string faildnum;
-		string costtime;
-		string asapdiff;
-		string mergerdiff;
-	};
-	class index_valve
-	{
-	public: 
-		index_valve():failvalve(100),costtime(100),asapvalve(5),mergervalve(5)
-		{}
-		~index_valve(){}
-		int failvalve;
-		int costtimevalve;
-		int asapvalve;
-		int mergervalve;
-	};
 public:
 	IndexMerger():MapMaxSize(40),SendMaxSize(10)
 	{

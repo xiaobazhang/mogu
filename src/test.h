@@ -10,16 +10,49 @@
 using namespace ckit;
 using namespace std;
 
-class Test;
-class Test::log_name;
-class Test::log_valve;
+
+
+/*!
+ * 储存从配置文件中读取的log名字
+ */
+class log_name
+{
+	string Qps;
+	string CostTime;
+	string SearchZero;
+	string SearchFaild;
+	string SearchDiscard;
+	string SendMessName;	
+};
+/*!
+ * 记录每个监测项的阀门值
+ */
+class log_valve
+{
+public:
+	log_valve()
+	{
+		QpsValve = 0;
+		CostTimeValve = 0;
+		SearchZeroValve = 0;
+		SearchFaildValve = 0;
+		SearchDiscardValve = 0;
+	}
+	~log_valve(){}
+	int QpsValve;
+	int CostTimeValve;
+	int SearchZeroValve;
+	int SearchFaildValve;
+	int SearchDiscardValve;
+};
+
 
 class LogReadConf : public ReadConfig
 {
 public:
 	LogReadConf();
 	~LogReadConf();
-	void GetLogConfig(Test::log_name& arg1,Test::log_valve& arg2)//获取cpc_mearch配置文件
+	void GetLogConfig(log_name& arg1,log_valve& arg2)//获取cpc_mearch配置文件
 	{
 		Json::Value tmpvalue = root["cpc_mearch"];
 		for(int i=0; i < tmpvalue.size(); i++)
@@ -71,6 +104,7 @@ public:
 		}
 	}
 };
+
 /*!
  * 记录log中每秒日志的信息结构
  */
@@ -90,39 +124,7 @@ public:
 class Test: public Thread
 {
 public:
-	/*!
-	 * 储存从配置文件中读取的log名字
-	 */
-	class log_name
-	{
-		string Qps;
-		string CostTime;
-		string SearchZero;
-		string SearchFaild;
-		string SearchDiscard;
-		string SendMessName;	
-	};
-	/*!
-	 * 记录每个监测项的阀门值
-	 */
-	class log_valve
-	{
-	public:
-		log_valve()
-		{
-			QpsValve = 0;
-			CostTimeValve = 0;
-			SearchZeroValve = 0;
-			SearchFaildValve = 0;
-			SearchDiscardValve = 0;
-		}
-		~log_valve(){}
-		int QpsValve;
-		int CostTimeValve;
-		int SearchZeroValve;
-		int SearchFaildValve;
-		int SearchDiscardValve;
-	};
+	
 public:
 	Test():iMaxMapSize(40),iMaxMapSendSize(10),m_messageNum(0)
 	{
