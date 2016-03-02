@@ -10,7 +10,7 @@ void IndexMerger::Process(const string& strip,const string& strlog)
 	GetLogFlags(strlog);
 	HandleFlags();
 }
-void IndexMerger::GetLogFlags(cosnt string& strlog)
+void IndexMerger::GetLogFlags(const string& strlog)
 {
 	int logtime = log_match::GetLogTime(strlog);
 	if(logtime == -1)
