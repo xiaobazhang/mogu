@@ -10,7 +10,8 @@
 using namespace ckit;
 using namespace std;
 
-class Test;
+class Test::log_name;
+class Test::log_valve;
 
 class LogReadConf : public ReadConfig
 {
@@ -76,7 +77,8 @@ class log_mess
 {
 public:
 	log_mess():Qps(0),CostTime(0),SearchZero(0),SearchFaild(0),SearchDiscard(0)
-	~log_mess();
+	{}
+	~log_mess(){}
 	int Qps;
 	int CostTime;
 	int SearchZero;
@@ -112,7 +114,7 @@ class Test: public Thread
 			SearchFaildValve = 0;
 			SearchDiscardValve = 0;
 		}
-		~log_valve();
+		~log_valve(){}
 		int QpsValve;
 		int CostTimeValve;
 		int SearchZeroValve;

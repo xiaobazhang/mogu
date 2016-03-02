@@ -7,6 +7,7 @@
 #include <foundation/ckit_lock.h>
 #include <iostream>
 #include "log_analysis.h"
+#include "index_merger.h"
 
 using namespace std;
 using namespace ckit;

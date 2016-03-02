@@ -9,13 +9,14 @@
 using namespace std;
 using namespace ckit;
 
-class IndexMerger;
+class IndexMerger::index_metric_name;
+class IndexMerger::index_valve;
 
 class IndexReadConf : public ReadConfig
 {
 public:
-	IndexReadConf();
-	~IndexReadConf();
+	IndexReadConf(){}
+	~IndexReadConf(){}
 	void GetIndexConfMes(IndexMerger::index_metric_name& arg1,IndexMerger::index_valve& arg2)
 	{
 		Json::Reader reader;
