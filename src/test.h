@@ -133,7 +133,7 @@ public:
 		if(!m_ReadConfig.OpenFile("cpc_mearch.json"))
 		{
 			SET_ERROR_MSG("Log read conf open file error");
-			//exit(0);
+			exit(0);
 		}
 		m_ReadConfig.GetLogConfig(m_logname,m_logvalve);
 		std::cout<<m_logname.SendMessName<<m_logname.Qps<<m_logname.CostTime<<m_logname.SearchZero\
