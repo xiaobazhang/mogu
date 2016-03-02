@@ -78,7 +78,7 @@ class HandIndexMess : public LogAnalysis
 public:
 	HandIndexMess()
 	{
-		m_index.SetMaxSize(40,10);
+		//m_index.SetMaxSize(40,10);
 	}
 	~HandIndexMess();
 	virtual void Process(rd_kafka_message_t * pMessage)

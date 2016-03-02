@@ -34,7 +34,7 @@ void IndexMerger::GetLogFlags(const string& strlog)
 		{
 			m_IndexMerger[logtime].costtime += CostTime;
 		}
-		int Asapdiff = logtime::GetIndexAsapdiff(strlog);
+		int Asapdiff = log_match::GetIndexAsapdiff(strlog);
 		if(Asapdiff!=-1)
 		{
 			m_IndexMerger[logtime].asapdiff += Asapdiff;
