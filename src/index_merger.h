@@ -5,6 +5,7 @@
 #include <foundation/ckit_basedef.h>
 #include "metric.h"
 #include "read_config.h"
+#include "log_analysis.h"
 #include <iostream>
 
 using namespace std;
