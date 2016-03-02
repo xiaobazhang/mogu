@@ -16,8 +16,8 @@ namespace metric
 	}
 	void SendAlarmMessage(const string& name,const string& host,const string& method,const string& metaData)
 	{
-		if(m_appName == "")
-			return false;
+		if(name == "")
+			return ;
 		char* ptr = new char[512]();
 		sprintf(ptr,"\"appName=%s&host=%s&method=%s&metaData=%s\"",name.c_str(),host.c_str(),method.c_str(),metaData.c_str());
 		SingleLogQueue::GetInstance()->m_AlarmMailBoxR.Send(ptr);
