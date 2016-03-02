@@ -31,7 +31,7 @@ public:
 		return ;
 		string strlog = strRecvMes((char*)pMessage->payload,pMessage->len);
 		string strip  = strRecvIp((char*)pMessage->key,pMessage->key_len);
-		if(strip == "10.15.15.11")
+		if(strip == "10.11.12.19")
 			std::cout<<name<<std::endl;
 		m_test.Process(strip,strlog);
 	}
