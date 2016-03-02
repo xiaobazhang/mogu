@@ -6,8 +6,9 @@
 #include <foundation/ckit_lf_queue.h>
 #include <foundation/ckit_lock.h>
 #include <iostream>
+#include "index_merger.h"
 #include "log_analysis.h"
-//#include "index_merger.h"
+
 
 using namespace std;
 using namespace ckit;
