@@ -163,6 +163,7 @@ void Test::Process(const string& strip, const string& strlog)
 		map<int,log_mess> _map;
 		m_DataType[strip] = _map;//初始化每个ip中的记录单元
 	}
+	std::cout<<"ip = "<<strip<<std::endl;
 	CountLog(strlog,m_DataType[strip]);
 	SendLog();
 }

@@ -128,7 +128,7 @@ class Test: public Thread
 public:
 	
 public:
-	Test():iMaxMapSize(40),iMaxMapSendSize(10),m_messageNum(0)
+	Test():iMaxMapSize(10),iMaxMapSendSize(5),m_messageNum(0)
 	{
 		LogReadConf m_ReadConfig;
 		if(!m_ReadConfig.OpenFile("cpc_mearch.json"))
