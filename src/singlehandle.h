@@ -23,7 +23,7 @@ public:
 	SingleLogQueue():iTimeOutMs(-1)//阻塞，直到读到数据
 	{
 		m_mesSendNum = 0;
-		m_mesRecvNum = 0
+		m_mesRecvNum = 0;
 	}
 	~SingleLogQueue()
 	{
