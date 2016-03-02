@@ -127,7 +127,7 @@ void Test::SendLog()
 		//std::cout<<"map size:"<<m_DataType.size()<<std::endl;
 		string ip = iter->first;
 		map<int,log_mess>::iterator _iter = iter->second.begin();
-		std::cout<<"_iter size:"<<_iter.size()<<std::endl;
+		std::cout<<"_iter size:"<<_iter->size()<<std::endl;
 		for(int i=0; i< iMaxMapSendSize;i++)
 		{
 			//Alarm(ip,_iter);
