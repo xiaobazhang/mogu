@@ -55,6 +55,7 @@ public:
 	~LogReadConf(){}
 	void GetLogConfig(log_name& arg1,log_valve& arg2)//获取cpc_mearch配置文件
 	{
+		std::cout<<"GetLogConfig"<<std::endl;
 		Json::Value tmpvalue = root["cpc_mearch"];
 		for(int i=0; i < tmpvalue.size(); i++)
 		{
@@ -135,14 +136,15 @@ public:
 		if(!m_ReadConfig.OpenFile("cpc_mearch.json"))
 		{
 			SET_ERROR_MSG("Log read conf open file error");
-			
+			std::cout<<"open error"<<std::endl;
+			exit(0);
 		}
 		m_ReadConfig.GetLogConfig(m_logname,m_logvalve);
 		std::cout<<m_logname.SendMessName<<m_logname.Qps<<m_logname.CostTime<<m_logname.SearchZero\
 		<<m_logname.SearchFaild<<m_logname.SearchDiscard<<std::endl;
 		std::cout<<m_logvalve.QpsValve<<m_logvalve.CostTimeValve<<m_logvalve.SearchZeroValve<<\
 		m_logvalve.SearchFaildValve<<m_logvalve.SearchDiscardValve<<std::endl;
-		exit(0);
+		
 	}
 	~Test()
 	{

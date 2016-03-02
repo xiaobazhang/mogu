@@ -25,7 +25,6 @@ public:
 		{
 			m_ifstream.open(filename.c_str());
 			assert(m_ifstream.is_open());
-			return true;
 		}
 		else
 		{
@@ -35,6 +34,7 @@ public:
 		{
 			return false;
 		}
+		return true;
 	}
 public:
 	Json::Reader reader;
