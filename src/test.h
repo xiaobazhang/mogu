@@ -123,12 +123,12 @@ public:
 	int SearchDiscard;
 };
 
-class Test: public Thread
+class Test
 {
 public:
 	
 public:
-	Test():iMaxMapSize(10),iMaxMapSendSize(5),m_messageNum(0)
+	Test():m_messageNum(0),iLastTime(0)
 	{
 		LogReadConf m_ReadConfig;
 		if(!m_ReadConfig.OpenFile("cpc_mearch.json"))
@@ -141,15 +141,10 @@ public:
 	~Test()
 	{
 	}
-	void SetMaxMapSize(int num)
-	{
-		iMaxMapSize = num;
-	}
 	void Process(const string& strip,const string& strlog);
-	void CountLog(const string& strlog,map<int,log_mess>& mapcount);
-	void SendLog();
-	void Alarm(string ip,map<int,log_mess>::iterator iter);
-	virtual void Run();
+	void CountLog(const string& strlog,log_mess& mapcount);
+	void SendLog(log_mess& logdata);
+	void Alarm(string ip,log_mess& logdata);
 	virtual bool QpsAlarm(int qps,string& message);
 	virtual bool CostTimeAlarm(int cost,string& message);
 	virtual bool SearchZeroAlarm(int zero,string& message);
@@ -158,20 +153,14 @@ public:
 private:
 	/*!
 	 * 计算数据的结构
-	 * 其中 string参数是ip，后面int类型是当前时间
+	 * 其中 string参数是ip
 	 */
-	map<string,map<int,log_mess> > m_DataType;
-	/*!
-	 * map中最大储存的个数
-	 */
-	int iMaxMapSize;
-	/*!
-	 * map中最大发送的个数，必须大于0
-	 */
-	int iMaxMapSendSize;
+	map<string,log_mess> m_DataType;
 	log_name m_logname;
 	log_valve m_logvalve;
 	int64 m_messageNum;
+	int iLastTime;
+	string current_ip;
 };
 #endif
 

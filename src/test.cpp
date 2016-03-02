@@ -1,6 +1,6 @@
 #include "test.h"
 
-void Test::Run()
+/*void Test::Run()
 {
 	while(1)
 	{
@@ -12,13 +12,9 @@ void Test::Run()
 		{	
 			delete iplog;
 			m_messageNum++;
-			if(m_messageNum%100 == 0)
-				std::cout<<"m_messageNum = "<<m_messageNum<<std::endl;
 		}
-		int last = ckit::time::GetCurrentUs()-first;
-		std::cout<<"user time"<<last<<std::endl;
 	}	
-}
+}*/
 /**
  * [Test::CountLog description]
  * @Author:suli
@@ -26,40 +22,45 @@ void Test::Run()
  * @param       strlog                   [description]
  * @param       mapcount                 [description]
  */
-void Test::CountLog(const string& strlog,map<int,log_mess>& mapcount)
+void Test::CountLog(const string& strlog,log_mess& logstruct)
 {
-	//std::cout<<strlog<<std::endl;
 	int iCurrentTime = log_match::GetLogTime(strlog);//获取当前日志时间
-	if(!mapcount.count(iCurrentTime))
+	if(iLastTime == 0)
 	{
-		log_mess tmp;
-		mapcount[iCurrentTime] = tmp;
-		//std::cout<<"map size = "<<mapcount.size()<<std::endl;
+		iLastTime = iCurrentTime;
 	}
-	if(log_match::IsQueryFinish(strlog))
+	if(iCurrentTime > iLastTime)
 	{
-		mapcount[iCurrentTime].Qps++;
-		//std::cout<<"qps = "<<mapcount[iCurrentTime].Qps<<std::endl;
-		if(int rt = log_match::GetCostTime(strlog))
+		SendLog(iCurrentTime,logstruct);
+		iLastTime = iCurrentTime;
+	}
+	if(iCurrentTime == iLastTime)
+	{
+		if(log_match::IsQueryFinish(strlog))
 		{
-			if(rt != -1)
+			logstruct.Qps++;
+			if(int rt = log_match::GetCostTime(strlog))
 			{
-				mapcount[iCurrentTime].CostTime += rt;
+				if(rt != -1)
+				{
+					logstruct.CostTime += rt;
+				}
 			}
 		}
+		if(log_match::IsSearchZero(strlog))
+		{
+			logstruct.SearchZero++;
+		}
+		if(log_match::IsSearchFailed(strlog))
+		{
+			logstruct.SearchFaild++;
+		}
+		if(log_match::IsSearchDiscard(strlog))
+		{
+			logstruct.SearchDiscard++;
+		}
 	}
-	if(log_match::IsSearchZero(strlog))
-	{
-		mapcount[iCurrentTime].SearchZero++;
-	}
-	if(log_match::IsSearchFailed(strlog))
-	{
-		mapcount[iCurrentTime].SearchFaild++;
-	}
-	if(log_match::IsSearchDiscard(strlog))
-	{
-		mapcount[iCurrentTime].SearchDiscard++;
-	}
+	
 }
 bool Test::QpsAlarm(int qps,string& message)
 {
@@ -91,10 +92,9 @@ bool Test::SearchDiscardAlarm(int discard,string& message)
 	"mearch_cpc_log SearchDiscard error num is"+ckit::strings::Itoa(discard);
 	return false;
 }
-void Test::Alarm(string ip,map<int,log_mess>::iterator iter)
+void Test::Alarm(string ip,log_mess& logdata)
 {
-	int itime = iter->first;
-	int iqps = iter->second.Qps;
+	int iqps = logdata.Qps;
 	string message;
 	if(QpsAlarm(iqps,message))
 	{
@@ -102,21 +102,21 @@ void Test::Alarm(string ip,map<int,log_mess>::iterator iter)
 	}
 	if(iqps != 0)
 	{
-		int icost = iter->second.CostTime/iqps;
+		int icost = logdata.CostTime/iqps;
 		if(CostTimeAlarm(icost,message))
 		{
 			metric::SendAlarmMessage(m_logname.SendMessName,ip,"CostTime",message);
 		}
 	}
-	if(SearchZeroAlarm(iter->second.SearchZero,message))
+	if(SearchZeroAlarm(logdata.SearchZero,message))
 	{
 		metric::SendAlarmMessage(m_logname.SendMessName,ip,"SearchZero",message);
 	}
-	if(SearchFaildAlarm(iter->second.SearchFaild,message))
+	if(SearchFaildAlarm(logdata.SearchFaild,message))
 	{
 		metric::SendAlarmMessage(m_logname.SendMessName,ip,"SearchFaild",message);
 	}
-	if(SearchDiscardAlarm(iter->second.SearchDiscard,message))
+	if(SearchDiscardAlarm(logdata.SearchDiscard,message))
 	{
 		metric::SendAlarmMessage(m_logname.SendMessName,ip,"SearchDiscard",message);
 	}
@@ -126,32 +126,23 @@ void Test::Alarm(string ip,map<int,log_mess>::iterator iter)
  * @Author:suli
  * @DateTime    2016-02-17T16:37:32+0800
  */
-void Test::SendLog()
+void Test::SendLog(int itime,log_mess& logdata)
 {
-	map<string,map<int,log_mess> >::iterator iter;
-	for(iter = m_DataType.begin();iter!=m_DataType.end();iter++)//遍历所有的IP地址
+	Alarm(current_ip,logdata);
+	metric::SprintfMetric(m_logname.Qps,current_ip,itime,logdata.Qps);
+	if(logdata.Qps!=0)
 	{
-		//std::cout<<"map size:"<<m_DataType.size()<<std::endl;
-		string ip = iter->first;
-		map<int,log_mess>::iterator _iter = iter->second.begin();
-		for(int i=0; i< iMaxMapSendSize;i++)
-		{
-			Alarm(ip,_iter);
-			int itime = _iter->first;
-			int iqps = _iter->second.Qps; 
-			metric::SprintfMetric(m_logname.Qps,ip,itime,iqps);
-			if(iqps!=0)
-			{
-				int icost = _iter->second.CostTime/iqps;//计算平均时间
-				metric::SprintfMetric(m_logname.CostTime,ip,itime,icost);
-			}
-			metric::SprintfMetric(m_logname.SearchZero,ip,itime,_iter->second.SearchZero);
-			metric::SprintfMetric(m_logname.SearchFaild,ip,itime,_iter->second.SearchFaild);
-			metric::SprintfMetric(m_logname.SearchDiscard,ip,itime,_iter->second.SearchDiscard);
-			if(iter->second.size())
-				iter->second.erase(_iter++);//删除当前时间的数据
-		}
+		int icost = logdata.CostTime/logdata.Qps;//计算平均时间
+		metric::SprintfMetric(m_logname.CostTime,current_ip,itime,icost);
 	}
+	metric::SprintfMetric(m_logname.SearchZero,current_ip,itime,logdata.SearchZero);
+	metric::SprintfMetric(m_logname.SearchFaild,current_ip,itime,logdata.SearchFaild);
+	metric::SprintfMetric(m_logname.SearchDiscard,current_ip,itime,logdata.SearchDiscard);
+	logdata.Qps = 0;
+	logdata.CostTime = 0;
+	logdata.SearchZero = 0;
+	logdata.SearchFaild = 0;
+	logdata.SearchDiscard = 0;
 }
 /**
  * [Test::Process description]
@@ -167,7 +158,6 @@ void Test::Process(const string& strip, const string& strlog)
 		map<int,log_mess> _map;
 		m_DataType[strip] = _map;//初始化每个ip中的记录单元
 	}
-	//std::cout<<"ip = "<<strip<<std::endl;
-	CountLog(strlog,m_DataType[strip]);
-	SendLog();
+	current_ip = strip;
+	CountLog(strlog,m_DataType[strip]);	//SendLog();
 }

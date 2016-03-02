@@ -5,6 +5,7 @@
 #include "singlehandle.h"
 #include "index_merger.h"
 #include "log_analysis.h"
+#include "test.h"
 
 
 using namespace std;
@@ -24,13 +25,12 @@ public:
 	{
 		if(pMessage == NULL)
 		return ;
-		IpLog *iplog = new IpLog;
-		iplog->log = strRecvMes((char*)pMessage->payload,pMessage->len);
-		iplog->ip  = strRecvIp((char*)pMessage->key,pMessage->key_len);
-		SingleLogQueue::GetInstance()->Send(iplog);
-		SingleLogQueue::GetInstance()->count();
+		string strlog = strRecvMes((char*)pMessage->payload,pMessage->len);
+		string strip  = strRecvIp((char*)pMessage->key,pMessage->key_len);
+		m_test.Process(strip,strlog);
 	}
 private:
+	Test m_test;
 };
 
 class HandIndexMess : public LogAnalysis

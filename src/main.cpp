@@ -50,7 +50,6 @@ int main()
 	//HandIndexMess index;
 	Metric metric;
 	metric.SetQueueMaxNum(10);
-	myConsumer.SetMaxMapSize(40);
 	//index.Start();
 	metric.Start();
 	myConsumer.Start();
