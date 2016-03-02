@@ -24,7 +24,6 @@ void Test::Run()
 void Test::CountLog(const string& strlog,map<int,log_mess>& mapcount)
 {
 	int iCurrentTime = log_match::GetLogTime(strlog);//获取当前日志时间
-	std::cout<<"current time"<<iCurrentTime<<std::endl;
 	if(!mapcount.count(iCurrentTime))
 	{
 		log_mess tmp;
@@ -125,13 +124,13 @@ void Test::SendLog()
 	map<string,map<int,log_mess> >::iterator iter;
 	for(iter = m_DataType.begin();iter!=m_DataType.end();iter++)//遍历所有的IP地址
 	{
-		std::cout<<"map size:"<<m_DataType.size()<<std::endl;
-		std::cout<<"_iter size:"<<iter->second.size()<<std::endl;
+		//std::cout<<"map size:"<<m_DataType.size()<<std::endl;
 		string ip = iter->first;
 		map<int,log_mess>::iterator _iter = iter->second.begin();
+		std::cout<<"_iter size:"<<_iter.size()<<std::endl;
 		for(int i=0; i< iMaxMapSendSize;i++)
 		{
-			Alarm(ip,_iter);
+			//Alarm(ip,_iter);
 			int itime = _iter->first;
 			int iqps = _iter->second.Qps; 
 			metric::SprintfMetric(m_logname.Qps,ip,itime,iqps);
