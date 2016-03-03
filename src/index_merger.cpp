@@ -58,10 +58,11 @@ void IndexMerger::HandleFlags()
 		int success = iter->second.successnum;
 		int faild = iter->second.faildnum;
 		int avgCosttime = iter->second.costtime/success;
+		float fcosttime = (float)avgCosttime/(1000.0);
 		int avgAsapdiff = iter->second.asapdiff/success;
 		int avgMergerdiff = iter->second.mergerdiff/success;
 		metric::SprintfMetric(m_MetricName.faildnum,m_strip,sendtime,faild);
-		metric::SprintfMetric(m_MetricName.costtime,m_strip,sendtime,avgCosttime);
+		metric::SprintfMetric(m_MetricName.costtime,m_strip,sendtime,fcosttime);
 		metric::SprintfMetric(m_MetricName.asapdiff,m_strip,sendtime,avgAsapdiff);
 		metric::SprintfMetric(m_MetricName.mergerdiff,m_strip,sendtime,avgMergerdiff);
 		if(m_IndexMerger.size())
