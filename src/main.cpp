@@ -9,7 +9,7 @@ using namespace std;
 
 void CreateHandle()
 {
-	for(int i =0;i<1;i++)
+	for(int i =0;i<4;i++)
 	{
 		string group = "log_Partition"+ckit::strings::Itoa(i);
 		HandleMessage* myhand = new HandleMessage();
@@ -26,7 +26,7 @@ void CreateHandle()
 }
 void CreateIndex()
 {
-	for(int i =0;i<1;i++)
+	for(int i =0;i<4;i++)
 	{
 		string group = "Index_Partition"+ckit::strings::Itoa(i);
 		HandIndexMess* myindex = new HandIndexMess();
