@@ -3,60 +3,53 @@
 #include "test.h"
 #include "index_merger.h"
 #include "handle_message.h"
+
 using namespace ckit;
 using namespace std;
 
+void CreateHandle()
+{
+	for(int i =0;i<4;i++)
+	{
+		string group = "log_Partition"+ckit::strings::Itoa(i);
+		HandleMessage* myhand = new HandleMessage();
+		myhand->SetTopicConf("topic.offset.store.method", "file");
+		myhand->SetTopicConf("topic.offset.store.sync.interval.ms", "1");
+		myhand->SetTopicConf("auto.commit.interval.ms", "10");
+		myhand->SetTopicConf("group.id",group);
+		myhand->SetOffset(RD_KAFKA_OFFSET_END);
+		myhand->SetTopic("msearch_cpc");
+		myhand->SetPartition(i);
+		myhand->Start();
+	}
+}
+void CreateIndex()
+{
+	for(int i =0;i<4;i++)
+	{
+		string group = "Index_Partition"+ckit::strings::Itoa(i);
+		HandIndexMess* myindex = new HandIndexMess();
+		myindex->SetTopicConf("topic.offset.store.method", "file");
+		myindex->SetTopicConf("topic.offset.store.sync.interval.ms", "1");
+		myindex->SetTopicConf("auto.commit.interval.ms", "10");
+		myindex->SetTopicConf("group.id",group);
+		myindex->SetOffset(RD_KAFKA_OFFSET_END);
+		myindex->SetTopic("index_merger");
+		myindex->SetPartition(i);
+		myindex->Start();
+	}
+}
+void CreateMetric()
+{
+	Metric *metric = new Metric();
+	metric->SetQueueMaxNum(10);
+	metric->Start();
+}
 int main()
 {
-	HandleMessage myHMess0,myHMess1,myHMess2,myHMess3;
-	myHMess0.SetTopicConf("topic.offset.store.method", "file");
-	myHMess0.SetTopicConf("topic.offset.store.sync.interval.ms", "1");
-	myHMess0.SetTopicConf("auto.commit.interval.ms", "10");
-	myHMess0.SetTopicConf("group.id","g1");
-	myHMess0.SetOffset(RD_KAFKA_OFFSET_END);
-	myHMess0.SetTopic("msearch_cpc");
-	myHMess0.SetPartition(0);
-	
-	myHMess1.SetTopicConf("topic.offset.store.method", "file");
-	myHMess1.SetTopicConf("topic.offset.store.sync.interval.ms", "1");
-	myHMess1.SetTopicConf("auto.commit.interval.ms", "10");
-	myHMess1.SetTopicConf("group.id","g2");
-	myHMess1.SetOffset(RD_KAFKA_OFFSET_END);
-	myHMess1.SetTopic("msearch_cpc");
-	myHMess1.SetPartition(1);
-	
-	myHMess2.SetTopicConf("topic.offset.store.method", "file");
-	myHMess2.SetTopicConf("topic.offset.store.sync.interval.ms", "1");
-	myHMess2.SetTopicConf("auto.commit.interval.ms", "10");
-	myHMess2.SetTopicConf("group.id","g3");
-	myHMess2.SetOffset(RD_KAFKA_OFFSET_END);
-	myHMess2.SetTopic("msearch_cpc");
-	myHMess2.SetPartition(2);
- 
- 	myHMess3.SetTopicConf("topic.offset.store.method", "file");
-	myHMess3.SetTopicConf("topic.offset.store.sync.interval.ms", "1");
-	myHMess3.SetTopicConf("auto.commit.interval.ms", "10");
-	myHMess3.SetTopicConf("group.id","g4");
-	myHMess3.SetOffset(RD_KAFKA_OFFSET_END);
-	myHMess3.SetTopic("msearch_cpc");
-	myHMess3.SetPartition(3);
-	
-	myHMess0.Start();
-	myHMess1.Start();
-	myHMess2.Start();
-	myHMess3.Start();
-	
-	//HandIndexMess index;
-	Metric metric;
-	metric.SetQueueMaxNum(10);
-	//index.Start();
-	metric.Start();
-	myHMess0.Join();
-	myHMess1.Join();
-	myHMess2.Join();
-	myHMess3.Join();
-	//index.Join();
-	metric.Join();
+	CreateHandle();
+	CreateIndex();
+	CreateMetric();
 	while(1)
 	{
 		sleep(1); 
