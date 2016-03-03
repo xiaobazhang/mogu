@@ -16,7 +16,7 @@ void CreateHandle()
 		myhand->SetTopicConf("topic.offset.store.method", "file");
 		myhand->SetTopicConf("topic.offset.store.sync.interval.ms", "1");
 		myhand->SetTopicConf("auto.commit.interval.ms", "10");
-		myhand->SetTopicConf("group.id",group);
+		myhand->SetTopicConf("group.id",group.c_str());
 		myhand->SetOffset(RD_KAFKA_OFFSET_END);
 		myhand->SetTopic("msearch_cpc");
 		myhand->SetPartition(i);
@@ -32,7 +32,7 @@ void CreateIndex()
 		myindex->SetTopicConf("topic.offset.store.method", "file");
 		myindex->SetTopicConf("topic.offset.store.sync.interval.ms", "1");
 		myindex->SetTopicConf("auto.commit.interval.ms", "10");
-		myindex->SetTopicConf("group.id",group);
+		myindex->SetTopicConf("group.id",group.c_str());
 		myindex->SetOffset(RD_KAFKA_OFFSET_END);
 		myindex->SetTopic("index_merger");
 		myindex->SetPartition(i);
