@@ -34,7 +34,7 @@ void CreateIndex()
 		myindex->SetTopicConf("auto.commit.interval.ms", "10");
 		myindex->SetTopicConf("group.id",group.c_str());
 		myindex->SetOffset(RD_KAFKA_OFFSET_END);
-		myindex->SetTopic("index_merger");
+		myindex->SetTopic("index_merge");
 		myindex->SetPartition(i);
 		myindex->Start();
 	}
