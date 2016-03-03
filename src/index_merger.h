@@ -107,7 +107,7 @@ class index_merger
 class IndexMerger : public SupportErrorMsg
 {
 public:
-	IndexMerger():MapMaxSize(40),SendMaxSize(10)
+	IndexMerger():MapMaxSize(10),SendMaxSize(4),IsOpenAlarm(false)
 	{
 		IndexReadConf m_readconf;
 		if(!m_readconf.OpenFile("cpc_mearch.json"))
@@ -115,15 +115,16 @@ public:
 			SET_ERROR_MSG("Open cpc_mearch.json error");
 		}
 		m_readconf.GetIndexConfMes(m_MetricName,m_index_valve);
-		cout<<m_MetricName.alarmName<<":"<<m_MetricName.faildnum<<":"\
-		<<m_MetricName.costtime<<":"<<m_MetricName.asapdiff<<endl;
-
 	}
 	~IndexMerger(){}
 	void SetMaxSize(int mapmaxsize,int sendmaxsize)
 	{
 		MapMaxSize = mapmaxsize;
 		SendMaxSize = sendmaxsize;
+	}
+	void SetIsOpenAlarm(bool value)
+	{
+		IsOpenAlarm = value;
 	}
 	virtual void Process(const string& strip,const string& strlog);
 	virtual void Alarm(map<int,index_merger>::iterator iter);
@@ -138,6 +139,7 @@ private:
 	string m_strip;
 	index_metric_name m_MetricName;
 	index_valve m_index_valve;
+	bool IsOpenAlarm;
 };
 
 #endif

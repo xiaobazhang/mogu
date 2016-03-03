@@ -7,7 +7,6 @@ void IndexMerger::Process(const string& strip,const string& strlog)
 		SET_ERROR_MSG("index_merger Process strip strlog null");
 	}
 	m_strip = strip;
-	std::cout<<strip<<":"<<strlog<<std::endl;
 	GetLogFlags(strlog);
 	HandleFlags();
 }
@@ -71,6 +70,8 @@ void IndexMerger::HandleFlags()
 }
 void IndexMerger::Alarm(map<int,index_merger>::iterator iter)
 {
+	if(!IsOpenAlarm)
+		return ;
 	int sendtime = iter->first;//获取当前的时间
 	int success = iter->second.successnum;
 	int faild = iter->second.faildnum;
