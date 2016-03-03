@@ -57,9 +57,9 @@ void Metric::Run()
 			system(char_alarm);
 			delete [] alarm;
 		}
-		ckit::time::SleepByUs(100);//休眠10us
+		//ckit::time::SleepByUs(100);//休眠10us
 		int end = ckit::time::GetCurrentUs()-first;
-		//sstd::cout<<"user time "<<end;	
+		std::cout<<"user time "<<end;	
 	}
 }
 
