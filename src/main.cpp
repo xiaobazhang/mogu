@@ -19,7 +19,7 @@ void CreateHandle()
 		myhand->SetTopicConf("group.id",group.c_str());
 		myhand->SetOffset(RD_KAFKA_OFFSET_END);
 		myhand->SetTopic("msearch_cpc");
-		//myhand->SetFetchBrokerLimitNum(3);
+		myhand->SetFetchBrokerLimitNum(3);
 		myhand->SetPartition(i);
 		myhand->Start();
 	}
@@ -36,7 +36,7 @@ void CreateIndex()
 		myindex->SetTopicConf("group.id",group.c_str());
 		myindex->SetOffset(RD_KAFKA_OFFSET_END);
 		myindex->SetTopic("index_merge");
-		//myindex->SetFetchBrokerLimitNum(3);
+		myindex->SetFetchBrokerLimitNum(3);
 		myindex->SetPartition(i);
 		myindex->Start();
 	}
