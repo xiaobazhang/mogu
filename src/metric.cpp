@@ -70,6 +70,10 @@ void Metric::Run()
 			delete [] tmp;
 			SendMetric();
 		}
+		else
+		{
+			ckit::time::SleepByUs(1200);//超时1ms
+		}
 		if(alarm != NULL)
 		{
 			string str2(alarm);
@@ -77,8 +81,7 @@ void Metric::Run()
 			sprintf(char_alarm,"/usr/local/bin/curl -s -d %s http://monitor.bit.service.mogujie.org:8080/alarmcenter/service/alarm",str2.c_str());
 			system(char_alarm);
 			delete [] alarm;
-		}
-		ckit::time::SleepByUs(1200);//超时1ms
+		}	
 	}
 }
 /**
