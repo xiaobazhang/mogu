@@ -110,8 +110,14 @@ public:
 	IndexMerger():MapMaxSize(40),SendMaxSize(10)
 	{
 		IndexReadConf m_readconf;
-		m_readconf.OpenFile("cpc_mearch.json");
+		if(!m_readconf.OpenFile("cpc_mearch.json"))
+		{
+			SET_ERROR_MSG("Open cpc_mearch.json error");
+		}
 		m_readconf.GetIndexConfMes(m_MetricName,m_index_valve);
+		cout<<m_MetricName.alarmName<<":"<<m_MetricName.faildnum<<":"\
+		<<m_MetricName.costtime<<":"<<m_MetricName.asapdiff<<endl;
+
 	}
 	~IndexMerger(){}
 	void SetMaxSize(int mapmaxsize,int sendmaxsize)

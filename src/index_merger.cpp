@@ -7,6 +7,7 @@ void IndexMerger::Process(const string& strip,const string& strlog)
 		SET_ERROR_MSG("index_merger Process strip strlog null");
 	}
 	m_strip = strip;
+	std::cout<<strip<<":"<<strlog<<std::endl;
 	GetLogFlags(strlog);
 	HandleFlags();
 }
