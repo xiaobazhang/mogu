@@ -72,7 +72,7 @@ void Metric::Run()
 		}
 		else
 		{
-			ckit::time::SleepByUs(1200);//超时1ms
+			ckit::time::SleepByUs(3000);//超时1ms
 		}
 		if(alarm != NULL)
 		{
