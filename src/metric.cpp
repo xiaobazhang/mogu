@@ -78,7 +78,7 @@ void Metric::Run()
 			system(char_alarm);
 			delete [] alarm;
 		}
-		ckit::time::SleepByUs(500);//超时1ms
+		ckit::time::SleepByUs(1200);//超时1ms
 	}
 }
 /**
