@@ -2,22 +2,45 @@
 
 namespace metric
 {
+	/**
+	 * [SprintfMetric description]
+	 * @Author:suli
+	 * @DateTime    2016-03-03T17:14:26+0800
+	 * @param       strmetric                [metric name]
+	 * @param       strhost                  [tags host]
+	 * @param       itime                    [time]
+	 * @param       ivalue                   [value]
+	 */
 	void SprintfMetric(const string strmetric,const string strhost,int itime,int ivalue)
 	{
 		char *buf = new char[256]();
 		sprintf(buf,"{\"metric\":\"%s\",\"tags\":{\"host\":\"%s\"},\"timestamp\":%d,\"value\":%d}",strmetric.c_str(),strhost.c_str(),itime,ivalue);
-		SingleLogQueue::GetInstance()->m_mesSendNum++;
 		SingleLogQueue::GetInstance()->m_MetricMailBoxR.Send(buf);
-		int64 num = SingleLogQueue::GetInstance()->m_mesSendNum;
-		if(num%100==0)
-			std::cout<<"send num "<<num<<std::endl;
 	}
+	/**
+	 * [SprintfMetric description]
+	 * @Author:suli
+	 * @DateTime    2016-03-03T17:14:31+0800
+	 * @param       strmetric                [description]
+	 * @param       strhost                  [description]
+	 * @param       itime                    [description]
+	 * @param       fvalue                   [description]
+	 */
 	void SprintfMetric(const string strmetric,const string strhost,int itime,float fvalue)
 	{
 		char *buf = new char[256]();
 		sprintf(buf,"{\"metric\":\"%s\",\"tags\":{\"host\":\"%s\"},\"timestamp\":%d,\"value\":%0.2f}",strmetric.c_str(),strhost.c_str(),itime,fvalue);
 		SingleLogQueue::GetInstance()->m_MetricMailBoxR.Send(buf);
 	}
+	/**
+	 * [SendAlarmMessage description]
+	 * @Author:suli
+	 * @DateTime    2016-03-03T17:14:35+0800
+	 * @param       name                     [description]
+	 * @param       host                     [description]
+	 * @param       method                   [description]
+	 * @param       metaData                 [description]
+	 */
 	void SendAlarmMessage(const string& name,const string& host,const string& method,const string& metaData)
 	{
 		if(name == "")
@@ -27,23 +50,21 @@ namespace metric
 		SingleLogQueue::GetInstance()->m_AlarmMailBoxR.Send(ptr);
 	}
 }
-
+/**
+ * [Metric::Run description]
+ * @Author:suli
+ * @DateTime    2016-03-03T17:14:40+0800
+ */
 void Metric::Run()
 {
 	while(1)
 	{
-		int first = ckit::time::GetCurrentUs();
 		char* tmp = NULL;
 		char* alarm = NULL;
 		SingleLogQueue::GetInstance()->m_MetricMailBoxR.Recv(tmp,1);
 		SingleLogQueue::GetInstance()->m_AlarmMailBoxR.Recv(alarm,1);
 		if(tmp!=NULL)
 		{
-			SingleLogQueue::GetInstance()->m_mesRecvNum++;
-			int64 num = SingleLogQueue::GetInstance()->m_mesRecvNum;
-			if(num%100==0)
-				std::cout<<"Recv num "<<num<<std::endl;
-		
 			string str1(tmp);
 			m_queue.push(str1);
 			delete [] tmp;
@@ -57,12 +78,13 @@ void Metric::Run()
 			system(char_alarm);
 			delete [] alarm;
 		}
-		ckit::time::SleepByMs(1);//休眠10us
-		int end = ckit::time::GetCurrentUs()-first;
-		//std::cout<<"user time "<<end;	
 	}
 }
-
+/**
+ * [Metric::SendMetric description]
+ * @Author:suli
+ * @DateTime    2016-03-03T17:14:44+0800
+ */
 void Metric::SendMetric()
 {
 	if(m_queue.size()>=miQueueMaxNum)

@@ -1,26 +1,11 @@
 #include "test.h"
 
-/*void Test::Run()
-{
-	while(1)
-	{
-		int first = ckit::time::GetCurrentUs();
-		IpLog *iplog = NULL;
-		SingleLogQueue::GetInstance()->Recv(&iplog);
-		Process(iplog->ip,iplog->log);
-		if(iplog !=NULL)
-		{	
-			delete iplog;
-			m_messageNum++;
-		}
-	}	
-}*/
 /**
  * [Test::CountLog description]
  * @Author:suli
- * @DateTime    2016-02-17T16:33:09+0800
+ * @DateTime    2016-03-03T17:13:02+0800
  * @param       strlog                   [description]
- * @param       mapcount                 [description]
+ * @param       logstruct                [description]
  */
 void Test::CountLog(const string& strlog,log_mess& logstruct)
 {
@@ -31,7 +16,6 @@ void Test::CountLog(const string& strlog,log_mess& logstruct)
 	}
 	if(iCurrentTime > m_ip_time[current_ip])
 	{
-		//std::cout<<"qps = "<<logstruct.Qps<<std::endl;
 		SendLog(iCurrentTime,logstruct);
 		m_ip_time[current_ip] = iCurrentTime;
 	}
@@ -63,36 +47,83 @@ void Test::CountLog(const string& strlog,log_mess& logstruct)
 	}
 	
 }
+/**
+ * [Test::QpsAlarm description]
+ * @Author:suli
+ * @DateTime    2016-03-03T17:13:21+0800
+ * @param       qps                      [description]
+ * @param       message                  [description]
+ * @return                               [description]
+ */
 bool Test::QpsAlarm(int qps,string& message)
 {
 	message = "ERROR: "+log_match::GetCurrentTime()+ \
 	"mearch_cpc_log QPS error num is"+ckit::strings::Itoa(qps);
 	return false;
 }
+/**
+ * [Test::CostTimeAlarm description]
+ * @Author:suli
+ * @DateTime    2016-03-03T17:13:31+0800
+ * @param       cost                     [description]
+ * @param       message                  [description]
+ * @return                               [description]
+ */
 bool Test::CostTimeAlarm(int cost,string& message)
 {
 	message = "ERROR: "+log_match::GetCurrentTime()+ \
 	"mearch_cpc_log CostTime error num is"+ckit::strings::Itoa(cost);
 	return false;
 }
+/**
+ * [Test::SearchZeroAlarm description]
+ * @Author:suli
+ * @DateTime    2016-03-03T17:13:37+0800
+ * @param       zero                     [description]
+ * @param       message                  [description]
+ * @return                               [description]
+ */
 bool Test::SearchZeroAlarm(int zero,string& message)
 {
 	message = "ERROR: "+log_match::GetCurrentTime()+ \
 	"mearch_cpc_log SearchZero error num is"+ckit::strings::Itoa(zero);
 	return false;
 }
+/**
+ * [Test::SearchFaildAlarm description]
+ * @Author:suli
+ * @DateTime    2016-03-03T17:13:44+0800
+ * @param       faild                    [description]
+ * @param       message                  [description]
+ * @return                               [description]
+ */
 bool Test::SearchFaildAlarm(int faild,string& message)
 {
 	message = "ERROR: "+log_match::GetCurrentTime()+ \
 	"mearch_cpc_log SearchFaild error num is"+ckit::strings::Itoa(faild);
 	return false;
 }
+/**
+ * [Test::SearchDiscardAlarm description]
+ * @Author:suli
+ * @DateTime    2016-03-03T17:13:48+0800
+ * @param       discard                  [description]
+ * @param       message                  [description]
+ * @return                               [description]
+ */
 bool Test::SearchDiscardAlarm(int discard,string& message)
 {
 	message = "ERROR: "+log_match::GetCurrentTime()+ \
 	"mearch_cpc_log SearchDiscard error num is"+ckit::strings::Itoa(discard);
 	return false;
 }
+/**
+ * [Test::Alarm description]
+ * @Author:suli
+ * @DateTime    2016-03-03T17:13:53+0800
+ * @param       ip                       [description]
+ * @param       logdata                  [description]
+ */
 void Test::Alarm(string ip,log_mess& logdata)
 {
 	int iqps = logdata.Qps;
@@ -125,7 +156,9 @@ void Test::Alarm(string ip,log_mess& logdata)
 /**
  * [Test::SendLog description]
  * @Author:suli
- * @DateTime    2016-02-17T16:37:32+0800
+ * @DateTime    2016-03-03T17:14:01+0800
+ * @param       itime                    [description]
+ * @param       logdata                  [description]
  */
 void Test::SendLog(int itime,log_mess& logdata)
 {
