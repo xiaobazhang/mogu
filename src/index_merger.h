@@ -104,7 +104,7 @@ class index_merger
 	int mergerdiff;	
 }; 
  
-class IndexMerger : public Thread
+class IndexMerger : public Thread,public SupportErrorMsg
 {
 public:
 	IndexMerger():MapMaxSize(10),SendMaxSize(4),IsOpenAlarm(false)
@@ -112,7 +112,7 @@ public:
 		IndexReadConf m_readconf;
 		if(!m_readconf.OpenFile("cpc_mearch.json"))
 		{
-			//SET_ERROR_MSG("Open cpc_mearch.json error");
+			SET_ERROR_MSG("Open cpc_mearch.json error");
 		}
 		m_readconf.GetIndexConfMes(m_MetricName,m_index_valve);
 	}
@@ -127,7 +127,7 @@ public:
 		IsOpenAlarm = value;
 	}
 	void Run();
-	virtual void Process(const string& strip,const string& strlog);
+	void Process(const string& strip,const string& strlog);
 	virtual void Alarm(map<int,index_merger>::iterator iter);
 private:
 	void GetLogFlags(const string& strlog);//处理日志中的各个标签
