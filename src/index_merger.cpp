@@ -1,6 +1,6 @@
 #include "index_merger.h"
 
-void Run()
+void IndexMerger::Run()
 {
 	while(1)
 	{
