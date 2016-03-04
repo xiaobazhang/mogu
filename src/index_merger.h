@@ -112,7 +112,7 @@ public:
 		IndexReadConf m_readconf;
 		if(!m_readconf.OpenFile("cpc_mearch.json"))
 		{
-			SET_ERROR_MSG("Open cpc_mearch.json error");
+			//SET_ERROR_MSG("Open cpc_mearch.json error");
 		}
 		m_readconf.GetIndexConfMes(m_MetricName,m_index_valve);
 	}
