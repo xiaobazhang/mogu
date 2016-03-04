@@ -64,7 +64,7 @@ void Metric::Run()
 		char* tmp = NULL;
 		char* alarm = NULL;
 		SingleLogQueue::GetInstance()->m_MetricMailBoxR.Recv(tmp,1000);
-		SingleLogQueue::GetInstance()->m_AlarmMailBoxR.Recv(alarm,1000);
+		SingleLogQueue::GetInstance()->m_AlarmMailBoxR.Recv(alarm,1);
 		if(tmp!=NULL)
 		{
 			string str1(tmp);
