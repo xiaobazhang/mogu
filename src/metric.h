@@ -24,7 +24,7 @@ namespace metric
 class Metric : public Thread
 {
 public:
-	Metric():miQueueMaxNum(10){}
+	Metric():miQueueMaxNum(10),m_TestNum(0){}
 	~Metric(){}
 	void SetQueueMaxNum(int num)
 	{
@@ -34,6 +34,8 @@ public:
 private:
 	void SendMetric();
 	int miQueueMaxNum;
+	int m_TestNum;
+	int m_time;
 	queue<string> m_queue;
 };
 #endif

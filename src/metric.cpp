@@ -58,7 +58,9 @@ namespace metric
 void Metric::Run()
 {
 	while(1)
-	{
+	{	
+		m_TestNum++;
+		int first = ckit::time::GetCurrentUs();
 		char* tmp = NULL;
 		char* alarm = NULL;
 		SingleLogQueue::GetInstance()->m_MetricMailBoxR.Recv(tmp,1);
@@ -81,7 +83,15 @@ void Metric::Run()
 			sprintf(char_alarm,"/usr/local/bin/curl -s -d %s http://monitor.bit.service.mogujie.org:8080/alarmcenter/service/alarm",str2.c_str());
 			system(char_alarm);
 			delete [] alarm;
-		}	
+		}
+		int end = ckit::time::GetCurrentUs()-first;
+		m_time += end;
+		if(m_TestNum%100==0)
+		{
+			std::cout<<"time = "<<(m_time/m_TestNum)<<std::endl;
+			m_TestNum = 0;
+			m_time = 0;
+		}
 	}
 }
 /**
