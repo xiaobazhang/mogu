@@ -11,10 +11,6 @@ void IndexMerger::Run()
 			Process(iplog->ip,iplog->log);
 			delete iplog;
 		}
-		else
-		{
-			//ckit::time::SleepByUs(1500);
-		}
 	}
 }
 void IndexMerger::Process(const string& strip,const string& strlog)

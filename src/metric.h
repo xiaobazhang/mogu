@@ -34,8 +34,6 @@ public:
 private:
 	void SendMetric();
 	int miQueueMaxNum;
-	int m_TestNum;
-	int m_time;
 	queue<string> m_queue;
 };
 #endif
