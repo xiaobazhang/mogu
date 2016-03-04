@@ -5,13 +5,16 @@ void IndexMerger::Run()
 	while(1)
 	{
 		IpLog* iplog = NULL;
-		SingleLogQueue::GetInstance()->m_IndexMailBoxR.Recv(iplog,1);
+		SingleLogQueue::GetInstance()->m_IndexMailBoxR.Recv(iplog,1000);
 		if(iplog!=NULL)
 		{
 			Process(iplog->ip,iplog->log);
 			delete iplog;
 		}
-		ckit::time::SleepByUs(1000);
+		else
+		{
+			//ckit::time::SleepByUs(1500);
+		}
 	}
 }
 void IndexMerger::Process(const string& strip,const string& strlog)

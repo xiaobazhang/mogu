@@ -63,8 +63,8 @@ void Metric::Run()
 		int first = ckit::time::GetCurrentUs();
 		char* tmp = NULL;
 		char* alarm = NULL;
-		SingleLogQueue::GetInstance()->m_MetricMailBoxR.Recv(tmp,1);
-		SingleLogQueue::GetInstance()->m_AlarmMailBoxR.Recv(alarm,1);
+		SingleLogQueue::GetInstance()->m_MetricMailBoxR.Recv(tmp,1000);
+		SingleLogQueue::GetInstance()->m_AlarmMailBoxR.Recv(alarm,1000);
 		if(tmp!=NULL)
 		{
 			string str1(tmp);
@@ -74,7 +74,7 @@ void Metric::Run()
 		}
 		else
 		{
-			ckit::time::SleepByUs(1500);//超时1ms
+			//ckit::time::SleepByUs(1500);//超时1ms
 		}
 		if(alarm != NULL)
 		{
