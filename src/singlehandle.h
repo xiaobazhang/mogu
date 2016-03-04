@@ -28,14 +28,6 @@ public:
 	~SingleLogQueue()
 	{
 	}
-	void Send(IpLog* pIplog)
-	{
-		m_MailBoxR.Send(pIplog);
-	}
-	void Recv(IpLog** pIplog)
-	{ 
-		m_MailBoxR.Recv(*pIplog,iTimeOutMs);
-	}
 	static SingleLogQueue* GetInstance()
 	{
 		static ckit::SingletonHolder<SingleLogQueue> m_single;
@@ -45,8 +37,8 @@ public:
 	int64 m_mesRecvNum;
 	MailBoxR<char*> m_MetricMailBoxR;
 	MailBoxR<char*> m_AlarmMailBoxR;
+	MailBoxR<IpLog*> m_IndexMailBoxR;
 private:
-	MailBoxR<IpLog*> m_MailBoxR;
 	int iTimeOutMs;
 };
 

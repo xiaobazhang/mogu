@@ -38,16 +38,15 @@ class HandIndexMess : public LogAnalysis
 public:
 	HandIndexMess()
 	{
-		m_index.SetMaxSize(40,10);
 	}
 	~HandIndexMess(){}
 	virtual void Process(rd_kafka_message_t * pMessage)
 	{
-		string data = strRecvMes((char*)pMessage->payload,pMessage->len);
-		string ip = "10.15.15.38";
-		m_index.Process(ip,data);
+		IpLog *iplog = new IpLog();
+		iplog->log = strRecvMes((char*)pMessage->payload,pMessage->len);
+		iplog->ip = "10.15.15.38";
+		SingleLogQueue::GetInstance()->m_IndexMailBoxR.Send(iplog);
 	}
 private:
-	IndexMerger m_index;
 };
 #endif

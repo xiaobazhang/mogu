@@ -42,6 +42,9 @@ void CreateIndex()
 		myindex->Start();
 		myindex->ReturnThreadNum();
 	}
+	IndexMerger* index = new IndexMerger();
+	index->SetMaxSize(10,5);
+	index->Start();
 }
 void CreateMetric()
 {
@@ -52,7 +55,7 @@ void CreateMetric()
 int main()
 {
 	CreateHandle();
-	//CreateIndex();
+	CreateIndex();
 	CreateMetric();
 	while(1)
 	{

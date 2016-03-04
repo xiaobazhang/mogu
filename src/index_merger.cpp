@@ -1,5 +1,19 @@
 #include "index_merger.h"
 
+void Run()
+{
+	while(1)
+	{
+		IpLog* iplog = NULL;
+		SingleLogQueue::GetInstance()->m_IndexMailBoxR.Recv(iplog,1);
+		if(iplog!=NULL)
+		{
+			Process(iplog->ip,iplog->log);
+			delete iplog;
+		}
+		ckit::time::SleepByUs(1000);
+	}
+}
 void IndexMerger::Process(const string& strip,const string& strlog)
 {
 	if(strip == ""||strlog == "")

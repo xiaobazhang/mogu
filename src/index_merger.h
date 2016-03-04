@@ -104,7 +104,7 @@ class index_merger
 	int mergerdiff;	
 }; 
  
-class IndexMerger : public SupportErrorMsg
+class IndexMerger : public Thread
 {
 public:
 	IndexMerger():MapMaxSize(10),SendMaxSize(4),IsOpenAlarm(false)
@@ -126,6 +126,7 @@ public:
 	{
 		IsOpenAlarm = value;
 	}
+	void Run();
 	virtual void Process(const string& strip,const string& strlog);
 	virtual void Alarm(map<int,index_merger>::iterator iter);
 private:
