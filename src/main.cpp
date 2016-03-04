@@ -52,7 +52,7 @@ void CreateMetric()
 int main()
 {
 	CreateHandle();
-	CreateIndex();
+	//CreateIndex();
 	CreateMetric();
 	while(1)
 	{
