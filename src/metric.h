@@ -30,7 +30,7 @@ private:
 class Metric : public Thread
 {
 public:
-	Metric():miQueueMaxNum(10),m_TestNum(0){}
+	Metric():miQueueMaxNum(10){}
 	~Metric(){}
 	void SetQueueMaxNum(int num)
 	{
