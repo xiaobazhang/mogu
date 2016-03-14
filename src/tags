@@ -1,0 +1,170 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Alarm	index_merger.cpp	/^void IndexMerger::Alarm(map<int,index_merger>::iterator iter)$/;"	f	class:IndexMerger
+Alarm	test.cpp	/^void Test::Alarm(string ip,log_mess& logdata)$/;"	f	class:Test
+CostTime	test.h	/^	int CostTime;$/;"	m	class:log_mess
+CostTime	test.h	/^	string CostTime;$/;"	m	class:log_name
+CostTimeAlarm	test.cpp	/^bool Test::CostTimeAlarm(int cost,string& message)$/;"	f	class:Test
+CostTimeValve	test.h	/^	int CostTimeValve;$/;"	m	class:log_valve
+CountLog	test.cpp	/^void Test::CountLog(const string& strlog,log_mess& logstruct)$/;"	f	class:Test
+CreateHandle	main.cpp	/^void CreateHandle()$/;"	f
+CreateIndex	main.cpp	/^void CreateIndex()$/;"	f
+CreateMetric	main.cpp	/^void CreateMetric()$/;"	f
+GetCostTime	log_analysis.cpp	/^	int GetCostTime(const string& strlog)$/;"	f	namespace:log_match
+GetCurrentTime	log_analysis.cpp	/^	string GetCurrentTime()$/;"	f	namespace:log_match
+GetIndexAsapdiff	log_analysis.cpp	/^	int GetIndexAsapdiff(const string& strlog)$/;"	f	namespace:log_match
+GetIndexConfMes	index_merger.h	/^	void GetIndexConfMes(index_metric_name& arg1,index_valve& arg2)$/;"	f	class:IndexReadConf
+GetIndexCostTime	log_analysis.cpp	/^	int GetIndexCostTime(const string& strlog)$/;"	f	namespace:log_match
+GetIndexMergerdiff	log_analysis.cpp	/^	int GetIndexMergerdiff(const string& strlog)$/;"	f	namespace:log_match
+GetInstance	singlehandle.h	/^	static SingleLogQueue* GetInstance()$/;"	f	class:SingleLogQueue
+GetLogConfig	test.h	/^	void GetLogConfig(log_name& arg1,log_valve& arg2)\/\/获取cpc_mearch配置文件$/;"	f	class:LogReadConf
+GetLogFlags	index_merger.cpp	/^void IndexMerger::GetLogFlags(const string& strlog)$/;"	f	class:IndexMerger
+GetLogTime	log_analysis.cpp	/^	int GetLogTime(const string& strlog)$/;"	f	namespace:log_match
+HandIndexMess	handle_message.h	/^	HandIndexMess()$/;"	f	class:HandIndexMess
+HandIndexMess	handle_message.h	/^class HandIndexMess : public LogAnalysis$/;"	c
+HandleFlags	index_merger.cpp	/^void IndexMerger::HandleFlags()$/;"	f	class:IndexMerger
+HandleMessage	handle_message.h	/^	HandleMessage()$/;"	f	class:HandleMessage
+HandleMessage	handle_message.h	/^class HandleMessage : public LogAnalysis$/;"	c
+IndexMerger	index_merger.h	/^	IndexMerger():MapMaxSize(10),SendMaxSize(4),IsOpenAlarm(false)$/;"	f	class:IndexMerger
+IndexMerger	index_merger.h	/^class IndexMerger : public Thread,public SupportErrorMsg$/;"	c
+IndexReadConf	index_merger.h	/^	IndexReadConf(){}$/;"	f	class:IndexReadConf
+IndexReadConf	index_merger.h	/^class IndexReadConf : public ReadConfig$/;"	c
+IpLog	singlehandle.h	/^struct IpLog$/;"	s
+IsIndexFailed	log_analysis.cpp	/^	bool IsIndexFailed(const string& strlog)$/;"	f	namespace:log_match
+IsOpenAlarm	index_merger.h	/^	bool IsOpenAlarm;$/;"	m	class:IndexMerger
+IsQueryFinish	log_analysis.cpp	/^	bool IsQueryFinish(const string& strlog)$/;"	f	namespace:log_match
+IsSearchDiscard	log_analysis.cpp	/^	bool IsSearchDiscard(const string& strlog)$/;"	f	namespace:log_match
+IsSearchFailed	log_analysis.cpp	/^	bool IsSearchFailed(const string& strlog)$/;"	f	namespace:log_match
+IsSearchZero	log_analysis.cpp	/^	bool IsSearchZero(const string& strlog)$/;"	f	namespace:log_match
+LogAnalysis	log_analysis.h	/^	LogAnalysis()$/;"	f	class:LogAnalysis
+LogAnalysis	log_analysis.h	/^class LogAnalysis : public KafkaConsumer, public KafkaConsumerCb$/;"	c
+LogReadConf	test.h	/^	LogReadConf(){}$/;"	f	class:LogReadConf
+LogReadConf	test.h	/^class LogReadConf : public ReadConfig$/;"	c
+MapMaxSize	index_merger.h	/^	int MapMaxSize;$/;"	m	class:IndexMerger
+Metric	metric.h	/^	Metric():miQueueMaxNum(10),m_TestNum(0){}$/;"	f	class:Metric
+Metric	metric.h	/^class Metric : public Thread$/;"	c
+OpenFile	read_config.h	/^	bool OpenFile(const string filename)$/;"	f	class:ReadConfig
+Process	handle_message.h	/^	virtual void Process(rd_kafka_message_t * pMessage)$/;"	f	class:HandIndexMess
+Process	handle_message.h	/^	virtual void Process(rd_kafka_message_t * pMessage)$/;"	f	class:HandleMessage
+Process	index_merger.cpp	/^void IndexMerger::Process(const string& strip,const string& strlog)$/;"	f	class:IndexMerger
+Process	log_analysis.cpp	/^void LogAnalysis::Process(rd_kafka_message_t * pMessage)$/;"	f	class:LogAnalysis
+Process	test.cpp	/^void Test::Process(const string& strip, const string& strlog)$/;"	f	class:Test
+Qps	test.h	/^	int Qps;$/;"	m	class:log_mess
+Qps	test.h	/^	string Qps;$/;"	m	class:log_name
+QpsAlarm	test.cpp	/^bool Test::QpsAlarm(int qps,string& message)$/;"	f	class:Test
+QpsValve	test.h	/^	int QpsValve;$/;"	m	class:log_valve
+ReadConfig	read_config.h	/^	ReadConfig(){}$/;"	f	class:ReadConfig
+ReadConfig	read_config.h	/^class ReadConfig$/;"	c
+Run	index_merger.cpp	/^void IndexMerger::Run()$/;"	f	class:IndexMerger
+Run	metric.cpp	/^void Metric::Run()$/;"	f	class:Metric
+SearchDiscard	test.h	/^	int SearchDiscard;$/;"	m	class:log_mess
+SearchDiscard	test.h	/^	string SearchDiscard;$/;"	m	class:log_name
+SearchDiscardAlarm	test.cpp	/^bool Test::SearchDiscardAlarm(int discard,string& message)$/;"	f	class:Test
+SearchDiscardValve	test.h	/^	int SearchDiscardValve;$/;"	m	class:log_valve
+SearchFaild	test.h	/^	int SearchFaild;$/;"	m	class:log_mess
+SearchFaild	test.h	/^	string SearchFaild;$/;"	m	class:log_name
+SearchFaildAlarm	test.cpp	/^bool Test::SearchFaildAlarm(int faild,string& message)$/;"	f	class:Test
+SearchFaildValve	test.h	/^	int SearchFaildValve;$/;"	m	class:log_valve
+SearchZero	test.h	/^	int SearchZero;$/;"	m	class:log_mess
+SearchZero	test.h	/^	string SearchZero;$/;"	m	class:log_name
+SearchZeroAlarm	test.cpp	/^bool Test::SearchZeroAlarm(int zero,string& message)$/;"	f	class:Test
+SearchZeroValve	test.h	/^	int SearchZeroValve;$/;"	m	class:log_valve
+SendAlarmMessage	metric.cpp	/^	void SendAlarmMessage(const string& name,const string& host,const string& method,const string& metaData)$/;"	f	namespace:metric
+SendLog	test.cpp	/^void Test::SendLog(int itime,log_mess& logdata)$/;"	f	class:Test
+SendMaxSize	index_merger.h	/^	int SendMaxSize;$/;"	m	class:IndexMerger
+SendMessName	test.h	/^	string SendMessName;	$/;"	m	class:log_name
+SendMetric	metric.cpp	/^void Metric::SendMetric()$/;"	f	class:Metric
+SetIsOpenAlarm	index_merger.h	/^	void SetIsOpenAlarm(bool value)$/;"	f	class:IndexMerger
+SetMaxSize	index_merger.h	/^	void SetMaxSize(int mapmaxsize,int sendmaxsize)$/;"	f	class:IndexMerger
+SetQueueMaxNum	metric.h	/^	void SetQueueMaxNum(int num)$/;"	f	class:Metric
+SingleLogQueue	singlehandle.h	/^	SingleLogQueue():iTimeOutMs(-1)\/\/阻塞，直到读到数据$/;"	f	class:SingleLogQueue
+SingleLogQueue	singlehandle.h	/^class SingleLogQueue$/;"	c
+SprintfMetric	metric.cpp	/^	void SprintfMetric(const string strmetric,const string strhost,int itime,float fvalue)$/;"	f	namespace:metric
+SprintfMetric	metric.cpp	/^	void SprintfMetric(const string strmetric,const string strhost,int itime,int ivalue)$/;"	f	namespace:metric
+StringTimeToInt	log_analysis.cpp	/^		int StringTimeToInt(std::string str)$/;"	f	namespace:ckit::time
+Test	test.h	/^	Test():m_messageNum(0)$/;"	f	class:Test
+Test	test.h	/^class Test : public SupportErrorMsg$/;"	c
+__HANDLE_MESSAGE_H__	handle_message.h	2;"	d
+__INDEX_MERGER_H__	index_merger.h	2;"	d
+__LOG_ANALYSIS_H__	log_analysis.h	2;"	d
+__METRIC_H__	metric.h	2;"	d
+__READ_CONFIG_H__	read_config.h	2;"	d
+__SINGHANDLE_H__	singlehandle.h	2;"	d
+__TEST_H__	test.h	2;"	d
+alarmName	index_merger.h	/^	string alarmName;$/;"	m	class:index_metric_name
+asapdiff	index_merger.h	/^	int asapdiff;$/;"	m	class:index_merger
+asapdiff	index_merger.h	/^	string asapdiff;$/;"	m	class:index_metric_name
+asapvalve	index_merger.h	/^	int asapvalve;$/;"	m	class:index_valve
+ckit	log_analysis.cpp	/^namespace ckit$/;"	n	file:
+ckit	log_analysis.h	/^namespace ckit$/;"	n
+costtime	index_merger.h	/^	int costtime;$/;"	m	class:index_merger
+costtime	index_merger.h	/^	string costtime;$/;"	m	class:index_metric_name
+costtimevalve	index_merger.h	/^	int costtimevalve;$/;"	m	class:index_valve
+current_ip	test.h	/^	string current_ip;$/;"	m	class:Test
+faildnum	index_merger.h	/^	string faildnum;$/;"	m	class:index_metric_name
+faildnum	index_merger.h	/^ 	int faildnum;$/;"	m	class:index_merger
+failvalve	index_merger.h	/^	int failvalve;$/;"	m	class:index_valve
+iTimeOutMs	singlehandle.h	/^	int iTimeOutMs;$/;"	m	class:SingleLogQueue
+index_merger	index_merger.h	/^ 	index_merger()$/;"	f	class:index_merger
+index_merger	index_merger.h	/^class index_merger$/;"	c
+index_metric_name	index_merger.h	/^class index_metric_name$/;"	c
+index_valve	index_merger.h	/^	index_valve():failvalve(100),costtimevalve(100),asapvalve(5),mergervalve(5)$/;"	f	class:index_valve
+index_valve	index_merger.h	/^class index_valve$/;"	c
+ip	singlehandle.h	/^	string ip;$/;"	m	struct:IpLog
+log	singlehandle.h	/^	string log;$/;"	m	struct:IpLog
+log_match	log_analysis.cpp	/^namespace log_match$/;"	n	file:
+log_match	log_analysis.h	/^namespace log_match$/;"	n
+log_mess	test.h	/^	log_mess():Qps(0),CostTime(0),SearchZero(0),SearchFaild(0),SearchDiscard(0)$/;"	f	class:log_mess
+log_mess	test.h	/^class log_mess  $/;"	c
+log_name	test.h	/^class log_name$/;"	c
+log_valve	test.h	/^	log_valve()$/;"	f	class:log_valve
+log_valve	test.h	/^class log_valve$/;"	c
+m_AlarmMailBoxR	singlehandle.h	/^	MailBoxR<char*> m_AlarmMailBoxR;$/;"	m	class:SingleLogQueue
+m_DataType	test.h	/^	map<string,log_mess> m_DataType;$/;"	m	class:Test
+m_IndexMailBoxR	singlehandle.h	/^	MailBoxR<IpLog*> m_IndexMailBoxR;$/;"	m	class:SingleLogQueue
+m_IndexMerger	index_merger.h	/^	map<int,index_merger> m_IndexMerger;$/;"	m	class:IndexMerger
+m_MetricMailBoxR	singlehandle.h	/^	MailBoxR<char*> m_MetricMailBoxR;$/;"	m	class:SingleLogQueue
+m_MetricName	index_merger.h	/^	index_metric_name m_MetricName;$/;"	m	class:IndexMerger
+m_ifstream	read_config.h	/^	ifstream m_ifstream;$/;"	m	class:ReadConfig
+m_index_valve	index_merger.h	/^	index_valve m_index_valve;$/;"	m	class:IndexMerger
+m_ip_time	test.h	/^	map<string,int> m_ip_time;$/;"	m	class:Test
+m_logname	test.h	/^	log_name m_logname;$/;"	m	class:Test
+m_logvalve	test.h	/^	log_valve m_logvalve;$/;"	m	class:Test
+m_mesRecvNum	singlehandle.h	/^	int64 m_mesRecvNum;$/;"	m	class:SingleLogQueue
+m_mesSendNum	singlehandle.h	/^	int64 m_mesSendNum;$/;"	m	class:SingleLogQueue
+m_messageNum	test.h	/^	int64 m_messageNum;$/;"	m	class:Test
+m_queue	metric.h	/^	queue<string> m_queue;$/;"	m	class:Metric
+m_strip	index_merger.h	/^	string m_strip;$/;"	m	class:IndexMerger
+m_test	handle_message.h	/^	Test m_test;$/;"	m	class:HandleMessage
+main	main.cpp	/^int main()$/;"	f
+mergerdiff	index_merger.h	/^	int mergerdiff;	$/;"	m	class:index_merger
+mergerdiff	index_merger.h	/^	string mergerdiff;$/;"	m	class:index_metric_name
+mergervalve	index_merger.h	/^	int mergervalve;$/;"	m	class:index_valve
+metric	metric.cpp	/^namespace metric$/;"	n	file:
+metric	metric.h	/^namespace metric$/;"	n
+miQueueMaxNum	metric.h	/^	int miQueueMaxNum;$/;"	m	class:Metric
+reader	read_config.h	/^	Json::Reader reader;$/;"	m	class:ReadConfig
+root	read_config.h	/^	Json::Value  root; $/;"	m	class:ReadConfig
+strRecvIp	log_analysis.cpp	/^string LogAnalysis::strRecvIp(char* pstr,int len)$/;"	f	class:LogAnalysis
+strRecvMes	log_analysis.h	/^	string strRecvMes(char* pstr,int len)$/;"	f	class:LogAnalysis
+successnum	index_merger.h	/^ 	int successnum;$/;"	m	class:index_merger
+time	log_analysis.cpp	/^	namespace time$/;"	n	namespace:ckit	file:
+time	log_analysis.h	/^	namespace time$/;"	n	namespace:ckit
+~HandIndexMess	handle_message.h	/^	~HandIndexMess(){}$/;"	f	class:HandIndexMess
+~HandleMessage	handle_message.h	/^	~HandleMessage()$/;"	f	class:HandleMessage
+~IndexMerger	index_merger.h	/^	~IndexMerger(){}$/;"	f	class:IndexMerger
+~IndexReadConf	index_merger.h	/^	~IndexReadConf(){}$/;"	f	class:IndexReadConf
+~LogAnalysis	log_analysis.h	/^	~LogAnalysis(){}$/;"	f	class:LogAnalysis
+~LogReadConf	test.h	/^	~LogReadConf(){}$/;"	f	class:LogReadConf
+~Metric	metric.h	/^	~Metric(){}$/;"	f	class:Metric
+~ReadConfig	read_config.h	/^	~ReadConfig()$/;"	f	class:ReadConfig
+~SingleLogQueue	singlehandle.h	/^	~SingleLogQueue()$/;"	f	class:SingleLogQueue
+~Test	test.h	/^	~Test()$/;"	f	class:Test
+~index_merger	index_merger.h	/^ 	~index_merger(){}$/;"	f	class:index_merger
+~index_valve	index_merger.h	/^	~index_valve(){}$/;"	f	class:index_valve
+~log_mess	test.h	/^	~log_mess(){}$/;"	f	class:log_mess
+~log_valve	test.h	/^	~log_valve(){}$/;"	f	class:log_valve

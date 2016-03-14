@@ -140,6 +140,7 @@ private:
 	string m_strip;
 	index_metric_name m_MetricName;
 	index_valve m_index_valve;
+	SMetric m_SMetric;
 	bool IsOpenAlarm;
 };
 

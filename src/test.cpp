@@ -130,27 +130,27 @@ void Test::Alarm(string ip,log_mess& logdata)
 	string message;
 	if(QpsAlarm(iqps,message))
 	{
-		metric::SendAlarmMessage(m_logname.SendMessName,ip,"QPS",message);
+		m_SMetric.SendAlarmMessage(m_logname.SendMessName,ip,"QPS",message);
 	}
 	if(iqps != 0)
 	{
 		int icost = logdata.CostTime/iqps;
 		if(CostTimeAlarm(icost,message))
 		{
-			metric::SendAlarmMessage(m_logname.SendMessName,ip,"CostTime",message);
+			m_SMetric.SendAlarmMessage(m_logname.SendMessName,ip,"CostTime",message);
 		}
 	}
 	if(SearchZeroAlarm(logdata.SearchZero,message))
 	{
-		metric::SendAlarmMessage(m_logname.SendMessName,ip,"SearchZero",message);
+		m_SMetric.SendAlarmMessage(m_logname.SendMessName,ip,"SearchZero",message);
 	}
 	if(SearchFaildAlarm(logdata.SearchFaild,message))
 	{
-		metric::SendAlarmMessage(m_logname.SendMessName,ip,"SearchFaild",message);
+		m_SMetric.SendAlarmMessage(m_logname.SendMessName,ip,"SearchFaild",message);
 	}
 	if(SearchDiscardAlarm(logdata.SearchDiscard,message))
 	{
-		metric::SendAlarmMessage(m_logname.SendMessName,ip,"SearchDiscard",message);
+		m_SMetric.SendAlarmMessage(m_logname.SendMessName,ip,"SearchDiscard",message);
 	}
 }
 /**
@@ -163,15 +163,15 @@ void Test::Alarm(string ip,log_mess& logdata)
 void Test::SendLog(int itime,log_mess& logdata)
 {
 	Alarm(current_ip,logdata);
-	metric::SprintfMetric(m_logname.Qps,current_ip,itime,logdata.Qps);
+	m_SMetric.SprintfMetric(m_logname.Qps,current_ip,itime,logdata.Qps);
 	if(logdata.Qps!=0)
 	{
 		int icost = logdata.CostTime/logdata.Qps;//计算平均时间
-		metric::SprintfMetric(m_logname.CostTime,current_ip,itime,icost);
+		m_SMetric.SprintfMetric(m_logname.CostTime,current_ip,itime,icost);
 	}
-	metric::SprintfMetric(m_logname.SearchZero,current_ip,itime,logdata.SearchZero);
-	metric::SprintfMetric(m_logname.SearchFaild,current_ip,itime,logdata.SearchFaild);
-	metric::SprintfMetric(m_logname.SearchDiscard,current_ip,itime,logdata.SearchDiscard);
+	m_SMetric.SprintfMetric(m_logname.SearchZero,current_ip,itime,logdata.SearchZero);
+	m_SMetric.SprintfMetric(m_logname.SearchFaild,current_ip,itime,logdata.SearchFaild);
+	m_SMetric.SprintfMetric(m_logname.SearchDiscard,current_ip,itime,logdata.SearchDiscard);
 	logdata.Qps = 0;
 	logdata.CostTime = 0;
 	logdata.SearchZero = 0;

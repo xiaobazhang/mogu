@@ -54,9 +54,9 @@ void CreateMetric()
 }
 int main()
 {
+	CreateMetric();
 	CreateHandle();
 	CreateIndex();
-	CreateMetric();
 	while(1)
 	{
 		sleep(1);

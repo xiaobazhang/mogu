@@ -1,55 +1,53 @@
 #include "metric.h"
 
-namespace metric
+/**
+ * [SprintfMetric description]
+ * @Author:suli
+ * @DateTime    2016-03-03T17:14:26+0800
+ * @param       strmetric                [metric name]
+ * @param       strhost                  [tags host]
+ * @param       itime                    [time]
+ * @param       ivalue                   [value]
+ */
+void SMetric::SprintfMetric(const string strmetric,const string strhost,int itime,int ivalue)
 {
-	/**
-	 * [SprintfMetric description]
-	 * @Author:suli
-	 * @DateTime    2016-03-03T17:14:26+0800
-	 * @param       strmetric                [metric name]
-	 * @param       strhost                  [tags host]
-	 * @param       itime                    [time]
-	 * @param       ivalue                   [value]
-	 */
-	void SprintfMetric(const string strmetric,const string strhost,int itime,int ivalue)
-	{
-		char *buf = new char[256]();
-		sprintf(buf,"{\"metric\":\"%s\",\"tags\":{\"host\":\"%s\"},\"timestamp\":%d,\"value\":%d}",strmetric.c_str(),strhost.c_str(),itime,ivalue);
-		SingleLogQueue::GetInstance()->m_MetricMailBoxR.Send(buf);
-	}
-	/**
-	 * [SprintfMetric description]
-	 * @Author:suli
-	 * @DateTime    2016-03-03T17:14:31+0800
-	 * @param       strmetric                [description]
-	 * @param       strhost                  [description]
-	 * @param       itime                    [description]
-	 * @param       fvalue                   [description]
-	 */
-	void SprintfMetric(const string strmetric,const string strhost,int itime,float fvalue)
-	{
-		char *buf = new char[256]();
-		sprintf(buf,"{\"metric\":\"%s\",\"tags\":{\"host\":\"%s\"},\"timestamp\":%d,\"value\":%0.2f}",strmetric.c_str(),strhost.c_str(),itime,fvalue);
-		SingleLogQueue::GetInstance()->m_MetricMailBoxR.Send(buf);
-	}
-	/**
-	 * [SendAlarmMessage description]
-	 * @Author:suli
-	 * @DateTime    2016-03-03T17:14:35+0800
-	 * @param       name                     [description]
-	 * @param       host                     [description]
-	 * @param       method                   [description]
-	 * @param       metaData                 [description]
-	 */
-	void SendAlarmMessage(const string& name,const string& host,const string& method,const string& metaData)
-	{
-		if(name == "")
-			return ;
-		char* ptr = new char[512]();
-		sprintf(ptr,"\"appName=%s&host=%s&method=%s&metaData=%s\"",name.c_str(),host.c_str(),method.c_str(),metaData.c_str());
-		SingleLogQueue::GetInstance()->m_AlarmMailBoxR.Send(ptr);
-	}
+	char *buf = new char[256]();
+	sprintf(buf,"{\"metric\":\"%s\",\"tags\":{\"host\":\"%s\"},\"timestamp\":%d,\"value\":%d}",strmetric.c_str(),strhost.c_str(),itime,ivalue);
+	SingleLogQueue::GetInstance()->m_MetricMailBoxR.Send(buf);
 }
+/**
+ * [SprintfMetric description]
+ * @Author:suli
+ * @DateTime    2016-03-03T17:14:31+0800
+ * @param       strmetric                [description]
+ * @param       strhost                  [description]
+ * @param       itime                    [description]
+ * @param       fvalue                   [description]
+ */
+void SMetric::SprintfMetric(const string strmetric,const string strhost,int itime,float fvalue)
+{
+	char *buf = new char[256]();
+	sprintf(buf,"{\"metric\":\"%s\",\"tags\":{\"host\":\"%s\"},\"timestamp\":%d,\"value\":%0.2f}",strmetric.c_str(),strhost.c_str(),itime,fvalue);
+	SingleLogQueue::GetInstance()->m_MetricMailBoxR.Send(buf);
+}
+/**
+ * [SendAlarmMessage description]
+ * @Author:suli
+ * @DateTime    2016-03-03T17:14:35+0800
+ * @param       name                     [description]
+ * @param       host                     [description]
+ * @param       method                   [description]
+ * @param       metaData                 [description]
+ */
+void SMetric::SendAlarmMessage(const string& name,const string& host,const string& method,const string& metaData)
+{
+	if(name == "")
+		return ;
+	char* ptr = new char[512]();
+	sprintf(ptr,"\"appName=%s&host=%s&method=%s&metaData=%s\"",name.c_str(),host.c_str(),method.c_str(),metaData.c_str());
+	SingleLogQueue::GetInstance()->m_AlarmMailBoxR.Send(ptr);
+}
+
 /**
  * [Metric::Run description]
  * @Author:suli

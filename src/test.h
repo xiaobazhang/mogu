@@ -163,6 +163,7 @@ private:
 	log_valve m_logvalve;
 	int64 m_messageNum;
 	string current_ip;
+	SMetric m_SMetric;
 };
 #endif
 

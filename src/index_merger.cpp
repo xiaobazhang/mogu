@@ -74,10 +74,10 @@ void IndexMerger::HandleFlags()
 		float fcosttime = (float)avgCosttime/(1000.0);
 		int avgAsapdiff = iter->second.asapdiff/success;
 		int avgMergerdiff = iter->second.mergerdiff/success;
-		metric::SprintfMetric(m_MetricName.faildnum,m_strip,sendtime,faild);
-		metric::SprintfMetric(m_MetricName.costtime,m_strip,sendtime,fcosttime);
-		metric::SprintfMetric(m_MetricName.asapdiff,m_strip,sendtime,avgAsapdiff);
-		metric::SprintfMetric(m_MetricName.mergerdiff,m_strip,sendtime,avgMergerdiff);
+		m_SMetric.SprintfMetric(m_MetricName.faildnum,m_strip,sendtime,faild);
+		m_SMetric.SprintfMetric(m_MetricName.costtime,m_strip,sendtime,fcosttime);
+		m_SMetric.SprintfMetric(m_MetricName.asapdiff,m_strip,sendtime,avgAsapdiff);
+		m_SMetric.SprintfMetric(m_MetricName.mergerdiff,m_strip,sendtime,avgMergerdiff);
 		if(m_IndexMerger.size())
 			m_IndexMerger.erase(iter++);//删除最早的一秒
 	}
@@ -96,25 +96,25 @@ void IndexMerger::Alarm(map<int,index_merger>::iterator iter)
 	{
 		string message = "Warnning: "+log_match::GetCurrentTime()+ \
 		"index_merger Failed num is"+ckit::strings::Itoa(faild);
-		metric::SendAlarmMessage(m_MetricName.alarmName,m_strip,"Failed",message);
+		m_SMetric.SendAlarmMessage(m_MetricName.alarmName,m_strip,"Failed",message);
 	}
 	if(avgCosttime > m_index_valve.costtimevalve)
 	{
 		string message = "Warnning: "+log_match::GetCurrentTime()+ \
 		"index_merger unusual cost time is "+ckit::strings::Itoa(avgCosttime)+"us";
-		metric::SendAlarmMessage(m_MetricName.alarmName,m_strip,"CostTime",message);
+		m_SMetric.SendAlarmMessage(m_MetricName.alarmName,m_strip,"CostTime",message);
 	}
 	if(avgAsapdiff > m_index_valve.asapvalve)
 	{
 		string message = "Error: "+log_match::GetCurrentTime()+ \
 		"index_merger unusual asapdiff is "+ckit::strings::Itoa(avgAsapdiff)+"S";
-		metric::SendAlarmMessage(m_MetricName.alarmName,m_strip,"Asapdiff",message);
+		m_SMetric.SendAlarmMessage(m_MetricName.alarmName,m_strip,"Asapdiff",message);
 	}
 	if(avgMergerdiff > m_index_valve.mergervalve)
 	{
 		string message = "Error: "+log_match::GetCurrentTime()+ \
 		"index_merger unusual mergerdiff is "+ckit::strings::Itoa(avgMergerdiff)+"S";
-		metric::SendAlarmMessage(m_MetricName.alarmName,m_strip,"Mergerdiff",message);
+		m_SMetric.SendAlarmMessage(m_MetricName.alarmName,m_strip,"Mergerdiff",message);
 	}
 }
 

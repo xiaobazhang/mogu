@@ -14,12 +14,18 @@
 using namespace ckit;
 using namespace std;
 
-namespace metric
+
+class SMetric
 {
+public:
+	SMetric(){}
+	~SMetric(){}
 	void SprintfMetric(const string strmetric,const string strhost,int itime,int ivalue);
 	void SprintfMetric(const string strmetric,const string strhost,int itime,float fvalue);
-	void SendAlarmMessage(const string& name,const string& host,const string& method,const string& metaData);
-}
+	void SendAlarmMessage(const string& name,const string& host,const string& method,const string& metaData);	
+private:
+};
+
 
 class Metric : public Thread
 {
