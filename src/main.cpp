@@ -22,7 +22,6 @@ void CreateHandle()
 		myhand->SetFetchBrokerLimitNum(1);
 		myhand->SetPartition(i);
 		myhand->Start();
-		myhand->ReturnThreadNum();
 	}
 }
 void CreateIndex()
@@ -40,7 +39,6 @@ void CreateIndex()
 		myindex->SetFetchBrokerLimitNum(1);
 		myindex->SetPartition(i);
 		myindex->Start();
-		myindex->ReturnThreadNum();
 	}
 	IndexMerger* index = new IndexMerger();
 	index->SetMaxSize(10,5);
