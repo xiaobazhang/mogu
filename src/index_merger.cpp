@@ -41,7 +41,6 @@ void IndexMerger::GetLogFlags(const string& strlog)
 	}
 	if(log_match::IsIndexSuccess(strlog))
 	{
-		std::cout<<"num="<<m_IndexMerger[logtime].successnum<<std::endl;
 		m_IndexMerger[logtime].successnum++;//成功次数统计
 		int CostTime = log_match::GetIndexCostTime(strlog);
 		if(CostTime!=-1)
@@ -72,8 +71,7 @@ void IndexMerger::HandleFlags()
 		int success = iter->second.successnum;
 		int faild = iter->second.faildnum;
 		int avgCosttime = iter->second.costtime/success;
-		std::cout<<"avgCosttime="<<avgCosttime<<std::endl;
-		float fcosttime = (float)avgCosttime/(1000.0);
+		float fcosttime = static_cast<float>avgCosttime/static_cast<float>(1000);
 		int avgAsapdiff = iter->second.asapdiff/success;
 		int avgMergerdiff = iter->second.mergerdiff/success;
 		m_SMetric.SprintfMetric(m_MetricName.faildnum,m_strip,sendtime,faild);
