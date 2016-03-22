@@ -41,6 +41,7 @@ void IndexMerger::GetLogFlags(const string& strlog)
 	}
 	if(log_match::IsIndexSuccess(strlog))
 	{
+		std::cout<<"num = "<<m_IndexMerger[logtime].successnum<<std::endl;
 		m_IndexMerger[logtime].successnum++;//成功次数统计
 		int CostTime = log_match::GetIndexCostTime(strlog);
 		if(CostTime!=-1)
