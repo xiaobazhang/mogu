@@ -71,7 +71,7 @@ void IndexMerger::HandleFlags()
 		int success = iter->second.successnum;
 		int faild = iter->second.faildnum;
 		int avgCosttime = iter->second.costtime/success;
-		float fcosttime = static_cast<float>avgCosttime/static_cast<float>(1000);
+		float fcosttime = static_cast<float>(avgCosttime)/static_cast<float>(1000);
 		int avgAsapdiff = iter->second.asapdiff/success;
 		int avgMergerdiff = iter->second.mergerdiff/success;
 		m_SMetric.SprintfMetric(m_MetricName.faildnum,m_strip,sendtime,faild);
