@@ -39,7 +39,7 @@ void IndexMerger::GetLogFlags(const string& strlog)
 	{
 		m_IndexMerger[logtime].faildnum++;
 	}
-	else
+	else if(log_match::IsIndexSuccess(strlog))
 	{
 		m_IndexMerger[logtime].successnum++;//成功次数统计
 		int CostTime = log_match::GetIndexCostTime(strlog);

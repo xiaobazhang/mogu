@@ -124,6 +124,15 @@ namespace log_match
 			return true;
 		return false;
 	}
+	bool IsIndexSuccess(const string& strlog)
+	{
+		ckit::Regex regex;
+		if(!regex.Compile("(Processx success)"))
+			return false;
+		if(regex.Match(strlog))
+			return true;
+		return false;
+	}
 	int GetIndexCostTime(const string& strlog)
 	{
 		float tmp;

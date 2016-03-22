@@ -32,6 +32,7 @@ namespace log_match
 	bool IsSearchFailed(const string& strlog);
 	bool IsSearchDiscard(const string& strlog);
 	bool IsIndexFailed(const string& strlog);
+	bool IsIndexSuccess(const string& strlog);
 	int GetIndexCostTime(const string& strlog);
 	int GetIndexAsapdiff(const string& strlog);
 	int GetIndexMergerdiff(const string& strlog);
