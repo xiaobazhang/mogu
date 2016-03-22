@@ -41,7 +41,7 @@ void IndexMerger::GetLogFlags(const string& strlog)
 	}
 	if(log_match::IsIndexSuccess(strlog))
 	{
-		std::cout<<"num = "<<m_IndexMerger[logtime].successnum<<std::endl;
+		//std::cout<<"num = "<<m_IndexMerger[logtime].successnum<<std::endl;
 		m_IndexMerger[logtime].successnum++;//成功次数统计
 		int CostTime = log_match::GetIndexCostTime(strlog);
 		if(CostTime!=-1)
@@ -68,6 +68,7 @@ void IndexMerger::HandleFlags()
 	for(int i=0;i < SendMaxSize;i++)
 	{
 		Alarm(iter);//index报警功能
+		cout<<"success:"<<ter->second.successnum<<"faild:"<<iter->second.faildnum<<endl;
 		int sendtime = iter->first;//获取当前的时间
 		int success = iter->second.successnum;
 		int faild = iter->second.faildnum;
