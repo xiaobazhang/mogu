@@ -68,7 +68,7 @@ void IndexMerger::HandleFlags()
 	for(int i=0;i < SendMaxSize;i++)
 	{
 		Alarm(iter);//index报警功能
-		cout<<"success:"<<ter->second.successnum<<"faild:"<<iter->second.faildnum<<endl;
+		cout<<"success:"<<iter->second.successnum<<"faild:"<<iter->second.faildnum<<endl;
 		int sendtime = iter->first;//获取当前的时间
 		int success = iter->second.successnum;
 		int faild = iter->second.faildnum;
