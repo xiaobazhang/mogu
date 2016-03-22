@@ -33,7 +33,8 @@ void IndexMerger::GetLogFlags(const string& strlog)
 	if(!m_IndexMerger.count(logtime))
 	{ 
 		index_merger index;
-		m_IndexMerger[logtime] = index;
+		//m_IndexMerger[logtime] = index;
+		m_IndexMerger.insert(make_pair(logtime,index))
 	}
 	if(log_match::IsIndexFailed(strlog))
 	{
