@@ -1,3 +1,3 @@
 # mogu
-my mogujie work
+my work
 日志监控上报程序
